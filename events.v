@@ -1,10 +1,20 @@
 module viup
 
-type IUPCallback = fn(voidptr) int
-pub type ControlCallback = fn(Control) int
+pub type ActionFunc = fn(&Control) int
+pub type MouseButtonFunc = fn(&Control, MouseButton, bool, int, int, charptr) int
 
-fn C.IupSetCallback(voidptr, charptr, IUPCallback)
+type VIUPFunc = ActionFunc | MouseButtonFunc
 
-pub fn (control Control) watch(event string, callback IUPCallback) {
-	C.IupSetCallback(control.ptr, event.str, callback)
+fn C.IupDestroy(voidptr)
+fn C.IupSetCallback(voidptr, charptr, VIUPCallback)
+
+pub fn (control &Control) destroy() {
+	C.IupDestroy(control)
+}
+
+pub fn (control &Control) callback(func VIUPFunc) {
+	match func {
+		ActionFunc       { C.IupSetCallback(control, "ACTION", ActionFunc(func)) }
+		MouseButtonFunc  { C.IupSetCallback(control, "BUTTON_CB", MouseButtonFunc(func)) }
+	}
 }

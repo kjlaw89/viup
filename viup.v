@@ -13,20 +13,28 @@ module viup
 #flag -liupimglib
 #flag -liupole
 #flag -liuptuio*/
+#flag manifest.syso
 
 #include "iup.h"
 
 fn C.IupClose()
-fn C.IupOpen(int, voidptr)
+fn C.IupGetGlobal() voidptr
 fn C.IupMainLoop()
+fn C.IupOpen(int, voidptr)
 fn C.IupMessage(charptr, charptr)
-
-pub fn open(args []string) {
-	C.IupOpen(&args.len, &args.data)
-}
+fn C.IupSetGlobal(charptr, charptr)
+fn C.IupSetStrGlobal(charptr, charptr)
 
 pub fn close() {
 	C.IupClose()
+}
+
+pub fn get_global_reference(name string) voidptr {
+	return C.IupGetGlobal("${name}_global".to_upper().trim_space().str)
+}
+
+pub fn get_global_value(name string) string {
+	return tos3(C.IupGetGlobal("${name}_global".to_upper().trim_space().str))
 }
 
 pub fn main_loop() {
@@ -35,4 +43,16 @@ pub fn main_loop() {
 
 pub fn message(title string, message string) {
 	C.IupMessage(title.str, message.str)
+}
+
+pub fn open(args []string) {
+	C.IupOpen(&args.len, &args.data)
+}
+
+pub fn set_global_reference(name string, data voidptr) {
+	C.IupSetGlobal("${name}_global".to_upper().trim_space().str, charptr(data))
+}
+
+pub fn set_global_value(name, data string) {
+	C.IupSetStrGlobal("${name}_global".to_upper().trim_space().str, data.str)
 }

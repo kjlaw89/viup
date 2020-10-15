@@ -1,5 +1,13 @@
 module viup
 
+pub enum MouseButton {
+	left         = 49
+	middle       = 50
+	right        = 51
+	button_4     = 52
+	button_5     = 53
+}
+
 pub enum Pos {
 	center       = 0xFFFF
 	left         = 0xFFFE
