@@ -2,27 +2,35 @@ module viup
 
 #flag -I @VROOT/headers
 #flag -L .
-/*#flag -lfreetype6
-#flag -lftgl*/
+/*
+#flag -lfreetype6
+#flag -lftgl
+*/
 #flag -liup
-/*#flag -liupcd
+/*
+#flag -liupcd
 #flag -liupcontrols
 #flag -liupgl
 #flag -liupglcontrols
 #flag -liupim
 #flag -liupimglib
 #flag -liupole
-#flag -liuptuio*/
+#flag -liuptuio
+*/
 #flag manifest.syso
-
 #include "iup.h"
-
 fn C.IupClose()
+
 fn C.IupGetGlobal() voidptr
+
 fn C.IupMainLoop()
+
 fn C.IupOpen(int, voidptr)
+
 fn C.IupMessage(charptr, charptr)
+
 fn C.IupSetGlobal(charptr, charptr)
+
 fn C.IupSetStrGlobal(charptr, charptr)
 
 pub fn close() {
@@ -30,11 +38,11 @@ pub fn close() {
 }
 
 pub fn get_global_reference(name string) voidptr {
-	return C.IupGetGlobal("${name}_global".to_upper().trim_space().str)
+	return C.IupGetGlobal('${name}_global'.to_upper().trim_space().str)
 }
 
 pub fn get_global_value(name string) string {
-	return tos3(C.IupGetGlobal("${name}_global".to_upper().trim_space().str))
+	return tos3(C.IupGetGlobal('${name}_global'.to_upper().trim_space().str))
 }
 
 pub fn main_loop() {
@@ -50,9 +58,9 @@ pub fn open(args []string) {
 }
 
 pub fn set_global_reference(name string, data voidptr) {
-	C.IupSetGlobal("${name}_global".to_upper().trim_space().str, charptr(data))
+	C.IupSetGlobal('${name}_global'.to_upper().trim_space().str, charptr(data))
 }
 
-pub fn set_global_value(name, data string) {
-	C.IupSetStrGlobal("${name}_global".to_upper().trim_space().str, data.str)
+pub fn set_global_value(name string, data string) {
+	C.IupSetStrGlobal('${name}_global'.to_upper().trim_space().str, data.str)
 }

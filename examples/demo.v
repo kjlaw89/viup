@@ -31,6 +31,6 @@ fn button_clicked(control &viup.Control) int {
 	return 1
 }
 
-fn mouse_event(control &viup.Control, button viup.MouseButton, pressed bool, x, y int, status charptr) {
+fn mouse_event(control &viup.Control, button viup.MouseButton, pressed bool, x int, y int, status charptr) {
 	println("Mouse event: $button, $pressed, $x, $y")
 }
