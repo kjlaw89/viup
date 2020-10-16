@@ -8,15 +8,29 @@ fn main() {
 
 	label := viup.label("Hello from IUP", "expand=horizontal")
 	button := viup.button("Get Window Position", "")
-	button.callback(viup.ActionFunc(button_clicked))
-	button.callback(viup.MouseButtonFunc(mouse_event))
+	link := viup.link("https://www.google.com", "Google.com")
+	progress := viup.progress("marquee=yes")
+	spin := viup.spin_box(viup.text("spin"))
 
-	calendar := viup.calendar()
+	toggle1 := viup.toggle("Toggle 1", "action1")
+	toggle2 := viup.toggle("Toggle 2", "action2")
 
-	dialog := viup.dialog(viup.vbox([label, button, calendar], "margin=15x15"), "title=Hello World 2", "rastersize=640x480")
+	slider := viup.slider("horizontal")
+
+	colors := viup.color_browser()
+
+	picker := viup.date_picker("order=MDY")
+
+	multiline := viup.multiline("multiline")
+
+	dialog := viup.dialog(
+		viup.vbox([label, button, link, progress, spin, toggle1, toggle2, slider, colors, picker, multiline]), "title=Hello World 2", "rastersize=640x480"
+	)
+
 	dialog.show_xy(viup.Pos.center, viup.Pos.center)
 	button.set_data("window", dialog)
 	button.set_data("label", label)
+	button.callbacks(viup.ActionFunc(button_clicked), viup.MouseButtonFunc(mouse_event))
 
 	println("Window position: $dialog.current_width, $dialog.current_height")
 

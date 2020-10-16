@@ -6,7 +6,7 @@ fn C.IupShowXY(voidptr, int, int)
 
 pub fn dialog(child &Control, attrs ...string) &Control {
 	dialog := &Control(C.IupDialog(child))
-	dialog.apply_attrs(attrs)
+	dialog.set_attrs(attrs)
 	return dialog
 }
 

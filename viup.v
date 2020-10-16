@@ -19,15 +19,18 @@ module viup
 */
 #flag manifest.syso
 #include "iup.h"
+
 fn C.IupClose()
 
 fn C.IupGetGlobal() voidptr
 
+fn C.IupLog(charptr, charptr, voidptr)
+
 fn C.IupMainLoop()
 
-fn C.IupOpen(int, voidptr)
-
 fn C.IupMessage(charptr, charptr)
+
+fn C.IupOpen(int, voidptr)
 
 fn C.IupSetGlobal(charptr, charptr)
 
@@ -43,6 +46,10 @@ pub fn get_global_reference(name string) voidptr {
 
 pub fn get_global_value(name string) string {
 	return tos3(C.IupGetGlobal('${name}_global'.to_upper().trim_space().str))
+}
+
+pub fn log(log_type string, data string) {
+	C.IupLog(log_type.to_upper().str, data.str)
 }
 
 pub fn main_loop() {
