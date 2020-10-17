@@ -2,31 +2,21 @@ module viup
 
 #flag -I @VROOT/headers
 #flag -L .
-/*
-#flag -lfreetype6
-#flag -lftgl
-*/
 #flag -liup
-/*
-#flag -liupcd
-#flag -liupcontrols
-#flag -liupgl
-#flag -liupglcontrols
-#flag -liupim
-#flag -liupimglib
-#flag -liupole
-#flag -liuptuio
-*/
 #flag manifest.syso
 #include "iup.h"
 
 fn C.IupClose()
 
+fn C.IupFlush()
+
 fn C.IupGetGlobal() voidptr
 
 fn C.IupLog(charptr, charptr, voidptr)
 
-fn C.IupMainLoop()
+fn C.IupLoopStep() int
+
+fn C.IupMainLoop() int
 
 fn C.IupMessage(charptr, charptr)
 
@@ -38,6 +28,10 @@ fn C.IupSetStrGlobal(charptr, charptr)
 
 pub fn close() {
 	C.IupClose()
+}
+
+pub fn flush() {
+	C.IupFlush()
 }
 
 pub fn get_global_reference(name string) voidptr {
@@ -52,8 +46,12 @@ pub fn log(log_type string, data string) {
 	C.IupLog(log_type.to_upper().str, data.str)
 }
 
-pub fn main_loop() {
-	C.IupMainLoop()
+pub fn loop_step() int {
+	return C.IupLoopStep()
+}
+
+pub fn main_loop() int {
+	return C.IupMainLoop()
 }
 
 pub fn message(title string, message string) {

@@ -28,6 +28,8 @@ fn main() {
 	)
 
 	dialog.show_xy(viup.Pos.center, viup.Pos.center)
+	dialog.callback(viup.KeyFunc(key_event))
+
 	button.set_data("window", dialog)
 	button.set_data("label", label)
 	button.callbacks(viup.ActionFunc(button_clicked), viup.MouseButtonFunc(mouse_event))
@@ -38,11 +40,28 @@ fn main() {
 	viup.close()
 }
 
-fn button_clicked(control &viup.Control) int {
+fn button_clicked(control &viup.Control) viup.FuncResult {
 	window := &viup.Control(control.get_data("window"))
 	label  := &viup.Control(control.get_data("label"))
 	label.set_attr("title", "Window Size: ${window.current_width}x${window.current_height}")
-	return 1
+	return .@continue
+}
+
+fn key_event(control &viup.Control, key viup.Key) int {
+	num := int(key)
+	println("Key Pressed $key - $num")
+
+	if viup.is_shift(key) {
+		println("shifted")
+	}
+
+	if viup.is_ctrl(key) {
+		ckey := viup.get_key(key)
+		num2 := int(ckey)
+		println("ctrl $ckey - $num2")
+	}
+
+	return 0
 }
 
 fn mouse_event(control &viup.Control, button viup.MouseButton, pressed bool, x int, y int, status charptr) {

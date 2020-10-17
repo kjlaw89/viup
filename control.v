@@ -10,6 +10,8 @@ fn C.IupGetClassName(voidptr) charptr
 
 fn C.IupGetClassType(voidptr) charptr
 
+fn C.IupGetFocus() voidptr
+
 fn C.IupInsert(voidptr, voidptr, voidptr) voidptr
 
 fn C.IupMap(voidptr) int
@@ -19,6 +21,8 @@ fn C.IupRefresh(voidptr)
 fn C.IupRefreshChildren(voidptr)
 
 fn C.IupSaveClassAttributes(voidptr)
+
+fn C.IupSetFocus(voidptr) voidptr
 
 fn C.IupUnmap(voidptr)
 
@@ -58,12 +62,23 @@ pub fn (control &Control) detach() {
 	C.IupDetach(control)
 }
 
+// focus sets focus on to the current control and
+// returns back the previously focused control
+pub fn (control &Control) focus() &Control {
+	return C.IupSetFocus(control)
+}
+
 pub fn (control &Control) get_class_name() string {
 	return tos3(C.IupGetClassName(control))
 }
 
 pub fn (control &Control) get_class_type() string {
 	return tos3(C.IupGetClassType(control))
+}
+
+// get_focused returns back the control that currently has focus
+pub fn get_focused() &Control {
+	return C.IupGetFocus()
 }
 
 // insert inserts a `new_control` into this control after `ref_control` if provided
