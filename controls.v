@@ -22,6 +22,8 @@ fn C.IupFlatToggle(charptr) voidptr
 
 fn C.IupFlatVal(charptr) voidptr
 
+fn C.IupItem(charptr, charptr) voidptr
+
 fn C.IupLabel(charptr) voidptr
 
 fn C.IupLink(charptr, charptr) voidptr
@@ -30,9 +32,13 @@ fn C.IupMultiLine(charptr) voidptr
 
 fn C.IupProgressBar() voidptr
 
+fn C.IupSeparator() voidptr
+
 fn C.IupSpin() voidptr
 
 fn C.IupSpinbox(voidptr) voidptr
+
+fn C.IupSubmenu(charptr, voidptr) voidptr
 
 fn C.IupText(charptr) voidptr
 
@@ -108,6 +114,18 @@ pub fn flat_tree(attrs ...string) &Control {
 	return flat_tree
 }
 
+pub fn menu_item(title string, action string, attrs ...string) &Control {
+	menu_item := &Control(C.IupItem(title.str, action.str))
+	menu_item.set_attrs(attrs)
+	return menu_item
+}
+
+pub fn menu_sep(attrs ...string) &Control {
+	menu_sep := &Control(C.IupSeparator())
+	menu_sep.set_attrs(attrs)
+	return menu_sep
+}
+
 pub fn label(title string, attrs ...string) &Control {
 	label := &Control(C.IupLabel(title.str))
 	label.set_attrs(attrs)
@@ -148,6 +166,12 @@ pub fn spin_box(child &Control, attrs ...string) &Control {
 	spin_box := &Control(C.IupSpinbox(child))
 	spin_box.set_attrs(attrs)
 	return spin_box
+}
+
+pub fn sub_menu(title string, child &Control, attrs ...string) &Control {
+	sub_menu := &Control(C.IupSubmenu(title.str, child))
+	sub_menu.set_attrs(attrs)
+	return sub_menu
 }
 
 pub fn text(action string, attrs ...string) &Control {

@@ -1,8 +1,16 @@
 module viup
 
 pub enum FuncResult {
-	@continue = 0
+	cont = -4
+	close = -3
+	default = -2
+	ignore = -1
 }
+
+#define IUP_IGNORE    -1
+#define IUP_DEFAULT   -2
+#define IUP_CLOSE     -3
+#define IUP_CONTINUE  -4
 
 pub enum Key {
 	k_tab = 9

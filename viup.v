@@ -24,6 +24,8 @@ fn C.IupOpen(int, voidptr)
 
 fn C.IupSetGlobal(charptr, charptr)
 
+fn C.IupSetHandle(charptr, voidptr)
+
 fn C.IupSetStrGlobal(charptr, charptr)
 
 pub fn close() {
@@ -68,4 +70,8 @@ pub fn set_global_reference(name string, data voidptr) {
 
 pub fn set_global_value(name string, data string) {
 	C.IupSetStrGlobal('${name}_global'.to_upper().trim_space().str, data.str)
+}
+
+pub fn set_handle(name string, data voidptr) {
+	C.IupSetHandle(name.str, data)
 }

@@ -28,9 +28,9 @@ fn C.IupUnmap(voidptr)
 
 pub struct Control {
 mut:
-	sig            [4]byte
+	sig            [4]i8
 	iclass         voidptr
-	attr           voidptr
+	attrib         voidptr
 	serial         int
 	handle         voidptr
 	expand         int

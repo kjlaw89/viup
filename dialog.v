@@ -10,11 +10,13 @@ pub fn dialog(child &Control, attrs ...string) &Control {
 	return dialog
 }
 
+pub fn (control &Control) set_menu(name string, menu &Control) {
+	set_handle(name, menu)
+	control.set_attr("menu", name)
+}
+
+// show_xy shows the dialog the the provided X/Y coordinates
+// Note: Only to be used with dialogs
 pub fn (control &Control) show_xy(x int, y int) {
-	/*
-	if control.@type != "dialog" {
-		return
-	}
-	*/
 	C.IupShowXY(control, x, y)
 }
