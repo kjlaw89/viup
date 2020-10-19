@@ -28,6 +28,8 @@ fn C.IupLabel(charptr) voidptr
 
 fn C.IupLink(charptr, charptr) voidptr
 
+fn C.IupList(charptr) voidptr
+
 fn C.IupMultiLine(charptr) voidptr
 
 fn C.IupProgressBar() voidptr
@@ -135,6 +137,13 @@ pub fn link(url string, title string, attrs ...string) &Control {
 	label := &Control(C.IupLink(url.str, title.str))
 	label.set_attrs(attrs)
 	return label
+}
+
+pub fn list(action string, attrs ...string) &Control {
+	action_val := if action.len > 0 { action.str } else { 0 }
+	list := &Control(C.IupList(action_val))
+	list.set_attrs(attrs)
+	return list
 }
 
 pub fn menu_item(title string, action string, attrs ...string) &Control {

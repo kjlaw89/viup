@@ -6,19 +6,26 @@ import viup
 fn main() {
 	viup.open(os.args)
 
+	viup.file_dialog("title=Open file...").set_handle("open_dialog")
+	viup.file_dialog("title=Save file...", "dialogtype=save").set_handle("save_dialog")
+
+	menu_event := viup.ActionFunc(menu_clicked)
 	menu := viup.menu([
 		viup.sub_menu("&File", viup.menu([
-			viup.menu_item("E&xit", "", "name=MenuExit").callback(viup.ActionFunc(menu_clicked))
+			viup.menu_item("&Open File...", "", "name=MenuOpen").callback(menu_event)
+			viup.menu_item("&Save File...", "", "name=MenuSave").callback(menu_event)
+			viup.menu_sep()
+			viup.menu_item("E&xit", "", "name=MenuExit").callback(menu_event)
 		])),
 		viup.sub_menu("&Edit", viup.menu([
-			viup.menu_item("C&ut", "", "name=MenuCut").callback(viup.ActionFunc(menu_clicked)),
-			viup.menu_item("&Copy", "", "name=MenuCopy").callback(viup.ActionFunc(menu_clicked)),
-			viup.menu_item("&Paste", "", "name=MenuPaste").callback(viup.ActionFunc(menu_clicked))
+			viup.menu_item("C&ut", "", "name=MenuCut").callback(menu_event),
+			viup.menu_item("&Copy", "", "name=MenuCopy").callback(menu_event),
+			viup.menu_item("&Paste", "", "name=MenuPaste").callback(menu_event)
 		])),
 		viup.sub_menu("&Help", viup.menu([
-			viup.menu_item("&Documentation", "", "name=MenuDocumentation").callback(viup.ActionFunc(menu_clicked)),
+			viup.menu_item("&Documentation", "", "name=MenuDocumentation").callback(menu_event),
 			viup.menu_sep()
-			viup.menu_item("&About", "", "name=MenuAbout").callback(viup.ActionFunc(menu_clicked))
+			viup.menu_item("&About", "", "name=MenuAbout").callback(menu_event)
 		]))
 	])
 
@@ -38,14 +45,16 @@ fn main() {
 	// |               | | tab-group           |
 	// |---------------| |---------------------|
 
-	hbox := viup.hbox([
+	hbox :=
+	viup.hbox([
 		viup.vbox([
 			viup.frame(
 				viup.vbox([
-					viup.button("Button", "").callback(viup.MouseButtonFunc(mouse_event))
+					viup.button("Button", "", "expand=horizontal").callback(viup.ActionFunc(button_clicked))
 					viup.toggle("Checkbox", "action1")
+					viup.text("", "expand=horizontal")
 					viup.label("Label")
-					viup.link("https://www.vlang.io", "V Programming Language")
+					viup.link("https://www.vlang.io", "Link")
 					viup.divider()
 					viup.date_picker("order=MMMDY", "expand=horizontal")
 					viup.color_browser()
@@ -71,15 +80,52 @@ fn main() {
 				]),
 				"title=Numbers",
 				"margin=10x10",
-				"minsize=400x"
+				"minsize=400x",
 			)
+			viup.frame(
+				viup.vbox([
+					viup.list(
+						"",
+						"1=Item 1",
+						"2=Item 2",
+						"3=Item 3",
+						"4=Item 4",
+						"dropdown=yes",
+						"expand=horizontal",
+						"value=1"
+					)
+					viup.list(
+						"",
+						"1=Item 1",
+						"2=Item 2",
+						"3=Item 3",
+						"4=Item 4",
+						"dropdown=yes",
+						"editbox=yes",
+						"expand=horizontal",
+					)
+					viup.radio_group(
+						viup.vbox([
+							viup.toggle("Radio 1", "")
+							viup.toggle("Radio 2", "")
+							viup.toggle("Radio 3", "")
+						])
+					)
+				]),
+				"title=Lists",
+				"margin=10x10"
+			)
+			viup.tabs([
+				viup.hbox([viup.label("In tab 1"), viup.fill()], "tabtitle=Tab 1")
+				viup.hbox([viup.label("In tab 2")], "tabtitle=Tab 2")
+				viup.hbox([viup.label("In tab 3")], "tabtitle=Tab 3")
+			])
 		], "gap=10")
 	], "margin=10x10")
 
-	dialog := viup.dialog(viup.scroll(hbox), "title=Control Sampler")
+	dialog := viup.dialog(viup.scroll(hbox), "title=Kitchen Sink")
 	dialog.set_menu("app_menu", menu)
 	dialog.show_xy(viup.Pos.center, viup.Pos.center)
-	dialog.callback(viup.KeyFunc(key_event))
 
 	viup.main_loop()
 	viup.close()
@@ -88,6 +134,35 @@ fn main() {
 fn menu_clicked(control &viup.Control) viup.FuncResult {
 	name := control.get_attr("name")
 	match name {
+		"MenuOpen" {
+			dialog := viup.get_handle("open_dialog")
+			dialog.popup(viup.Pos.current, viup.Pos.current)
+
+			if dialog.get_int("status") == 0 {
+				value := dialog.get_attr("value")
+				viup
+					.message_dialog("title=File Opened", "value=The file '$value' was opened.", "dialogtype=information")
+					.popup(viup.Pos.current, viup.Pos.current)
+					.destroy()
+			}
+		}
+		"MenuSave" {
+			dialog := viup.get_handle("save_dialog")
+			dialog.popup(viup.Pos.current, viup.Pos.current)
+
+			if dialog.get_int("status") != -1 {
+				value := dialog.get_attr("value")
+				viup
+					.message_dialog(
+						"buttons=OKCANCEL",
+						"dialogtype=warning",
+						"title=File Save",
+						"value=The file '$value' was not actually saved, but this is where you would do it.",
+					)
+					.popup(viup.Pos.current, viup.Pos.current)
+					.destroy()
+			}
+		}
 		"MenuExit" { return .close }
 		else   { println("Menu $name") }
 	}
@@ -109,25 +184,4 @@ fn button_clicked(control &viup.Control) viup.FuncResult {
 	label  := &viup.Control(control.get_data("label"))
 	label.set_attr("title", "Window Size: ${window.current_width}x${window.current_height}")
 	return .ignore
-}
-
-fn key_event(control &viup.Control, key viup.Key) viup.FuncResult {
-	num := int(key)
-	println("Key Pressed $key - $num")
-
-	if viup.is_shift(key) {
-		println("shifted")
-	}
-
-	if viup.is_ctrl(key) {
-		ckey := viup.get_key(key)
-		num2 := int(ckey)
-		println("ctrl $ckey - $num2")
-	}
-
-	return .default
-}
-
-fn mouse_event(control &viup.Control, button viup.MouseButton, pressed bool, x int, y int, status charptr) {
-	println("Mouse event: $button, $pressed, $x, $y")
 }
