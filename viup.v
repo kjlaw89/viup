@@ -12,6 +12,8 @@ fn C.IupFlush()
 
 fn C.IupGetGlobal() voidptr
 
+fn C.IupGetHandle(charptr) voidptr
+
 fn C.IupLog(charptr, charptr, voidptr)
 
 fn C.IupLoopStep() int
@@ -44,6 +46,10 @@ pub fn get_global_value(name string) string {
 	return tos3(C.IupGetGlobal('${name}_global'.to_upper().trim_space().str))
 }
 
+pub fn get_handle(name string) &Control {
+	return C.IupGetHandle(name.str)
+}
+
 pub fn log(log_type string, data string) {
 	C.IupLog(log_type.to_upper().str, data.str)
 }
@@ -72,6 +78,7 @@ pub fn set_global_value(name string, data string) {
 	C.IupSetStrGlobal('${name}_global'.to_upper().trim_space().str, data.str)
 }
 
-pub fn set_handle(name string, data voidptr) {
-	C.IupSetHandle(name.str, data)
+pub fn set_handle(name string, control &Control) &Control {
+	C.IupSetHandle(name.str, control)
+	return control
 }

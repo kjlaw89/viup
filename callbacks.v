@@ -64,8 +64,7 @@ pub type ValueChangingFunc = fn(&Control, int) FuncResult
 pub type WheelFunc = fn(&Control, f32, int, int, charptr) FuncResult
 
 type VIUPFunc = 
-	ActionFunc |
-	BranchOpenFunc | BranchCloseFunc | ButtonFunc | ButtonPressFunc | ButtonReleaseFunc | CaretFunc |
+	ActionFunc | BranchOpenFunc | BranchCloseFunc | ButtonFunc | ButtonPressFunc | ButtonReleaseFunc | CaretFunc |
 	CellFunc | ChangeFunc | DblClickFunc | DestroyFunc | DetachedFunc | DragFunc | DragDropFunc | DropDownFunc |
 	DropFilesFunc | EditFunc | EnteredFunc | EntryFunc | ExecuteBranchFunc | ExecuteLeafFunc | ExitFunc |
 	ExitedFunc | ExtendedFunc | ExtraButtonFunc | FlatActionFunc | FocusedFunc | HelpFunc | IdleFunc | KeyFunc |

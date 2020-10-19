@@ -8,47 +8,47 @@ fn main() {
 
 	menu := viup.menu([
 		viup.sub_menu("&File", viup.menu([
-			viup.menu_item("&Exit", "exit")
+			viup.menu_item("E&xit", "", "name=MenuExit").callback(viup.ActionFunc(menu_clicked))
 		])),
 		viup.sub_menu("&Edit", viup.menu([
-			viup.menu_item("C&ut", "cut"),
-			viup.menu_item("&Copy", "copy"),
-			viup.menu_item("&Paste", "paste")
+			viup.menu_item("C&ut", "", "name=MenuCut").callback(viup.ActionFunc(menu_clicked)),
+			viup.menu_item("&Copy", "", "name=MenuCopy").callback(viup.ActionFunc(menu_clicked)),
+			viup.menu_item("&Paste", "", "name=MenuPaste").callback(viup.ActionFunc(menu_clicked))
 		])),
 		viup.sub_menu("&Help", viup.menu([
-			viup.menu_item("&Documentation", "documentation"),
+			viup.menu_item("&Documentation", "", "name=MenuDocumentation").callback(viup.ActionFunc(menu_clicked)),
 			viup.menu_sep()
-			viup.menu_item("&About", "about")
+			viup.menu_item("&About", "", "name=MenuAbout").callback(viup.ActionFunc(menu_clicked))
 		]))
 	])
 
-	label := viup.label("Hello from IUP", "expand=horizontal")
-	button := viup
-		.button("Get Window Position", "")
-		.callbacks(viup.ActionFunc(button_clicked), viup.MouseButtonFunc(mouse_event))
-
-	link := viup.link("https://www.google.com", "Google.com")
-	progress := viup.progress("marquee=yes", "expand=horizontal")
-	spin := viup.spin_box(viup.text("spin", "expand=horizontal"))
-
-	toggle1 := viup.toggle("Toggle 1", "action1")
-	toggle2 := viup.toggle("Toggle 2", "action2")
-
-	slider := viup.slider("horizontal", "expand=horizontal", "showticks=yes", "step=5", "tickspos=reverse")
-
-	colors := viup.color_browser()
-
-	picker := viup.date_picker("order=MDY")
-
-	//multiline := viup.multiline("multiline")
-
+    // Layout design
+	// ----------------- hbox ------------------
+	// ------vbox------- ---------vbox----------
+	// |---frame "BC"--| |----frame "Numbers"--|  "BC" - "Basic Controls"
+	// | button        | | spin                |
+	// | toggle        | | slider ('value')    |
+	// | text          | | progress            |
+	// | label         | |---------------------|
+	// | divider       | |----frame "Lists"----|
+	// | date_picker   | | dropdown            |
+	// | color_browser | | editable-dropdown   |
+	// | fill          | | radio-group         |
+	// |               | |---------------------|
+	// |               | | tab-group           |
+	// |---------------| |---------------------|
 
 	hbox := viup.hbox([
 		viup.vbox([
 			viup.frame(
 				viup.vbox([
-					label,
-					button,
+					viup.button("Button", "").callback(viup.MouseButtonFunc(mouse_event))
+					viup.toggle("Checkbox", "action1")
+					viup.label("Label")
+					viup.link("https://www.vlang.io", "V Programming Language")
+					viup.divider()
+					viup.date_picker("order=MMMDY", "expand=horizontal")
+					viup.color_browser()
 					viup.fill()
 				]),
 				"title=Basic Controls",
@@ -58,31 +58,50 @@ fn main() {
 		viup.vbox([
 			viup.frame(
 				viup.vbox([
-					spin,
-					slider,
-					progress,
+					viup
+						.text("", "expand=horizontal", "spin=yes", "spinmax=100", "value=50")
+						.set_handle("spin1")
+						.callback(viup.ValueChangedFunc(numbers_changed))
+					viup
+						.slider("horizontal", "expand=horizontal", "max=100", "showticks=yes", "step=5", "tickspos=reverse", "value=50")
+						.set_handle("slider1")
+						.callback(viup.ValueChangedFunc(numbers_changed))
+					viup.progress("expand=horizontal", "max=100", "value=50").set_handle("progress1")
 					viup.fill()
 				]),
 				"title=Numbers",
-				"margin=10x10"
+				"margin=10x10",
+				"minsize=400x"
 			)
 		], "gap=10")
 	], "margin=10x10")
 
-	scroll := viup.scroll(hbox)
-
-	dialog := viup.dialog(scroll, "title=Hello World 2")
+	dialog := viup.dialog(viup.scroll(hbox), "title=Control Sampler")
 	dialog.set_menu("app_menu", menu)
-
 	dialog.show_xy(viup.Pos.center, viup.Pos.center)
-	//dialog.callback(viup.KeyFunc(key_event))
-
-	/*button.set_data("window", dialog)
-	button.set_data("label", label)
-	button.callbacks(viup.ActionFunc(button_clicked), viup.MouseButtonFunc(mouse_event))*/
+	dialog.callback(viup.KeyFunc(key_event))
 
 	viup.main_loop()
 	viup.close()
+}
+
+fn menu_clicked(control &viup.Control) viup.FuncResult {
+	name := control.get_attr("name")
+	match name {
+		"MenuExit" { return .close }
+		else   { println("Menu $name") }
+	}
+
+	return .cont
+}
+
+fn numbers_changed(control &viup.Control) viup.FuncResult {
+	value := control.get_attr("value")
+	viup.get_handle("spin1").set_attr("value", value.int().str())
+	viup.get_handle("slider1").set_attr("value", value)
+	viup.get_handle("progress1").set_attr("value", value)
+
+	return .cont
 }
 
 fn button_clicked(control &viup.Control) viup.FuncResult {
@@ -106,7 +125,7 @@ fn key_event(control &viup.Control, key viup.Key) viup.FuncResult {
 		println("ctrl $ckey - $num2")
 	}
 
-	return .ignore
+	return .default
 }
 
 fn mouse_event(control &viup.Control, button viup.MouseButton, pressed bool, x int, y int, status charptr) {

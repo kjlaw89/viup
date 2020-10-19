@@ -98,6 +98,12 @@ pub fn (control &Control) refresh_children() {
 	C.IupRefreshChildren(control)
 }
 
+// set_handle is a helper function for `Control` that calls the global
+// `set_handle` function. Returns back an instance of `Control` for chaining
+pub fn (control &Control) set_handle(name string) &Control {
+	return set_handle(name, control)
+}
+
 pub fn (control &Control) unmap_control(save_attrs bool) {
 	if save_attrs {
 		C.IupSaveClassAttributes(control)

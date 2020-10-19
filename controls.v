@@ -55,7 +55,9 @@ pub fn animated_label(animation &Control, attrs ...string) &Control {
 }
 
 pub fn button(title string, action string, attrs ...string) &Control {
-	button := &Control(C.IupButton(title.str, action.str))
+	action_val := if action.len > 0 { action.str } else { 0 }
+	button := &Control(C.IupButton(title.str, action_val))
+	button.set_attr("action", action)
 	button.set_attrs(attrs)
 	return button
 }
@@ -67,7 +69,9 @@ pub fn calendar(attrs ...string) &Control {
 }
 
 pub fn canvas(action string, attrs ...string) &Control {
-	canvas := &Control(C.IupCanvas(action.str))
+	action_val := if action.len > 0 { action.str } else { 0 }
+	canvas := &Control(C.IupCanvas(action_val))
+	canvas.set_attr("action", action)
 	canvas.set_attrs(attrs)
 	return canvas
 }
@@ -82,6 +86,13 @@ pub fn date_picker(attrs ...string) &Control {
 	date_picker := &Control(C.IupDatePick())
 	date_picker.set_attrs(attrs)
 	return date_picker
+}
+
+pub fn divider(attrs ...string) &Control {
+	divider := &Control(C.IupFlatSeparator())
+	divider.set_attr("orientation", "horizontal")
+	divider.set_attrs(attrs)
+	return divider
 }
 
 pub fn drop_button(child &Control, attrs ...string) &Control {
@@ -114,18 +125,6 @@ pub fn flat_tree(attrs ...string) &Control {
 	return flat_tree
 }
 
-pub fn menu_item(title string, action string, attrs ...string) &Control {
-	menu_item := &Control(C.IupItem(title.str, action.str))
-	menu_item.set_attrs(attrs)
-	return menu_item
-}
-
-pub fn menu_sep(attrs ...string) &Control {
-	menu_sep := &Control(C.IupSeparator())
-	menu_sep.set_attrs(attrs)
-	return menu_sep
-}
-
 pub fn label(title string, attrs ...string) &Control {
 	label := &Control(C.IupLabel(title.str))
 	label.set_attrs(attrs)
@@ -138,8 +137,23 @@ pub fn link(url string, title string, attrs ...string) &Control {
 	return label
 }
 
+pub fn menu_item(title string, action string, attrs ...string) &Control {
+	action_val := if action.len > 0 { action.str } else { 0 }
+	menu_item := &Control(C.IupItem(title.str, action_val))
+	menu_item.set_attrs(attrs)
+	return menu_item
+}
+
+pub fn menu_sep(attrs ...string) &Control {
+	menu_sep := &Control(C.IupSeparator())
+	menu_sep.set_attrs(attrs)
+	return menu_sep
+}
+
 pub fn multiline(action string, attrs ...string) &Control {
-	multiline := &Control(C.IupMultiLine(action.str))
+	action_val := if action.len > 0 { action.str } else { 0 }
+	multiline := &Control(C.IupMultiLine(action_val))
+	multiline.set_attr("action", action)
 	multiline.set_attrs(attrs)
 	return multiline
 }
@@ -175,7 +189,9 @@ pub fn sub_menu(title string, child &Control, attrs ...string) &Control {
 }
 
 pub fn text(action string, attrs ...string) &Control {
-	text := &Control(C.IupText(action.str))
+	action_val := if action.len > 0 { action.str } else { 0 }
+	text := &Control(C.IupText(action_val))
+	text.set_attr("action", action)
 	text.set_attrs(attrs)
 	return text
 }
@@ -187,7 +203,9 @@ pub fn tree(attrs ...string) &Control {
 }
 
 pub fn toggle(title string, action string, attrs ...string) &Control {
-	toggle := &Control(C.IupToggle(title.str, action.str))
+	action_val := if action.len > 0 { action.str } else { 0 }
+	toggle := &Control(C.IupToggle(title.str, action_val))
+	toggle.set_attr("action", action)
 	toggle.set_attrs(attrs)
 	return toggle
 }

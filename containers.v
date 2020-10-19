@@ -12,6 +12,8 @@ fn C.IupFill() voidptr
 
 fn C.IupFlatFrame(voidptr) voidptr
 
+fn C.IupFlatSeparator() voidptr
+
 fn C.IupFlatScrollBox(voidptr) voidptr
 
 fn C.IupFlatTabsv(voidptr) voidptr
