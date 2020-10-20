@@ -86,6 +86,13 @@ pub fn callback(func VIUPFunc) {
 	}
 }
 
+// callbacks adds the provided callbacks to the global scope
+pub fn callbacks(funcs ...VIUPFunc) {
+	for f in funcs {
+		callback(f)
+	}
+}
+
 // callback adds a callback to this `Control` and
 // returns `Control` back for chaining
 pub fn (control &Control) callback(func VIUPFunc) &Control {

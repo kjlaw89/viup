@@ -6,9 +6,7 @@ import viup
 fn main() {
 	viup.open(os.args)
 
-	viup.file_dialog("title=Open file...").set_handle("open_dialog")
-	viup.file_dialog("title=Save file...", "dialogtype=save").set_handle("save_dialog")
-
+	// Create our menu with the typical "File | Edit | About" layout
 	menu_event := viup.ActionFunc(menu_clicked)
 	menu := viup.menu([
 		viup.sub_menu("&File", viup.menu([
@@ -18,12 +16,11 @@ fn main() {
 			viup.menu_item("E&xit", "", "name=MenuExit").callback(menu_event)
 		])),
 		viup.sub_menu("&Edit", viup.menu([
-			viup.menu_item("C&ut", "", "name=MenuCut").callback(menu_event),
-			viup.menu_item("&Copy", "", "name=MenuCopy").callback(menu_event),
-			viup.menu_item("&Paste", "", "name=MenuPaste").callback(menu_event)
+			viup.menu_item("Debug &Window", "", "name=MenuDebugWindow").callback(menu_event),
+			viup.menu_item("Debug &Control", "", "name=MenuDebugControl").callback(menu_event),
 		])),
 		viup.sub_menu("&Help", viup.menu([
-			viup.menu_item("&Documentation", "", "name=MenuDocumentation").callback(menu_event),
+			viup.menu_item("&Repository", "", "name=MenuRepository").callback(menu_event),
 			viup.menu_sep()
 			viup.menu_item("&About", "", "name=MenuAbout").callback(menu_event)
 		]))
@@ -39,7 +36,7 @@ fn main() {
 	// | label         | |---------------------|
 	// | divider       | |----frame "Lists"----|
 	// | date_picker   | | dropdown            |
-	// | color_browser | | editable-dropdown   |
+	// | button        | | editable-dropdown   |
 	// | fill          | | radio-group         |
 	// |               | |---------------------|
 	// |               | | tab-group           |
@@ -52,18 +49,27 @@ fn main() {
 				viup.vbox([
 					viup.button("Button", "", "expand=horizontal").callback(viup.ActionFunc(button_clicked))
 					viup.toggle("Checkbox", "action1")
-					viup.text("", "expand=horizontal")
+					viup.text("", "expand=horizontal", "value=Text Field")
 					viup.label("Label")
 					viup.link("https://www.vlang.io", "Link")
 					viup.divider()
-					viup.date_picker("order=MMMDY", "expand=horizontal")
-					viup.color_browser()
+					viup
+						.button("Set font...", "", "expand=horizontal")
+						.set_handle("font_btn")
+						.callback(viup.ActionFunc(font_button_clicked))
+					viup.date_picker("expand=horizontal", "order=MDY")
+					viup
+						.button("", "", "bgcolor=0 0 0", "expand=horizontal", "padding=10x0")
+						.unset_attr("title")
+						.set_handle("color_btn")
+						.callback(viup.ActionFunc(color_button_clicked))
 					viup.fill()
 				]),
 				"title=Basic Controls",
-				"margin=10x10"
+				"margin=10x10",
+				"expand=yes"
 			)
-		], "expand=vertical", "gap=10")
+		], "expand=vertical", "gap=10", "minsize=250x")
 		viup.vbox([
 			viup.frame(
 				viup.vbox([
@@ -80,29 +86,30 @@ fn main() {
 				]),
 				"title=Numbers",
 				"margin=10x10",
-				"minsize=400x",
+				"minsize=500x",
 			)
 			viup.frame(
 				viup.vbox([
 					viup.list(
 						"",
-						"1=Item 1",
-						"2=Item 2",
-						"3=Item 3",
-						"4=Item 4",
+						"1=Combo Item 1",
+						"2=Combo Item 2",
+						"3=Combo Item 3",
+						"4=Combo Item 4",
 						"dropdown=yes",
 						"expand=horizontal",
 						"value=1"
 					)
 					viup.list(
 						"",
-						"1=Item 1",
-						"2=Item 2",
-						"3=Item 3",
-						"4=Item 4",
+						"1=Editable Item 1",
+						"2=Editable Item 2",
+						"3=Editable Item 3",
+						"4=Editable Item 4",
 						"dropdown=yes",
 						"editbox=yes",
 						"expand=horizontal",
+						"value=1",
 					)
 					viup.radio_group(
 						viup.vbox([
@@ -123,9 +130,16 @@ fn main() {
 		], "gap=10")
 	], "margin=10x10")
 
-	dialog := viup.dialog(viup.scroll(hbox), "title=Kitchen Sink")
-	dialog.set_menu("app_menu", menu)
-	dialog.show_xy(viup.Pos.center, viup.Pos.center)
+	// Create our window to display - size will be
+	// automatically calculated by components
+	viup.
+		dialog(
+			viup.scroll(hbox),
+			"title=Control Gallery"
+		)
+		.set_handle("MainWindow")
+		.set_menu("app_menu", menu)
+		.show_xy(viup.Pos.center, viup.Pos.center)
 
 	viup.main_loop()
 	viup.close()
@@ -134,8 +148,9 @@ fn main() {
 fn menu_clicked(control &viup.Control) viup.FuncResult {
 	name := control.get_attr("name")
 	match name {
+		"MenuExit" { return .close }
 		"MenuOpen" {
-			dialog := viup.get_handle("open_dialog")
+			dialog := viup.file_dialog("title=Open file...")
 			dialog.popup(viup.Pos.current, viup.Pos.current)
 
 			if dialog.get_int("status") == 0 {
@@ -145,9 +160,22 @@ fn menu_clicked(control &viup.Control) viup.FuncResult {
 					.popup(viup.Pos.current, viup.Pos.current)
 					.destroy()
 			}
+
+			dialog.destroy()
+		}
+		"MenuDebugControl" {
+			focused := viup.get_focused()
+			focused.debug_props()
+		}
+		"MenuDebugWindow" {
+			window := viup.get_handle("MainWindow")
+			window.debug()
+		}
+		"MenuRepository" {
+			viup.help("https://github.com/kjlaw89/viup")
 		}
 		"MenuSave" {
-			dialog := viup.get_handle("save_dialog")
+			dialog := viup.file_dialog("title=Save file...", "dialogtype=save")
 			dialog.popup(viup.Pos.current, viup.Pos.current)
 
 			if dialog.get_int("status") != -1 {
@@ -162,9 +190,10 @@ fn menu_clicked(control &viup.Control) viup.FuncResult {
 					.popup(viup.Pos.current, viup.Pos.current)
 					.destroy()
 			}
+
+			dialog.destroy()
 		}
-		"MenuExit" { return .close }
-		else   { println("Menu $name") }
+		else { println("Menu $name") }
 	}
 
 	return .cont
@@ -180,8 +209,21 @@ fn numbers_changed(control &viup.Control) viup.FuncResult {
 }
 
 fn button_clicked(control &viup.Control) viup.FuncResult {
-	window := &viup.Control(control.get_data("window"))
-	label  := &viup.Control(control.get_data("label"))
-	label.set_attr("title", "Window Size: ${window.current_width}x${window.current_height}")
-	return .ignore
+	viup.message("Button Click", "Button clicked!")
+	return .cont
+}
+
+fn font_button_clicked(control &viup.Control) viup.FuncResult {
+	font := control.get_font().show_picker()
+	control.set_font(font).set_attr("title", font.face)
+
+	return .cont
+}
+
+fn color_button_clicked(control &viup.Control) viup.FuncResult {
+	color, table := control.get_bgcolor().show_picker()
+	println(table)
+	control.set_bgcolor(color)
+
+	return .cont
 }

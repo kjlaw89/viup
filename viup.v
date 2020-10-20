@@ -14,6 +14,8 @@ fn C.IupGetGlobal() voidptr
 
 fn C.IupGetHandle(charptr) voidptr
 
+fn C.IupHelp(charptr) int
+
 fn C.IupLog(charptr, charptr, voidptr)
 
 fn C.IupLoopStep() int
@@ -48,6 +50,11 @@ pub fn get_global_value(name string) string {
 
 pub fn get_handle(name string) &Control {
 	return C.IupGetHandle(name.str)
+}
+
+// help opens a browser to the provided `url`
+pub fn help(url string) int {
+	return C.IupHelp(url.str)
 }
 
 pub fn log(log_type string, data string) {

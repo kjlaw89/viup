@@ -27,6 +27,11 @@ pub fn (control &Control) get_attr(name string) string {
 	return tos3(ptr)
 }
 
+// get_bool retrieves an bool attribute (technically int > 0)
+pub fn (control &Control) get_bool(name string) bool {
+	return C.IupGetInt(control, name.to_upper().trim_space().str) > 0
+}
+
 // get_f32 retrieves a float attribute
 pub fn (control &Control) get_f32(name string) f32 {
 	return C.IupGetFloat(control, name.to_upper().trim_space().str)
@@ -104,4 +109,10 @@ pub fn (control &Control) set_data(name string, data voidptr) &Control {
 
 pub fn (control &Control) get_data(name string) voidptr {
 	return C.IupGetAttribute(control, '${name}_data'.to_upper().trim_space().str)
+}
+
+// unset_attr clears the provided attribute
+pub fn (control &Control) unset_attr(name string) &Control {
+	C.IupSetAttribute(control, name.to_upper().trim_space().str, C.NULL)
+	return control
 }

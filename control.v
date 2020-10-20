@@ -14,7 +14,11 @@ fn C.IupGetFocus() voidptr
 
 fn C.IupInsert(voidptr, voidptr, voidptr) voidptr
 
+fn C.IupNextField(voidptr) voidptr
+
 fn C.IupMap(voidptr) int
+
+fn C.IupPreviousField(voidptr) voidptr
 
 fn C.IupRefresh(voidptr)
 
@@ -68,6 +72,23 @@ pub fn (control &Control) focus() &Control {
 	return C.IupSetFocus(control)
 }
 
+// focus_next focuses on the next element that can have focus
+// Note: This may not produce the same results as tabbing
+pub fn (control &Control) focus_next() &Control {
+	return C.IupNextField(control)
+}
+
+// focus_prev focuses on the previous element that can have focus
+// Note: This may not produce the same results as tabbing
+pub fn (control &Control) focus_prev() &Control {
+	return C.IupPreviousField(control)
+}
+
+// get_bgcolor gets the background color for the control
+pub fn (control &Control) get_bgcolor() Color {
+	return parse_color(control.get_attr("bgcolor"))
+}
+
 pub fn (control &Control) get_class_name() string {
 	return tos3(C.IupGetClassName(control))
 }
@@ -76,9 +97,19 @@ pub fn (control &Control) get_class_type() string {
 	return tos3(C.IupGetClassType(control))
 }
 
+// get_fgcolor gets the foreground color for the control
+pub fn (control &Control) get_fgcolor() Color {
+	return parse_color(control.get_attr("fgcolor"))
+}
+
 // get_focused returns back the control that currently has focus
 pub fn get_focused() &Control {
 	return C.IupGetFocus()
+}
+
+// get_font returns back a formatted `Font` object for this control
+pub fn (control &Control) get_font() Font {
+	return parse_font(control.get_attr("font"))
 }
 
 // insert inserts a `new_control` into this control after `ref_control` if provided
@@ -96,6 +127,21 @@ pub fn (control &Control) refresh() {
 
 pub fn (control &Control) refresh_children() {
 	C.IupRefreshChildren(control)
+}
+
+// set_bgcolor updates the background color for this control to the provided `Color`
+pub fn (control &Control) set_bgcolor(color Color) &Control {
+	return control.set_attr("bgcolor", color.str())
+}
+
+// set_fgcolor updates the foreground color for this control to the provided `Color`
+pub fn (control &Control) set_fgcolor(color Color) &Control {
+	return control.set_attr("fgcolor", color.str())
+}
+
+// set_font updates the font for this control to the provided `Font`
+pub fn (control &Control) set_font(font Font) &Control {
+	return control.set_attr("font", font.str())
 }
 
 // set_handle is a helper function for `Control` that calls the global
