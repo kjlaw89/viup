@@ -202,7 +202,7 @@ Function | Description
 -------- | -----------
 `animated_label(animation, attrs)` | Creates a control that can display an animation
 `button(title, action, attrs)` | Creates a standard button with `title` for the text
-`canvas(attrs)` | A control that can be used to render custom content
+`canvas(action, attrs)` | A control that can be used to render custom content
 `divider(attrs)` | Draws a horizontal or vertical line (horizontal by default)
 `label(title, attrs)` | A simple control to show text or images
 `link(url, title, attrs)` | Similar to a label, can be used to link to an external source

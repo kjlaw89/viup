@@ -16,7 +16,7 @@ It gives a simple overview of all of the available controls and some sample use 
 fn main() {
 	viup.open(os.args)
 
-	vlogo := image.load("./v-logo.png", "resize=64x64")?
+	vlogo := image.load(os.resource_abs_path("./v-logo.png"), "resize=64x64")?
 	vlogo.set_handle("logo")
 
 	// Create our menu with the typical "File | Edit | About" layout

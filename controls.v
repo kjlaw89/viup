@@ -72,9 +72,10 @@ pub fn calendar(attrs ...string) &Control {
 }
 
 // canvas creates a control that can render custom content
-pub fn canvas(attrs ...string) &Control {
+pub fn canvas(action string, attrs ...string) &Control {
 	action_val := if action.len > 0 { action.str } else { 0 }
 	canvas := &Control(C.IupCanvas(action_val))
+	canvas.set_attr("action", action)
 	canvas.set_attrs(attrs)
 	return canvas
 }
