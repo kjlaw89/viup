@@ -2,7 +2,7 @@
 	<h1>VIUP</h1>
 </div>
 
-VIUP is a work-in-progress V wrapper for the C-based, cross-platform UI library, [IUP](http://webserver2.tecgraf.puc-rio.br/iup/). The aim of this
+VIUP is a work-in-progress V wrapper for the C-based cross-platform UI library, [IUP](http://webserver2.tecgraf.puc-rio.br/iup/). The aim of this
 library is to provide a thorough implementation of IUP in V. The implmentation is faithful to the original API but takes some liberties to provide
 a native "V" feel and modernizes some of the calls.
 
@@ -60,6 +60,14 @@ Extract runtime libraries to a folder and run `sudo ./install` to install librar
 
 I've noticed in testing that the libraries are installed to `/usr/lib64`. It does not appear that they are picked up by the compiler there. Copying from
 that folder to `/usr/lib` resolves the problem. This may not be necessary in all cases.
+
+### Notes about dependencies
+
+This repo comes with a copy of the headers for the version of IUP that it was developed against (3.30), but does not ship with the runtime libraries. It is *not* necessary to get the IM library runtime if you do not plan to use it in your application.
+
+By default VIUP only initializes the subsystems that are imported. For example, importing just `viup` only initializes the standard dialogs, containers, and components.
+
+If an extension library is loaded (`viup.image`), the required runtime binaries must be installed or provided along with the build.
 
 ## Using VIUP
 
@@ -207,3 +215,7 @@ Function | Description
 `sub_menu(title, child, attrs)` | Creates a sub menu component. Sub-menues are children of `menu` components. Typically structured like: Menu -> Sub-menu -> Menu -> Menu Item.
 `text(action, attrs)` | Creates a standard text-input control. Can be set as multi-line, number input, etc.
 `toggle(title, action, attrs)` | A radio or checkbox component. Defaults to radio when in a `radio_group`.
+
+## Contributing / Support
+
+This project was developed as a way of improving my understanding of V & C. I will not be providing active support for the project, but I'll happily accept any pull requests. Use at your own discretion! 
