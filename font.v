@@ -1,9 +1,10 @@
 module viup
 
-pub struct Font {
+struct Font {
 pub mut:
 	condensed string
 	face      string
+	font      string
 	italic    bool
 	size      int     = 12
 	strikeout bool
@@ -15,25 +16,25 @@ pub mut:
 // converts it to a valid `Font`
 pub fn parse_font(font string) Font {
 	if font == "" {
-		return Font{}
+		return Font{ font: font }
 	}
 
-	mut obj := Font{}
+	mut obj := Font{ font: font }
 	mut split := []string{}
 
-	$if windows {
+	if font.contains(",") {
 		split_1 := font.split(',')
 		if split_1.len <= 1 {
-			return Font{ face: split_1[0] }
+			return Font{ face: split_1[0], font: font }
 		}
 
 		obj.face = split_1[0]
 
 		split = split_1[1].trim_space().split(' ')
-	} $else {
+	} else {
 		split = font.split(' ')
 		if split.len <= 1 {
-			return Font{ face: split[0] }
+			return Font{ face: split[0], font: font }
 		}
 
 		obj.face = split[0]
@@ -80,32 +81,7 @@ pub fn (font Font) show_picker() Font {
 	return font
 }
 
-// str converts the font to a IUP valid string
-// Example format: Segoe UI, Bold Italic Strikeout Underline 10
+// str returns back the original font that was provided in `parse_font`
 pub fn (font Font) str() string {
-	face := font.face
-	mut output := $if windows { '$face,' } $else { face }
-	
-	if font.weight != "" {
-		output += ' $font.weight'
-	}
-
-	if font.condensed != "" {
-		output += ' $font.condensed'
-	}
-
-	if font.italic {
-		output += ' Italic'
-	}
-
-	if font.strikeout {
-		output += ' Strikeout'
-	}
-
-	if font.underline {
-		output += ' Underline'
-	}
-
-	output += ' ${font.size}'
-	return output
+	return font.font
 }
