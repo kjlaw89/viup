@@ -1,6 +1,5 @@
-# V IUP
 <div align="center">
-	<h1>VSDL</h1>
+	<h1>VIUP</h1>
 </div>
 
 VIUP is a work-in-progress V wrapper for the C-based, cross-platform UI library, [IUP](http://webserver2.tecgraf.puc-rio.br/iup/). The aim of this
@@ -8,8 +7,8 @@ library is to provide a thorough implementation of IUP in V. The implmentation i
 a native "V" feel and modernizes some of the calls.
 
 <div align="center">
-	<img src="https://raw.githubusercontent.com/kjlaw89/viup/main/examples/gallery/gallery_windows.png" alt="Windows Gallery Example" style="height: 240px;" />
-	<img src="https://raw.githubusercontent.com/kjlaw89/viup/main/examples/gallery/gallery_linux.png" alt="Linux (Ubuntu) Gallery Example" style="height: 240px;" />
+	<img src="https://raw.githubusercontent.com/kjlaw89/viup/main/examples/gallery/gallery_windows.png" alt="Windows Gallery Example" style="width: 320px;" />
+	<img src="https://raw.githubusercontent.com/kjlaw89/viup/main/examples/gallery/gallery_linux.png" alt="Linux (Ubuntu) Gallery Example" style="width: 330px;" />
 </div>
 
 ## Features
