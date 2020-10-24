@@ -20,6 +20,7 @@ fn C.IupShow(voidptr) int
 
 fn C.IupShowXY(voidptr, int, int)
 
+// color_dialog opens a color picker with optional palette
 pub fn color_dialog(attrs ...string) &Control {
 	dialog := &Control(C.IupColorDlg())
 	dialog.set_attrs(attrs)
@@ -43,12 +44,15 @@ pub fn (control &Control) debug_props() &Control {
 	return dialog.show()
 }
 
+// dialog creates a standard Window or Modal dialog control
 pub fn dialog(child &Control, attrs ...string) &Control {
 	dialog := &Control(C.IupDialog(child))
 	dialog.set_attrs(attrs)
 	return dialog
 }
 
+// file_dialog creates a file chooser dialog that can be used to
+// open or save files. If "dialogtype" is not provided, defaults to "open"
 pub fn file_dialog(attrs ...string) &Control {
 	dialog := &Control(C.IupFileDlg())
 	dialog.set_attr("dialogtype", "open")
@@ -56,18 +60,21 @@ pub fn file_dialog(attrs ...string) &Control {
 	return dialog
 }
 
+// font_dialog opens a font picker dialog
 pub fn font_dialog(attrs ...string) &Control {
 	dialog := &Control(C.IupFontDlg())
 	dialog.set_attrs(attrs)
 	return dialog
 }
 
+// message_dialog opens customizable message modal box
 pub fn message_dialog(attrs ...string) &Control {
 	dialog := &Control(C.IupMessageDlg())
 	dialog.set_attrs(attrs)
 	return dialog
 }
 
+// popup displays the dialog as a modal at `x`, `y` position
 pub fn (control &Control) popup(x int, y int) &Control {
 	C.IupPopup(control, x, y)
 	return control
@@ -79,6 +86,8 @@ pub fn (control &Control) set_menu(name string, menu &Control) &Control {
 	return control.set_attr("menu", name)
 }
 
+// show shows the dialog (not as a modal), typically
+// centered on the opening dialog control
 pub fn (control &Control) show() &Control {
 	C.IupShow(control)
 	return control

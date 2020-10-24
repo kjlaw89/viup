@@ -24,7 +24,7 @@ pub fn (control &Control) get_attr(name string) string {
 		return ""
 	}
 
-	return tos3(ptr)
+	return tos_clone(ptr)
 }
 
 // get_bool retrieves an bool attribute (technically int > 0)

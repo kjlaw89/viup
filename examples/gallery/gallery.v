@@ -76,7 +76,7 @@ fn main() {
 						.unset_attr("title")
 						.set_handle("color_btn")
 						.callback(viup.ActionFunc(color_button_clicked))
-					viup.label("", "size=64x64", "alignment=acenter").set_image("logo")
+					viup.label("", "size=64x64", "alignment=acenter", "expand=horizontal").set_image("logo")
 					viup.fill()
 				]),
 				"title=Basic Controls",
@@ -159,6 +159,7 @@ fn main() {
 	viup.close()
 }
 
+// menu_clicked handles when different menu items are clicked
 fn menu_clicked(control &viup.Control) viup.FuncResult {
 	name := control.get_attr("name")
 	match name {
@@ -219,6 +220,8 @@ fn menu_clicked(control &viup.Control) viup.FuncResult {
 	return .cont
 }
 
+// numbers_changed handles when the spinner or slider are updated
+// and links all three controls together automatically
 fn numbers_changed(control &viup.Control) viup.FuncResult {
 	value := control.get_attr("value")
 	viup.get_handle("spin1").set_attr("value", value.int().str())
@@ -228,11 +231,13 @@ fn numbers_changed(control &viup.Control) viup.FuncResult {
 	return .cont
 }
 
+// button_clicked shows a dialog when the test button is clicked
 fn button_clicked(control &viup.Control) viup.FuncResult {
 	viup.message("Button Click", "Button clicked!")
 	return .cont
 }
 
+// font_button_clicked shows a font dialog when the font button is clicked
 fn font_button_clicked(control &viup.Control) viup.FuncResult {
 	font := control.get_font().show_picker()
 	control.set_font(font).set_attr("title", font.face)
@@ -240,6 +245,7 @@ fn font_button_clicked(control &viup.Control) viup.FuncResult {
 	return .cont
 }
 
+// color_button_clicked shows a color dialog when the color button is clicked
 fn color_button_clicked(control &viup.Control) viup.FuncResult {
 	color, table := control.get_bgcolor().show_picker()
 	println(table)

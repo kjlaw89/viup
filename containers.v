@@ -44,6 +44,8 @@ fn C.IupVboxv(voidptr) voidptr
 
 fn C.IupZboxv(voidptr) voidptr
 
+// background is a simple container element that is
+// designed to have a background color or image
 pub fn background(child &Control, attrs ...string) &Control {
 	background := &Control(C.IupBackgroundBox(child))
 	background.set_attr('title', '')
@@ -63,6 +65,8 @@ pub fn cbox(children []&Control, attrs ...string) &Control {
 	return cbox
 }
 
+// detach_box is a container that can be detached as a dialog
+// and reattached back to the parent dialog when needed
 pub fn detach_box(child &Control, attrs ...string) &Control {
 	detach_box := &Control(C.IupDetachBox(child))
 	detach_box.set_attrs(attrs)
@@ -75,12 +79,14 @@ pub fn expander(child &Control, attrs ...string) &Control {
 	return expander
 }
 
+// fill fills up the remaining space for the parent container
 pub fn fill(attrs ...string) &Control {
 	fill := &Control(C.IupFill())
 	fill.set_attrs(attrs)
 	return fill
 }
 
+// flat_frame is a standard frame that allows custom drawing
 pub fn flat_frame(child &Control, attrs ...string) &Control {
 	flat_frame := &Control(C.IupFlatFrame(child))
 	flat_frame.set_attr('title', '')
@@ -88,12 +94,14 @@ pub fn flat_frame(child &Control, attrs ...string) &Control {
 	return flat_frame
 }
 
+// flat_scroll is a standard scroll that allow custom drawing
 pub fn flat_scroll(child &Control, attrs ...string) &Control {
 	flat_scroll := &Control(C.IupFlatScrollBox(child))
 	flat_scroll.set_attrs(attrs)
 	return flat_scroll
 }
 
+// flat_tabs is a standard tabs container that allows custom drawing
 pub fn flat_tabs(children []&Control, attrs ...string) &Control {
 	mut ptrs := []voidptr{}
 	for child in children {
@@ -106,6 +114,7 @@ pub fn flat_tabs(children []&Control, attrs ...string) &Control {
 	return flat_tabs
 }
 
+// frame puts a border around its children with an optional title
 pub fn frame(child &Control, attrs ...string) &Control {
 	frame := &Control(C.IupFrame(child))
 	frame.set_attr('title', '')
@@ -113,6 +122,7 @@ pub fn frame(child &Control, attrs ...string) &Control {
 	return frame
 }
 
+// grid is a container that can layout its children in a table-like configuration
 pub fn grid(children []&Control, attrs ...string) &Control {
 	mut ptrs := []voidptr{}
 	for child in children {
@@ -125,6 +135,7 @@ pub fn grid(children []&Control, attrs ...string) &Control {
 	return grid
 }
 
+// hbox is a container that displays its children in a row
 pub fn hbox(children []&Control, attrs ...string) &Control {
 	mut ptrs := []voidptr{}
 	for child in children {
@@ -137,6 +148,7 @@ pub fn hbox(children []&Control, attrs ...string) &Control {
 	return hbox
 }
 
+// menu is an application container for menu items
 pub fn menu(children []&Control, attrs ...string) &Control {
 	mut ptrs := []voidptr{}
 	for child in children {
@@ -173,6 +185,8 @@ pub fn normalizer(children []&Control, attrs ...string) &Control {
 	return normalizer
 }
 
+// radio_group is designed to wrap around toggle controls to
+// turn them into a radio button group
 pub fn radio_group(child &Control, attrs ...string) &Control {
 	radio_group := &Control(C.IupRadio(child))
 	radio_group.set_attrs(attrs)
@@ -199,6 +213,8 @@ pub fn space(attrs ...string) &Control {
 	return space
 }
 
+// tabs creates a tab group that can be switched
+// between to view different content
 pub fn tabs(children []&Control, attrs ...string) &Control {
 	mut ptrs := []voidptr{}
 	for child in children {
@@ -211,6 +227,7 @@ pub fn tabs(children []&Control, attrs ...string) &Control {
 	return tabs
 }
 
+// vbox is a container that displays its children in a column
 pub fn vbox(children []&Control, attrs ...string) &Control {
 	mut ptrs := []voidptr{}
 	for child in children {
