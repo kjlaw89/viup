@@ -8,8 +8,8 @@ library is to provide a thorough implementation of IUP in V. The implmentation i
 a native "V" feel and modernizes some of the calls.
 
 <div align="center">
-	<img src="https://raw.githubusercontent.com/kjlaw89/viup/master/examples/gallery/gallery_windows.png" alt="Windows Gallery Example" style="width: 320px;" />
-	<img src="https://raw.githubusercontent.com/kjlaw89/viup/master/examples/gallery/gallery_linux.png" alt="Linux (Ubuntu) Gallery Example" style="width: 320px;" />
+	<img src="https://raw.githubusercontent.com/kjlaw89/viup/main/examples/gallery/gallery_windows.png" alt="Windows Gallery Example" style="height: 240px;" />
+	<img src="https://raw.githubusercontent.com/kjlaw89/viup/main/examples/gallery/gallery_linux.png" alt="Linux (Ubuntu) Gallery Example" style="height: 240px;" />
 </div>
 
 ## Features
