@@ -69,6 +69,10 @@ By default VIUP only initializes the subsystems that are imported. For example, 
 
 If an extension library is loaded (`viup.image`), the required runtime binaries must be installed or provided along with the build.
 
+## Example
+
+This repo comes with a simple application that demos all of the available controls. This app is available in the "examples/gallery". It requires the IM libraries. Once all runtime libraries are in the folder, run the example with `v run .`.
+
 ## Using VIUP
 
 One of the strengths of IUP is that is it a very simple library. All controls are instances of `&Control` and share the same methods, though not all methods are applicable to a Control. Adjusting settings for a control is as simple as calling `set_attr` or providing the attributes when initializing the Control.
