@@ -52,7 +52,6 @@ pub fn (color Color) show_picker() (Color, []Color) {
 	if dialog.get_bool("status") {
 		value := dialog.get_attr("value")
 		colortable := dialog.get_attr("colortable")
-		dialog.destroy()
 		
 		mut colors := []Color{}
 		split := colortable.split(';')
@@ -60,7 +59,10 @@ pub fn (color Color) show_picker() (Color, []Color) {
 			colors << parse_color(c)
 		}
 
-		return parse_color(value), colors
+		parsed, table := parse_color(value), colors
+
+		dialog.destroy()
+		return parsed, table
 	}
 
 	dialog.destroy()

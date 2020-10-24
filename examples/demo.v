@@ -4,6 +4,15 @@ import os
 import viup
 import viup.image
 
+const (
+	version = "1.0.0"
+	about = "
+This is version $version of VIUP Control Gallery demo.
+
+It gives a simple overview of all of the available controls and some sample use cases.
+	"
+)
+
 fn main() {
 	viup.open(os.args)
 
@@ -153,6 +162,12 @@ fn main() {
 fn menu_clicked(control &viup.Control) viup.FuncResult {
 	name := control.get_attr("name")
 	match name {
+		"MenuAbout" {
+			viup
+				.message_dialog("title=About", "value=$about", "dialogtype=information")
+				.popup(viup.Pos.current, viup.Pos.current)
+				.destroy()
+		}
 		"MenuExit" { return .close }
 		"MenuOpen" {
 			dialog := viup.file_dialog("title=Open file...")

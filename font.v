@@ -2,12 +2,13 @@ module viup
 
 pub struct Font {
 pub mut:
-	bold      bool
+	condensed string
 	face      string
 	italic    bool
 	size      int     = 12
 	strikeout bool
 	underline bool
+	weight    string
 }
 
 // parse_font parses the provided font string and
@@ -17,17 +18,39 @@ pub fn parse_font(font string) Font {
 		return Font{}
 	}
 
-	split_1 := font.split(',')
-	if split_1.len <= 1 {
-		return Font{ face: split_1[0] }
+	mut obj := Font{}
+	mut split := []string{}
+
+	$if windows {
+		split_1 := font.split(',')
+		if split_1.len <= 1 {
+			return Font{ face: split_1[0] }
+		}
+
+		obj.face = split_1[0]
+
+		split = split_1[1].trim_space().split(' ')
+	} $else {
+		split = font.split(' ')
+		if split.len <= 1 {
+			return Font{ face: split[0] }
+		}
+
+		obj.face = split[0]
+		split.delete(0)
 	}
-
-	mut obj := Font{ face: split_1[0] }
-
-	split_2 := split_1[1].trim_space().split(' ')
-	for val in split_2 {
+	
+	for val in split {
 		match val.to_lower() {
-			"bold"      { obj.bold = true }
+			"ultra-light", "light", "medium", "semi-bold",
+			"bold", "ultra-bold", "heavy" {
+				obj.weight = val
+			}
+			"ultra-condensed", "extra-condensed", "condensed",
+			"semi-condensed", "semi-expanded", "expanded",
+			"extra-expanded", "ultra-expanded" {
+				obj.condensed = val
+			}
 			"italic"    { obj.italic = true }
 			"strikeout" { obj.strikeout = true }
 			"underline" { obj.underline = true }
@@ -47,9 +70,10 @@ pub fn (font Font) show_picker() Font {
 
 	if dialog.get_bool("status") {
 		value := dialog.get_attr("value")
+		parsed := parse_font(value)
 		dialog.destroy()
 		
-		return parse_font(value)
+		return parsed
 	}
 
 	dialog.destroy()
@@ -59,10 +83,15 @@ pub fn (font Font) show_picker() Font {
 // str converts the font to a IUP valid string
 // Example format: Segoe UI, Bold Italic Strikeout Underline 10
 pub fn (font Font) str() string {
-	mut output := '${font.face},'
+	face := font.face
+	mut output := $if windows { '$face,' } $else { face }
 	
-	if font.bold {
-		output += ' Bold'
+	if font.weight != "" {
+		output += ' $font.weight'
+	}
+
+	if font.condensed != "" {
+		output += ' $font.condensed'
 	}
 
 	if font.italic {
