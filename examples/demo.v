@@ -2,9 +2,13 @@ module main
 
 import os
 import viup
+import viup.image
 
 fn main() {
 	viup.open(os.args)
+
+	vlogo := image.load("./v-logo.png", "resize=64x64")?
+	vlogo.set_handle("logo")
 
 	// Create our menu with the typical "File | Edit | About" layout
 	menu_event := viup.ActionFunc(menu_clicked)
@@ -37,8 +41,8 @@ fn main() {
 	// | divider       | |----frame "Lists"----|
 	// | date_picker   | | dropdown            |
 	// | button        | | editable-dropdown   |
-	// | fill          | | radio-group         |
-	// |               | |---------------------|
+	// | image         | | radio-group         |
+	// | fill          | |---------------------|
 	// |               | | tab-group           |
 	// |---------------| |---------------------|
 
@@ -63,6 +67,7 @@ fn main() {
 						.unset_attr("title")
 						.set_handle("color_btn")
 						.callback(viup.ActionFunc(color_button_clicked))
+					viup.label("", "size=64x64", "alignment=acenter").set_image("logo")
 					viup.fill()
 				]),
 				"title=Basic Controls",

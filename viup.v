@@ -41,11 +41,11 @@ pub fn flush() {
 }
 
 pub fn get_global_reference(name string) voidptr {
-	return C.IupGetGlobal('${name}_global'.to_upper().trim_space().str)
+	return C.IupGetGlobal(name.to_upper().trim_space().str)
 }
 
 pub fn get_global_value(name string) string {
-	return tos3(C.IupGetGlobal('${name}_global'.to_upper().trim_space().str))
+	return tos3(C.IupGetGlobal(name.to_upper().trim_space().str))
 }
 
 pub fn get_handle(name string) &Control {
@@ -78,11 +78,11 @@ pub fn open(args []string) {
 }
 
 pub fn set_global_reference(name string, data voidptr) {
-	C.IupSetGlobal('${name}_global'.to_upper().trim_space().str, charptr(data))
+	C.IupSetGlobal(name.to_upper().trim_space().str, charptr(data))
 }
 
 pub fn set_global_value(name string, data string) {
-	C.IupSetStrGlobal('${name}_global'.to_upper().trim_space().str, data.str)
+	C.IupSetStrGlobal(name.to_upper().trim_space().str, data.str)
 }
 
 pub fn set_handle(name string, control &Control) &Control {

@@ -150,6 +150,10 @@ pub fn (control &Control) set_handle(name string) &Control {
 	return set_handle(name, control)
 }
 
+pub fn (control &Control) set_image(handle string) &Control {
+	return control.set_attr("image", handle)
+}
+
 pub fn (control &Control) unmap_control(save_attrs bool) {
 	if save_attrs {
 		C.IupSaveClassAttributes(control)
