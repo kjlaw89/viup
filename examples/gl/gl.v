@@ -42,8 +42,6 @@ fn redraw(control &viup.Control, x f32, y f32) viup.FuncResult {
 		C.glColor3f(0, 0, 1) C.glVertex3f(0, 0.75, 0)
 	C.glEnd()
 
-	//C.glFlush()
-
 	gl.swap(control)
 
 	return .cont
