@@ -1,5 +1,7 @@
 module viup
 
+import os
+
 #flag -I @VROOT/headers
 #flag -L .
 #flag -liup
@@ -31,6 +33,10 @@ fn C.IupSetGlobal(charptr, charptr)
 fn C.IupSetHandle(charptr, voidptr)
 
 fn C.IupSetStrGlobal(charptr, charptr)
+
+fn init() {
+	C.IupOpen(&os.args.len, &os.args.data)
+}
 
 pub fn close() {
 	C.IupClose()
@@ -71,10 +77,6 @@ pub fn main_loop() int {
 
 pub fn message(title string, message string) {
 	C.IupMessage(title.str, message.str)
-}
-
-pub fn open(args []string) {
-	C.IupOpen(&args.len, &args.data)
 }
 
 pub fn set_global_reference(name string, data voidptr) {

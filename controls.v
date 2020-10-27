@@ -58,9 +58,8 @@ pub fn animated_label(animation &Control, attrs ...string) &Control {
 }
 
 // button creates a standard button control with `title` for text
-pub fn button(title string, action string, attrs ...string) &Control {
-	action_val := if action.len > 0 { action.str } else { 0 }
-	button := &Control(C.IupButton(title.str, action_val))
+pub fn button(title string, attrs ...string) &Control {
+	button := &Control(C.IupButton(title.str, 0))
 	button.set_attrs(attrs)
 	return button
 }
@@ -72,10 +71,8 @@ pub fn calendar(attrs ...string) &Control {
 }
 
 // canvas creates a control that can render custom content
-pub fn canvas(action string, attrs ...string) &Control {
-	action_val := if action.len > 0 { action.str } else { 0 }
-	canvas := &Control(C.IupCanvas(action_val))
-	canvas.set_attr("action", action)
+pub fn canvas(attrs ...string) &Control {
+	canvas := &Control(C.IupCanvas(0))
 	canvas.set_attrs(attrs)
 	return canvas
 }
@@ -146,18 +143,16 @@ pub fn link(url string, title string, attrs ...string) &Control {
 }
 
 // list creates a component that can list multiple values
-pub fn list(action string, attrs ...string) &Control {
-	action_val := if action.len > 0 { action.str } else { 0 }
-	list := &Control(C.IupList(action_val))
+pub fn list(attrs ...string) &Control {
+	list := &Control(C.IupList(0))
 	list.set_attrs(attrs)
 	return list
 }
 
 // menu_item is a component that can be used in a `menu` to
 // that is tied to a specific action or event
-pub fn menu_item(title string, action string, attrs ...string) &Control {
-	action_val := if action.len > 0 { action.str } else { 0 }
-	menu_item := &Control(C.IupItem(title.str, action_val))
+pub fn menu_item(title string, attrs ...string) &Control {
+	menu_item := &Control(C.IupItem(title.str, 0))
 	menu_item.set_attrs(attrs)
 	return menu_item
 }
@@ -170,10 +165,8 @@ pub fn menu_sep(attrs ...string) &Control {
 }
 
 // multiline creates a multiline chooser component
-pub fn multiline(action string, attrs ...string) &Control {
-	action_val := if action.len > 0 { action.str } else { 0 }
-	multiline := &Control(C.IupMultiLine(action_val))
-	multiline.set_attr("action", action)
+pub fn multiline(attrs ...string) &Control {
+	multiline := &Control(C.IupMultiLine(0))
 	multiline.set_attrs(attrs)
 	return multiline
 }
@@ -213,10 +206,8 @@ pub fn sub_menu(title string, child &Control, attrs ...string) &Control {
 
 // text is a standard text input component. Can be configured to
 // to be multi-line, number formatted, etc.
-pub fn text(action string, attrs ...string) &Control {
-	action_val := if action.len > 0 { action.str } else { 0 }
-	text := &Control(C.IupText(action_val))
-	text.set_attr("action", action)
+pub fn text(attrs ...string) &Control {
+	text := &Control(C.IupText(0))
 	text.set_attrs(attrs)
 	return text
 }
@@ -228,10 +219,8 @@ pub fn tree(attrs ...string) &Control {
 }
 
 // toggle is a radio or checkbox component. Defaults to radio in a `radio_group`
-pub fn toggle(title string, action string, attrs ...string) &Control {
-	action_val := if action.len > 0 { action.str } else { 0 }
-	toggle := &Control(C.IupToggle(title.str, action_val))
-	toggle.set_attr("action", action)
+pub fn toggle(title string, attrs ...string) &Control {
+	toggle := &Control(C.IupToggle(title.str, 0))
 	toggle.set_attrs(attrs)
 	return toggle
 }

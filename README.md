@@ -21,7 +21,7 @@ a native "V" feel and modernizes some of the calls.
 - [x] containers
 - [x] dialogs
 - [ ] gl
-  - [ ] gl rendering
+  - [x] gl rendering
   - [ ] gl controls
 - [ ] scintilla
 - [ ] plot

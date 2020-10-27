@@ -14,8 +14,6 @@ It gives a simple overview of all of the available controls and some sample use 
 )
 
 fn main() {
-	viup.open(os.args)
-
 	vlogo := image.load(os.resource_abs_path("./v-logo.png"), "resize=64x64")?
 	vlogo.set_handle("logo")
 
@@ -23,19 +21,19 @@ fn main() {
 	menu_event := viup.ActionFunc(menu_clicked)
 	menu := viup.menu([
 		viup.sub_menu("&File", viup.menu([
-			viup.menu_item("&Open File...", "", "name=MenuOpen").callback(menu_event)
-			viup.menu_item("&Save File...", "", "name=MenuSave").callback(menu_event)
+			viup.menu_item("&Open File...", "name=MenuOpen").callback(menu_event)
+			viup.menu_item("&Save File...", "name=MenuSave").callback(menu_event)
 			viup.menu_sep()
-			viup.menu_item("E&xit", "", "name=MenuExit").callback(menu_event)
+			viup.menu_item("E&xit", "name=MenuExit").callback(menu_event)
 		])),
 		viup.sub_menu("&Edit", viup.menu([
-			viup.menu_item("Debug &Window", "", "name=MenuDebugWindow").callback(menu_event),
-			viup.menu_item("Debug &Control", "", "name=MenuDebugControl").callback(menu_event),
+			viup.menu_item("Debug &Window", "name=MenuDebugWindow").callback(menu_event),
+			viup.menu_item("Debug &Control", "name=MenuDebugControl").callback(menu_event),
 		])),
 		viup.sub_menu("&Help", viup.menu([
-			viup.menu_item("&Repository", "", "name=MenuRepository").callback(menu_event),
+			viup.menu_item("&Repository", "name=MenuRepository").callback(menu_event),
 			viup.menu_sep()
-			viup.menu_item("&About", "", "name=MenuAbout").callback(menu_event)
+			viup.menu_item("&About", "name=MenuAbout").callback(menu_event)
 		]))
 	])
 
@@ -60,19 +58,19 @@ fn main() {
 		viup.vbox([
 			viup.frame(
 				viup.vbox([
-					viup.button("Button", "", "expand=horizontal").callback(viup.ActionFunc(button_clicked))
+					viup.button("Button", "expand=horizontal").callback(viup.ActionFunc(button_clicked))
 					viup.toggle("Checkbox", "action1")
-					viup.text("", "expand=horizontal", "value=Text Field")
+					viup.text("expand=horizontal", "value=Text Field")
 					viup.label("Label")
 					viup.link("https://www.vlang.io", "Link")
 					viup.divider()
 					viup
-						.button("Set font...", "", "expand=horizontal")
+						.button("Set font...", "expand=horizontal")
 						.set_handle("font_btn")
 						.callback(viup.ActionFunc(font_button_clicked))
 					viup.date_picker("expand=horizontal", "order=MDY")
 					viup
-						.button("", "", "bgcolor=0 0 0", "expand=horizontal", "padding=10x0")
+						.button("", "bgcolor=0 0 0", "expand=horizontal", "padding=10x0")
 						.unset_attr("title")
 						.set_handle("color_btn")
 						.callback(viup.ActionFunc(color_button_clicked))
@@ -88,7 +86,7 @@ fn main() {
 			viup.frame(
 				viup.vbox([
 					viup
-						.text("", "expand=horizontal", "spin=yes", "spinmax=100", "value=50")
+						.text("expand=horizontal", "spin=yes", "spinmax=100", "value=50")
 						.set_handle("spin1")
 						.callback(viup.ValueChangedFunc(numbers_changed))
 					viup
@@ -105,7 +103,6 @@ fn main() {
 			viup.frame(
 				viup.vbox([
 					viup.list(
-						"",
 						"1=Combo Item 1",
 						"2=Combo Item 2",
 						"3=Combo Item 3",
@@ -115,7 +112,6 @@ fn main() {
 						"value=1"
 					)
 					viup.list(
-						"",
 						"1=Editable Item 1",
 						"2=Editable Item 2",
 						"3=Editable Item 3",
@@ -127,9 +123,9 @@ fn main() {
 					)
 					viup.radio_group(
 						viup.vbox([
-							viup.toggle("Radio 1", "")
-							viup.toggle("Radio 2", "")
-							viup.toggle("Radio 3", "")
+							viup.toggle("Radio 1")
+							viup.toggle("Radio 2")
+							viup.toggle("Radio 3")
 						])
 					)
 				]),
