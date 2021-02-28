@@ -32,13 +32,13 @@ fn C.IupUnmap(voidptr)
 
 pub struct Control {
 mut:
-	sig            [4]i8
-	iclass         voidptr
-	attrib         voidptr
-	serial         int
-	handle         voidptr
-	expand         int
-	flags          int
+	sig    [4]i8
+	iclass voidptr
+	attrib voidptr
+	serial int
+	handle voidptr
+	expand int
+	flags  int
 pub:
 	x              int
 	y              int
@@ -68,48 +68,59 @@ pub fn (control &Control) detach() {
 
 // focus sets focus on to the current control and
 // returns back the previously focused control
-pub fn (control &Control) focus() &Control {
+pub fn (control &Control) focus() {
 	return C.IupSetFocus(control)
 }
 
 // focus_next focuses on the next element that can have focus
 // Note: This may not produce the same results as tabbing
-pub fn (control &Control) focus_next() &Control {
+pub fn (control &Control) focus_next() {
 	return C.IupNextField(control)
 }
 
 // focus_prev focuses on the previous element that can have focus
 // Note: This may not produce the same results as tabbing
-pub fn (control &Control) focus_prev() &Control {
+pub fn (control &Control) focus_prev() {
 	return C.IupPreviousField(control)
+}
+
+// free destroys this control and releases its memory (used by autofree)
+pub fn (mut control Control) free() {
+	if control.handle == 0 {
+		return
+	}
+
+	control.destroy()
+	control.handle = voidptr(0)
 }
 
 // get_bgcolor gets the background color for the control
 pub fn (control &Control) get_bgcolor() Color {
-	return parse_color(control.get_attr("bgcolor"))
+	return parse_color(control.get_attr('bgcolor'))
 }
 
 pub fn (control &Control) get_class_name() string {
-	return tos3(C.IupGetClassName(control))
+	return unsafe { tos3(C.IupGetClassName(control)) }
 }
 
 pub fn (control &Control) get_class_type() string {
-	return tos3(C.IupGetClassType(control))
+	return unsafe { tos3(C.IupGetClassType(control)) }
 }
 
 // get_fgcolor gets the foreground color for the control
 pub fn (control &Control) get_fgcolor() Color {
-	return parse_color(control.get_attr("fgcolor"))
+	return parse_color(control.get_attr('fgcolor'))
 }
 
 // get_focused returns back the control that currently has focus
+// Note: This method can cause issues with autofree
 pub fn get_focused() &Control {
 	return C.IupGetFocus()
 }
 
 // get_font returns back a formatted `Font` object for this control
 pub fn (control &Control) get_font() Font {
-	return parse_font(control.get_attr("font"))
+	return parse_font(control.get_attr('font'))
 }
 
 // insert inserts a `new_control` into this control after `ref_control` if provided
@@ -131,17 +142,17 @@ pub fn (control &Control) refresh_children() {
 
 // set_bgcolor updates the background color for this control to the provided `Color`
 pub fn (control &Control) set_bgcolor(color Color) &Control {
-	return control.set_attr("bgcolor", color.str())
+	return control.set_attr('bgcolor', color.str())
 }
 
 // set_fgcolor updates the foreground color for this control to the provided `Color`
 pub fn (control &Control) set_fgcolor(color Color) &Control {
-	return control.set_attr("fgcolor", color.str())
+	return control.set_attr('fgcolor', color.str())
 }
 
 // set_font updates the font for this control to the provided `Font`
 pub fn (control &Control) set_font(font Font) &Control {
-	return control.set_attr("font", font.str())
+	return control.set_attr('font', font.str())
 }
 
 // set_handle is a helper function for `Control` that calls the global
@@ -151,7 +162,7 @@ pub fn (control &Control) set_handle(name string) &Control {
 }
 
 pub fn (control &Control) set_image(handle string) &Control {
-	return control.set_attr("image", handle)
+	return control.set_attr('image', handle)
 }
 
 pub fn (control &Control) unmap_control(save_attrs bool) {

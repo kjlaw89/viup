@@ -5,7 +5,7 @@ import os
 #flag -I @VROOT/headers
 #flag -L .
 #flag -liup
-#flag manifest.syso
+//#flag @VOUTPUT/manifest.syso    // `@VOUTPUT` doesn't exist, compilers will compain about this file next existing
 #include "iup.h"
 
 fn C.IupClose()
@@ -51,11 +51,13 @@ pub fn get_global_reference(name string) voidptr {
 }
 
 pub fn get_global_value(name string) string {
-	return tos3(C.IupGetGlobal(name.to_upper().trim_space().str))
+	return unsafe { tos3(C.IupGetGlobal(name.to_upper().trim_space().str)) }
 }
 
-pub fn get_handle(name string) &Control {
-	return C.IupGetHandle(name.str)
+// get_handle returns a component with the provided handle name
+// Note: This method can cause issues with autofree
+pub fn get_handle(handle string) &Control {
+	return C.IupGetHandle(handle.str)
 }
 
 // help opens a browser to the provided `url`
@@ -87,7 +89,10 @@ pub fn set_global_value(name string, data string) {
 	C.IupSetStrGlobal(name.to_upper().trim_space().str, data.str)
 }
 
-pub fn set_handle(name string, control &Control) &Control {
-	C.IupSetHandle(name.str, control)
+// set_handle adds a component to the global scope based on
+// the provided handle name. Note, currently accessing a component
+// on the global scope with autofree enabled can cause crashes
+pub fn set_handle(handle string, control &Control) &Control {
+	C.IupSetHandle(handle.str, control)
 	return control
 }

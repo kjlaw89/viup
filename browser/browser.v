@@ -12,6 +12,6 @@ fn C.IupWebBrowser() voidptr
 
 pub fn new(attrs ...string) &viup.Control {
 	control := &viup.Control(C.IupWebBrowser())
-	control.set_attrs(attrs)
+	control.set_attrs(...attrs)
 	return control
 }

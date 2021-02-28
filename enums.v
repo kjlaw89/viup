@@ -1,5 +1,15 @@
 module viup
 
+pub const (
+	pos_center        = 0xFFFF
+	pos_left          = 0xFFFE
+	pos_mouse         = 0xFFFC
+	pos_current       = 0xFFFB
+	pos_center_parent = 0xFFFA
+	pos_left_parent   = 0xFFF9
+	pos_right_parent  = 0xFFF8
+)
+
 pub enum FuncResult {
 	cont = -4
 	close = -3
@@ -7,15 +17,9 @@ pub enum FuncResult {
 	ignore = -1
 }
 
-#define IUP_IGNORE    -1
-#define IUP_DEFAULT   -2
-#define IUP_CLOSE     -3
-#define IUP_CONTINUE  -4
-
 pub enum Key {
 	k_tab = 9
 	k_enter = 13
-
 	key_sp = 32
 	key_exclam = 33
 	key_quotedbl = 34
@@ -111,7 +115,6 @@ pub enum Key {
 	key_bar = 124
 	key_braceright = 125
 	key_tilde = 126
-
 	k_middle = 0xff0b
 	k_pause = 0xff13
 	k_scroll = 0xff14
@@ -128,7 +131,6 @@ pub enum Key {
 	k_ins = 0xff63
 	k_menu = 0xff67
 	k_num = 0xff7f
-
 	k_f1 = 0xffbe
 	k_f2 = 0xffbf
 	k_f3 = 0xffc0
@@ -141,7 +143,6 @@ pub enum Key {
 	k_f10 = 0xffc7
 	k_f11 = 0xffc8
 	k_f12 = 0xffc9
-
 	k_lshift = 268500961
 	k_rshift = 268500962
 	k_lctrl = 536936419
@@ -149,9 +150,7 @@ pub enum Key {
 	k_caps = 0xffe5
 	k_lalt = 1073807337
 	k_ralt = 1073807338
-
 	k_del = 0xffff
-
 	k_sys = -2147483557
 }
 
@@ -161,15 +160,4 @@ pub enum MouseButton {
 	right = 51
 	button_4 = 52
 	button_5 = 53
-}
-
-pub enum Pos {
-	center = 0xFFFF
-	left = 0xFFFE
-	right = 0xFFFD
-	mousepos = 0xFFFC
-	current = 0xFFFB
-	centerparent = 0xFFFA
-	leftparent = 0xFFF9
-	rightparent = 0xFFF8
 }

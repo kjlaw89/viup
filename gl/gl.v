@@ -27,8 +27,8 @@ fn init() {
 
 pub fn create_context(attrs ...string) &viup.Control {
 	canvas := &viup.Control(C.IupGLCanvas(0))
-	canvas.set_attr("buffer", "double")
-	canvas.set_attrs(attrs)
+	canvas.set_attr('buffer', 'double')
+	canvas.set_attrs(...attrs)
 	return canvas
 }
 

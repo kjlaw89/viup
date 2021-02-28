@@ -2,18 +2,17 @@ module viup
 
 pub struct Color {
 pub mut:
-	r   byte
-	g   byte
-	b   byte
-	a   byte = 255
+	r byte
+	g byte
+	b byte
+	a byte = 255
 }
-
 
 // parse_color parses the provided color string
 // and converts it to a valid `Color`
 pub fn parse_color(color string) Color {
 	mut obj := Color{}
-	if color == "" {
+	if color == '' {
 		return obj
 	}
 
@@ -46,27 +45,26 @@ pub fn parse_color(color string) Color {
 // values pre-selected and returns back the new Color on select
 // as well as all of the colors in the color table
 pub fn (color Color) show_picker() (Color, []Color) {
-	dialog := viup.color_dialog("value=$color.r $color.g $color.b", "alpha=$color.a", "showhex=yes", "showcolortable=yes", "title=Color Chooser")
-	dialog.popup(viup.Pos.current, viup.Pos.current)
+	dialog := color_dialog('value=$color.r $color.g $color.b', 'alpha=$color.a', 'showhex=yes',
+		'showcolortable=yes', 'title=Color Chooser')
 
-	if dialog.get_bool("status") {
-		value := dialog.get_attr("value")
-		colortable := dialog.get_attr("colortable")
-		
+	dialog.popup(pos_current, pos_current)
+
+	if dialog.get_bool('status') {
+		value := dialog.get_attr('value')
+		colortable := dialog.get_attr('colortable')
+
 		mut colors := []Color{}
 		split := colortable.split(';')
 		for c in split {
 			colors << parse_color(c)
 		}
 
-		parsed, table := parse_color(value), colors
-
-		dialog.destroy()
-		return parsed, table
+		parsed := parse_color(value)
+		return parsed, colors
 	}
 
-	dialog.destroy()
-	return color, []Color{ len: 0 }
+	return color, []Color{len: 0}
 }
 
 // str converts the color to a IUP valid string

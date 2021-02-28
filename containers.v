@@ -49,7 +49,7 @@ fn C.IupZboxv(voidptr) voidptr
 pub fn background(child &Control, attrs ...string) &Control {
 	background := &Control(C.IupBackgroundBox(child))
 	background.set_attr('title', '')
-	background.set_attrs(attrs)
+	background.set_attrs(...attrs)
 	return background
 }
 
@@ -59,9 +59,8 @@ pub fn cbox(children []&Control, attrs ...string) &Control {
 		ptrs << child
 	}
 	ptrs << 0 // Add null value
-
 	cbox := &Control(C.IupCboxv(ptrs.data))
-	cbox.set_attrs(attrs)
+	cbox.set_attrs(...attrs)
 	return cbox
 }
 
@@ -69,20 +68,20 @@ pub fn cbox(children []&Control, attrs ...string) &Control {
 // and reattached back to the parent dialog when needed
 pub fn detach_box(child &Control, attrs ...string) &Control {
 	detach_box := &Control(C.IupDetachBox(child))
-	detach_box.set_attrs(attrs)
+	detach_box.set_attrs(...attrs)
 	return detach_box
 }
 
 pub fn expander(child &Control, attrs ...string) &Control {
 	expander := &Control(C.IupExpander(child))
-	expander.set_attrs(attrs)
+	expander.set_attrs(...attrs)
 	return expander
 }
 
 // fill fills up the remaining space for the parent container
 pub fn fill(attrs ...string) &Control {
 	fill := &Control(C.IupFill())
-	fill.set_attrs(attrs)
+	fill.set_attrs(...attrs)
 	return fill
 }
 
@@ -90,14 +89,14 @@ pub fn fill(attrs ...string) &Control {
 pub fn flat_frame(child &Control, attrs ...string) &Control {
 	flat_frame := &Control(C.IupFlatFrame(child))
 	flat_frame.set_attr('title', '')
-	flat_frame.set_attrs(attrs)
+	flat_frame.set_attrs(...attrs)
 	return flat_frame
 }
 
 // flat_scroll is a standard scroll that allow custom drawing
 pub fn flat_scroll(child &Control, attrs ...string) &Control {
 	flat_scroll := &Control(C.IupFlatScrollBox(child))
-	flat_scroll.set_attrs(attrs)
+	flat_scroll.set_attrs(...attrs)
 	return flat_scroll
 }
 
@@ -108,9 +107,8 @@ pub fn flat_tabs(children []&Control, attrs ...string) &Control {
 		ptrs << child
 	}
 	ptrs << 0 // Add null value
-
 	flat_tabs := &Control(C.IupFlatTabsv(ptrs.data))
-	flat_tabs.set_attrs(attrs)
+	flat_tabs.set_attrs(...attrs)
 	return flat_tabs
 }
 
@@ -118,7 +116,7 @@ pub fn flat_tabs(children []&Control, attrs ...string) &Control {
 pub fn frame(child &Control, attrs ...string) &Control {
 	frame := &Control(C.IupFrame(child))
 	frame.set_attr('title', '')
-	frame.set_attrs(attrs)
+	frame.set_attrs(...attrs)
 	return frame
 }
 
@@ -129,9 +127,8 @@ pub fn grid(children []&Control, attrs ...string) &Control {
 		ptrs << child
 	}
 	ptrs << 0 // Add null value
-
 	grid := &Control(C.IupGridBoxv(ptrs.data))
-	grid.set_attrs(attrs)
+	grid.set_attrs(...attrs)
 	return grid
 }
 
@@ -142,9 +139,8 @@ pub fn hbox(children []&Control, attrs ...string) &Control {
 		ptrs << child
 	}
 	ptrs << 0 // Add null value
-
 	hbox := &Control(C.IupHboxv(ptrs.data))
-	hbox.set_attrs(attrs)
+	hbox.set_attrs(...attrs)
 	return hbox
 }
 
@@ -155,9 +151,8 @@ pub fn menu(children []&Control, attrs ...string) &Control {
 		ptrs << child
 	}
 	ptrs << 0 // Add null value
-
 	menu := &Control(C.IupMenuv(ptrs.data))
-	menu.set_attrs(attrs)
+	menu.set_attrs(...attrs)
 	return menu
 }
 
@@ -167,9 +162,8 @@ pub fn multi_box(children []&Control, attrs ...string) &Control {
 		ptrs << child
 	}
 	ptrs << 0 // Add null value
-
 	multi_box := &Control(C.IupMultiBoxv(ptrs.data))
-	multi_box.set_attrs(attrs)
+	multi_box.set_attrs(...attrs)
 	return multi_box
 }
 
@@ -179,9 +173,8 @@ pub fn normalizer(children []&Control, attrs ...string) &Control {
 		ptrs << child
 	}
 	ptrs << 0 // Add null value
-
 	normalizer := &Control(C.IupNormalizerv(ptrs.data))
-	normalizer.set_attrs(attrs)
+	normalizer.set_attrs(...attrs)
 	return normalizer
 }
 
@@ -189,13 +182,13 @@ pub fn normalizer(children []&Control, attrs ...string) &Control {
 // turn them into a radio button group
 pub fn radio_group(child &Control, attrs ...string) &Control {
 	radio_group := &Control(C.IupRadio(child))
-	radio_group.set_attrs(attrs)
+	radio_group.set_attrs(...attrs)
 	return radio_group
 }
 
 pub fn resizer(child &Control, attrs ...string) &Control {
 	resizer := &Control(C.IupSbox(child))
-	resizer.set_attrs(attrs)
+	resizer.set_attrs(...attrs)
 	return resizer
 }
 
@@ -203,13 +196,13 @@ pub fn resizer(child &Control, attrs ...string) &Control {
 // can hold an unlimited amount of items with scrolling.
 pub fn scroll(child &Control, attrs ...string) &Control {
 	scroll := &Control(C.IupScrollBox(child))
-	scroll.set_attrs(attrs)
+	scroll.set_attrs(...attrs)
 	return scroll
 }
 
 pub fn space(attrs ...string) &Control {
 	space := &Control(C.IupSpace())
-	space.set_attrs(attrs)
+	space.set_attrs(...attrs)
 	return space
 }
 
@@ -221,9 +214,8 @@ pub fn tabs(children []&Control, attrs ...string) &Control {
 		ptrs << child
 	}
 	ptrs << 0 // Add null value
-
 	tabs := &Control(C.IupTabsv(ptrs.data))
-	tabs.set_attrs(attrs)
+	tabs.set_attrs(...attrs)
 	return tabs
 }
 
@@ -234,9 +226,8 @@ pub fn vbox(children []&Control, attrs ...string) &Control {
 		ptrs << child
 	}
 	ptrs << 0 // Add null value
-
 	vbox := &Control(C.IupVboxv(ptrs.data))
-	vbox.set_attrs(attrs)
+	vbox.set_attrs(...attrs)
 	return vbox
 }
 
@@ -246,8 +237,7 @@ pub fn zbox(children []&Control, attrs ...string) &Control {
 		ptrs << child
 	}
 	ptrs << 0 // Add null value
-
 	zbox := &Control(C.IupZboxv(ptrs.data))
-	zbox.set_attrs(attrs)
+	zbox.set_attrs(...attrs)
 	return zbox
 }

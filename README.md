@@ -52,6 +52,8 @@ To update the manifest:
 
 Copy manifest.syso to application directory.
 
+_Note: Currently running `v .` or `v run .` will not find the `.syso` file correctly. To include it in your project, add a `#flag windows "path\\to\\file\\manifest.syso` to the top of your application._
+
 ### Linux install
 
 Extract runtime libraries to a folder and run `sudo ./install` to install libraries.
@@ -87,6 +89,12 @@ viup.
 	.show_xy(viup.Pos.center, viup.Pos.center)           // Display dialog in center of screen
 ```
 
+### Autofree
+
+VIUP should work with V's autofree, however, there are a few situations that can cause crashes. If a Control is accessed by calling `get_focused` or `get_handle`,
+the resulting variable, once it goes out of scope, will free the control that was restored by those functions. This may crash the application. For now if those
+methods are used, add `[manualfree]` to the method and call `free()` on the Controls within as necessary.
+
 ### Attributes
 
 All controls can be passed attributes as the last parameters when creating a Control. Any amount of attributes can provided. Attributes can adjust the various characteristics of a Control such as the title, value(s), background or foreground colors, control sub-type, sizing, etc.
@@ -110,12 +118,12 @@ viup.list(
 
 ### Callbacks & Events
 
-All controls have a `callback` or `callbacks` method available that allows you to associate 1 or more callbacks with a control. These callbacks are called automatically when the specific event occurs.
+All controls have callback methods available for various events. Each callback method starts with `on_` and can be quickly chained to add multiple callbacks.
 
 Example:
 
 ```v
-viup.button("Button", "action").callback(viup.ActionFunc(button_clicked))
+viup.button("Button", "action").on_action(button_clicked)
 
 fn button_clicked(control &viup.Control) viup.FuncResult {
 	viup.message("Button Click", "Button clicked!")
@@ -123,7 +131,7 @@ fn button_clicked(control &viup.Control) viup.FuncResult {
 }
 ```
 
-In the example above, a `Button` control is initialized with "Button" for the title. `callback` is called with `viup.ActionFunc(button_clicked)`. `button_clicked` is an `ActionFunc` callback and is automatically called when the button is clicked. VIUP mirrors the callbacks that IUP provides pretty closely, typically adding `Func` on the end for consistency.
+In the example above, a `Button` control is initialized with "Button" for the title. An `action` callback is added with `on_action(button_clicked)`. `button_clicked` is an `ActionFunc` callback and is automatically called when the button is clicked. VIUP mirrors the callbacks that IUP provides pretty closely, typically adding `Func` on the end for consistency.
 
 The majority of callback functions can return a `viup.FuncResult`. This result can be one of the following:
 
@@ -155,8 +163,11 @@ Example 2:
 viup
 	.button("Set font...", "", "expand=horizontal") // Create button with "Set font..." as title
 	.set_handle("font_btn")                         // Set a handle name
-	.callback(viup.ActionFunc(font_button_clicked)) // Set a Action callback
+	.on_action(font_button_clicked) // Set a Action callback
 ```
+
+_Note: Dialogs return back an struct of `Dialog`. This struct has a few unique functions associated with it (i.e. `popup`, `show`, `show_xy`). It's not
+to chain to these methods from regular `Control` methods._
 
 ### Controls
 
@@ -176,11 +187,11 @@ Method | Description
 
 Function | Description
 -------- | -----------
-`color_dialog(attrs)` | Opens a color picker with optional color palette
+`color_dialog(...attrs)` | Opens a color picker with optional color palette
 `dialog(child, attrs)` | Creates a standard Window or modal dialog
-`file_dialog(attrs)` | Open a file chooser. This can be used to open or save files
-`font_dialog(attrs)` | Opens a font picker
-`message_dialog(attrs)` | Opens a customizable message modal
+`file_dialog(...attrs)` | Open a file chooser. This can be used to open or save files
+`font_dialog(...attrs)` | Opens a font picker
+`message_dialog(...attrs)` | Opens a customizable message modal
 `message(title, message)` | Shows a generic message box with a standard "OK" button to close
 
 ### Container Controls
@@ -189,7 +200,7 @@ Function | Description
 -------- | -----------
 `background(child, attrs)` | A simple container element that is designed to have a background color or image
 `detach_box(child, attrs)` | Container that is designed to be detachable from the parent container when needed. Can also be reattached.
-`fill(attrs)` | Fills the remaining space for the parent container
+`fill(...attrs)` | Fills the remaining space for the parent container
 `flat_frame(child, attrs)` | Standard frame that allows custom rendering
 `flat_scroll(child, attrs)` | Standard scroll that allows custom rendering
 `frame(child, attrs)` | Container that puts a border around its children with an optional title
@@ -207,14 +218,14 @@ Function | Description
 `animated_label(animation, attrs)` | Creates a control that can display an animation
 `button(title, action, attrs)` | Creates a standard button with `title` for the text
 `canvas(action, attrs)` | A control that can be used to render custom content
-`divider(attrs)` | Draws a horizontal or vertical line (horizontal by default)
+`divider(...attrs)` | Draws a horizontal or vertical line (horizontal by default)
 `label(title, attrs)` | A simple control to show text or images
 `link(url, title, attrs)` | Similar to a label, can be used to link to an external source
 `list(action, attrs)` | Creates a component that can be used to list multiple values
 `menu_item(action, attrs)` | Used in the `menu` component as a specific action (e.g. "Open File..." or "About")
-`menu_sep(attrs)` | Create a simple horizontal line in a `menu`
+`menu_sep(...attrs)` | Create a simple horizontal line in a `menu`
 `multiline(action, attrs)` | Creates a multiline chooser component
-`progress(attrs)` | Basic progressbar component
+`progress(...attrs)` | Basic progressbar component
 `slider(orientation, attrs)` | Creates a number-line slider component
 `sub_menu(title, child, attrs)` | Creates a sub menu component. Sub-menues are children of `menu` components. Typically structured like: Menu -> Sub-menu -> Menu -> Menu Item.
 `text(action, attrs)` | Creates a standard text-input control. Can be set as multi-line, number input, etc.

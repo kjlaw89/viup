@@ -26,11 +26,11 @@ pub fn load(path string, attrs ...string) ?&viup.Control {
 	ptr := &viup.Control(C.IupLoadImage(path.str))
 
 	if ptr == 0 {
-		err := viup.get_global_value("IUPIM_LASSERROR")
-		return error("Unable to load image $path: $err")
+		err := viup.get_global_value('IUPIM_LASSERROR')
+		return error('Unable to load image $path: $err')
 	}
 
-	ptr.set_attrs(attrs)
+	ptr.set_attrs(...attrs)
 	return ptr
 }
 
@@ -38,8 +38,8 @@ pub fn load_animation(path string) ?&viup.Control {
 	ptr := C.IupLoadAnimation(path.str)
 
 	if ptr == 0 {
-		err := viup.get_global_value("IUPIM_LASSERROR")
-		return error("Unable to load image $path: $err")
+		err := viup.get_global_value('IUPIM_LASSERROR')
+		return error('Unable to load image $path: $err')
 	}
 
 	return ptr
@@ -59,11 +59,13 @@ pub fn new_rgba(width int, height int, pixels []byte) &viup.Control {
 
 // Need "im_image.h" from library
 //#include "im_image.h"
-//pub type NativeImage = voidptr
-/*pub fn get_control(native NativeImage) &viup.Control {
+// pub type NativeImage = voidptr
+/*
+pub fn get_control(native NativeImage) &viup.Control {
 	return C.IupImageFromImImage(native)
 }
 
 pub fn get_to_native(control &viup.Control) NativeImage {
 	return C.IupGetImageNativeHandle(control)
-}*/
+}
+*/

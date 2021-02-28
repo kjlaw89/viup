@@ -21,10 +21,10 @@ fn C.IupSetStrAttribute(voidptr, charptr, charptr)
 pub fn (control &Control) get_attr(name string) string {
 	ptr := C.IupGetAttribute(control, name.to_upper().trim_space().str)
 	if ptr == 0 {
-		return ""
+		return ''
 	}
 
-	return tos_clone(ptr)
+	return unsafe { tos_clone(ptr) }
 }
 
 // get_bool retrieves an bool attribute (technically int > 0)
@@ -108,7 +108,7 @@ pub fn (control &Control) set_attrs(attrs ...string) &Control {
 // returns `Control` back for chaining
 pub fn (control &Control) set_data(name string, data voidptr) &Control {
 	C.IupSetAttribute(control, '${name}_data'.to_upper().trim_space().str, charptr(data))
-	
+
 	return control
 }
 
