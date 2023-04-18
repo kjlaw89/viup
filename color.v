@@ -18,23 +18,19 @@ pub fn parse_color(color string) Color {
 
 	split := color.split(' ')
 	if split.len > 0 {
-		val := split[0].int()
-		obj.r = if val < 0 || val > 255 { 0 } else { byte(val) }
+		obj.r = split[0].u8()
 	}
 
 	if split.len > 1 {
-		val := split[1].int()
-		obj.g = if val < 0 || val > 255 { 0 } else { byte(val) }
+		obj.g = split[1].u8()
 	}
 
 	if split.len > 2 {
-		val := split[2].int()
-		obj.b = if val < 0 || val > 255 { 0 } else { byte(val) }
+		obj.b = split[2].u8()
 	}
 
 	if split.len > 3 {
-		val := split[3].int()
-		obj.a = if val < 0 || val > 255 { 0 } else { byte(val) }
+		obj.a = split[3].u8()
 	}
 
 	return obj
@@ -45,8 +41,8 @@ pub fn parse_color(color string) Color {
 // values pre-selected and returns back the new Color on select
 // as well as all of the colors in the color table
 pub fn (color Color) show_picker() (Color, []Color) {
-	dialog := color_dialog('value=$color.r $color.g $color.b', 'alpha=$color.a', 'showhex=yes',
-		'showcolortable=yes', 'title=Color Chooser')
+	dialog := color_dialog('value=${color.r} ${color.g} ${color.b}', 'alpha=${color.a}',
+		'showhex=yes', 'showcolortable=yes', 'title=Color Chooser')
 
 	dialog.popup(pos_current, pos_current)
 
@@ -70,5 +66,5 @@ pub fn (color Color) show_picker() (Color, []Color) {
 // str converts the color to a IUP valid string
 // Example format: 200 150 0 100
 pub fn (color Color) str() string {
-	return '$color.r $color.g $color.b $color.a'
+	return '${color.r} ${color.g} ${color.b} ${color.a}'
 }

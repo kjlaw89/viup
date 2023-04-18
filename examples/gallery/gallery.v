@@ -9,14 +9,14 @@ import viup.image
 const (
 	version = '1.0.0'
 	about   = '
-This is version $version of VIUP Control Gallery demo.
+This is version ${version} of VIUP Control Gallery demo.
 
 It gives a simple overview of all of the available controls and some sample use cases.
 	'
 )
 
 fn main() {
-	vlogo := image.load(os.resource_abs_path('./v-logo.png'), 'resize=64x64') ?
+	vlogo := image.load(os.resource_abs_path('./v-logo.png'), 'resize=64x64')!
 	vlogo.set_handle('logo')
 
 	// Create our menu with the typical "File | Edit | About" layout
@@ -121,7 +121,7 @@ fn menu_clicked(control &viup.Control) viup.FuncResult {
 	name := control.get_attr('name')
 	match name {
 		'MenuAbout' {
-			viup.message_dialog('title=About', 'value=$about', 'dialogtype=information').popup(viup.pos_current,
+			viup.message_dialog('title=About', 'value=${about}', 'dialogtype=information').popup(viup.pos_current,
 				viup.pos_current)
 		}
 		'MenuExit' {
@@ -134,7 +134,7 @@ fn menu_clicked(control &viup.Control) viup.FuncResult {
 			if dialog.get_int('status') == 0 {
 				value := dialog.get_attr('value')
 
-				viup.message_dialog('title=File Opened', "value=The file '$value' was opened.",
+				viup.message_dialog('title=File Opened', "value=The file '${value}' was opened.",
 					'dialogtype=information').popup(viup.pos_current, viup.pos_current)
 			}
 		}
@@ -157,12 +157,12 @@ fn menu_clicked(control &viup.Control) viup.FuncResult {
 				value := dialog.get_attr('value')
 
 				viup.message_dialog('buttons=OKCANCEL', 'dialogtype=warning', 'title=File Save',
-					"value=The file '$value' was not actually saved, but this is where you would do it.").popup(viup.pos_current,
+					"value=The file '${value}' was not actually saved, but this is where you would do it.").popup(viup.pos_current,
 					viup.pos_current)
 			}
 		}
 		else {
-			println('Menu $name')
+			println('Menu ${name}')
 		}
 	}
 

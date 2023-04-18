@@ -11,7 +11,7 @@ import viup
 fn C.IupWebBrowser() voidptr
 
 pub fn new(attrs ...string) &viup.Control {
-	control := &viup.Control(C.IupWebBrowser())
+	control := unsafe { &viup.Control(C.IupWebBrowser()) }
 	control.set_attrs(...attrs)
 	return control
 }

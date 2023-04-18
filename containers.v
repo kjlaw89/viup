@@ -47,7 +47,7 @@ fn C.IupZboxv(voidptr) voidptr
 // background is a simple container element that is
 // designed to have a background color or image
 pub fn background(child &Control, attrs ...string) &Control {
-	background := &Control(C.IupBackgroundBox(child))
+	background := unsafe { &Control(C.IupBackgroundBox(child)) }
 	background.set_attr('title', '')
 	background.set_attrs(...attrs)
 	return background
@@ -59,7 +59,7 @@ pub fn cbox(children []&Control, attrs ...string) &Control {
 		ptrs << child
 	}
 	ptrs << 0 // Add null value
-	cbox := &Control(C.IupCboxv(ptrs.data))
+	cbox := unsafe { &Control(C.IupCboxv(ptrs.data)) }
 	cbox.set_attrs(...attrs)
 	return cbox
 }
@@ -67,27 +67,27 @@ pub fn cbox(children []&Control, attrs ...string) &Control {
 // detach_box is a container that can be detached as a dialog
 // and reattached back to the parent dialog when needed
 pub fn detach_box(child &Control, attrs ...string) &Control {
-	detach_box := &Control(C.IupDetachBox(child))
+	detach_box := unsafe { &Control(C.IupDetachBox(child)) }
 	detach_box.set_attrs(...attrs)
 	return detach_box
 }
 
 pub fn expander(child &Control, attrs ...string) &Control {
-	expander := &Control(C.IupExpander(child))
+	expander := unsafe { &Control(C.IupExpander(child)) }
 	expander.set_attrs(...attrs)
 	return expander
 }
 
 // fill fills up the remaining space for the parent container
 pub fn fill(attrs ...string) &Control {
-	fill := &Control(C.IupFill())
+	fill := unsafe { &Control(C.IupFill()) }
 	fill.set_attrs(...attrs)
 	return fill
 }
 
 // flat_frame is a standard frame that allows custom drawing
 pub fn flat_frame(child &Control, attrs ...string) &Control {
-	flat_frame := &Control(C.IupFlatFrame(child))
+	flat_frame := unsafe { &Control(C.IupFlatFrame(child)) }
 	flat_frame.set_attr('title', '')
 	flat_frame.set_attrs(...attrs)
 	return flat_frame
@@ -95,7 +95,7 @@ pub fn flat_frame(child &Control, attrs ...string) &Control {
 
 // flat_scroll is a standard scroll that allow custom drawing
 pub fn flat_scroll(child &Control, attrs ...string) &Control {
-	flat_scroll := &Control(C.IupFlatScrollBox(child))
+	flat_scroll := unsafe { &Control(C.IupFlatScrollBox(child)) }
 	flat_scroll.set_attrs(...attrs)
 	return flat_scroll
 }
@@ -107,14 +107,14 @@ pub fn flat_tabs(children []&Control, attrs ...string) &Control {
 		ptrs << child
 	}
 	ptrs << 0 // Add null value
-	flat_tabs := &Control(C.IupFlatTabsv(ptrs.data))
+	flat_tabs := unsafe { &Control(C.IupFlatTabsv(ptrs.data)) }
 	flat_tabs.set_attrs(...attrs)
 	return flat_tabs
 }
 
 // frame puts a border around its children with an optional title
 pub fn frame(child &Control, attrs ...string) &Control {
-	frame := &Control(C.IupFrame(child))
+	frame := unsafe { &Control(C.IupFrame(child)) }
 	frame.set_attr('title', '')
 	frame.set_attrs(...attrs)
 	return frame
@@ -127,7 +127,7 @@ pub fn grid(children []&Control, attrs ...string) &Control {
 		ptrs << child
 	}
 	ptrs << 0 // Add null value
-	grid := &Control(C.IupGridBoxv(ptrs.data))
+	grid := unsafe { &Control(C.IupGridBoxv(ptrs.data)) }
 	grid.set_attrs(...attrs)
 	return grid
 }
@@ -139,7 +139,7 @@ pub fn hbox(children []&Control, attrs ...string) &Control {
 		ptrs << child
 	}
 	ptrs << 0 // Add null value
-	hbox := &Control(C.IupHboxv(ptrs.data))
+	hbox := unsafe { &Control(C.IupHboxv(ptrs.data)) }
 	hbox.set_attrs(...attrs)
 	return hbox
 }
@@ -151,7 +151,7 @@ pub fn menu(children []&Control, attrs ...string) &Control {
 		ptrs << child
 	}
 	ptrs << 0 // Add null value
-	menu := &Control(C.IupMenuv(ptrs.data))
+	menu := unsafe { &Control(C.IupMenuv(ptrs.data)) }
 	menu.set_attrs(...attrs)
 	return menu
 }
@@ -162,7 +162,7 @@ pub fn multi_box(children []&Control, attrs ...string) &Control {
 		ptrs << child
 	}
 	ptrs << 0 // Add null value
-	multi_box := &Control(C.IupMultiBoxv(ptrs.data))
+	multi_box := unsafe { &Control(C.IupMultiBoxv(ptrs.data)) }
 	multi_box.set_attrs(...attrs)
 	return multi_box
 }
@@ -173,7 +173,7 @@ pub fn normalizer(children []&Control, attrs ...string) &Control {
 		ptrs << child
 	}
 	ptrs << 0 // Add null value
-	normalizer := &Control(C.IupNormalizerv(ptrs.data))
+	normalizer := unsafe { &Control(C.IupNormalizerv(ptrs.data)) }
 	normalizer.set_attrs(...attrs)
 	return normalizer
 }
@@ -181,13 +181,13 @@ pub fn normalizer(children []&Control, attrs ...string) &Control {
 // radio_group is designed to wrap around toggle controls to
 // turn them into a radio button group
 pub fn radio_group(child &Control, attrs ...string) &Control {
-	radio_group := &Control(C.IupRadio(child))
+	radio_group := unsafe { &Control(C.IupRadio(child)) }
 	radio_group.set_attrs(...attrs)
 	return radio_group
 }
 
 pub fn resizer(child &Control, attrs ...string) &Control {
-	resizer := &Control(C.IupSbox(child))
+	resizer := unsafe { &Control(C.IupSbox(child)) }
 	resizer.set_attrs(...attrs)
 	return resizer
 }
@@ -195,13 +195,13 @@ pub fn resizer(child &Control, attrs ...string) &Control {
 // scroll creates a scroll box that creates a virtual space that
 // can hold an unlimited amount of items with scrolling.
 pub fn scroll(child &Control, attrs ...string) &Control {
-	scroll := &Control(C.IupScrollBox(child))
+	scroll := unsafe { &Control(C.IupScrollBox(child)) }
 	scroll.set_attrs(...attrs)
 	return scroll
 }
 
 pub fn space(attrs ...string) &Control {
-	space := &Control(C.IupSpace())
+	space := unsafe { &Control(C.IupSpace()) }
 	space.set_attrs(...attrs)
 	return space
 }
@@ -214,7 +214,7 @@ pub fn tabs(children []&Control, attrs ...string) &Control {
 		ptrs << child
 	}
 	ptrs << 0 // Add null value
-	tabs := &Control(C.IupTabsv(ptrs.data))
+	tabs := unsafe { &Control(C.IupTabsv(ptrs.data)) }
 	tabs.set_attrs(...attrs)
 	return tabs
 }
@@ -226,7 +226,7 @@ pub fn vbox(children []&Control, attrs ...string) &Control {
 		ptrs << child
 	}
 	ptrs << 0 // Add null value
-	vbox := &Control(C.IupVboxv(ptrs.data))
+	vbox := unsafe { &Control(C.IupVboxv(ptrs.data)) }
 	vbox.set_attrs(...attrs)
 	return vbox
 }
@@ -237,7 +237,7 @@ pub fn zbox(children []&Control, attrs ...string) &Control {
 		ptrs << child
 	}
 	ptrs << 0 // Add null value
-	zbox := &Control(C.IupZboxv(ptrs.data))
+	zbox := unsafe { &Control(C.IupZboxv(ptrs.data)) }
 	zbox.set_attrs(...attrs)
 	return zbox
 }

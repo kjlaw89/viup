@@ -22,24 +22,25 @@ fn C.IupLoadAnimation(charptr) voidptr
 
 fn C.IupLoadImage(charptr) voidptr
 
-pub fn load(path string, attrs ...string) ?&viup.Control {
-	ptr := &viup.Control(C.IupLoadImage(path.str))
+pub fn load(path string, attrs ...string) !&viup.Control {
+	println(path)
+	ptr := unsafe { &viup.Control(C.IupLoadImage(path.str)) }
 
-	if ptr == 0 {
+	if isnil(ptr) {
 		err := viup.get_global_value('IUPIM_LASSERROR')
-		return error('Unable to load image $path: $err')
+		return error('Unable to load image ${path}: ${err}')
 	}
 
 	ptr.set_attrs(...attrs)
 	return ptr
 }
 
-pub fn load_animation(path string) ?&viup.Control {
+pub fn load_animation(path string) !&viup.Control {
 	ptr := C.IupLoadAnimation(path.str)
 
-	if ptr == 0 {
+	if isnil(ptr) {
 		err := viup.get_global_value('IUPIM_LASSERROR')
-		return error('Unable to load image $path: $err')
+		return error('Unable to load image ${path}: ${err}')
 	}
 
 	return ptr

@@ -30,6 +30,7 @@ fn C.IupSetFocus(voidptr) voidptr
 
 fn C.IupUnmap(voidptr)
 
+[heap]
 pub struct Control {
 mut:
 	sig    [4]i8
@@ -68,19 +69,19 @@ pub fn (control &Control) detach() {
 
 // focus sets focus on to the current control and
 // returns back the previously focused control
-pub fn (control &Control) focus() {
+pub fn (control &Control) focus() &Control {
 	return C.IupSetFocus(control)
 }
 
 // focus_next focuses on the next element that can have focus
 // Note: This may not produce the same results as tabbing
-pub fn (control &Control) focus_next() {
+pub fn (control &Control) focus_next() &Control {
 	return C.IupNextField(control)
 }
 
 // focus_prev focuses on the previous element that can have focus
 // Note: This may not produce the same results as tabbing
-pub fn (control &Control) focus_prev() {
+pub fn (control &Control) focus_prev() &Control {
 	return C.IupPreviousField(control)
 }
 
@@ -91,7 +92,7 @@ pub fn (mut control Control) free() {
 	}
 
 	control.destroy()
-	control.handle = voidptr(0)
+	control.handle = unsafe { nil }
 }
 
 // get_bgcolor gets the background color for the control

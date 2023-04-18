@@ -82,7 +82,7 @@ pub fn parse_font(font string) Font {
 // will automatically show the font dialog with this `Font`s
 // values pre-selected and returns back the new font on select
 pub fn (font Font) show_picker() Font {
-	dialog := font_dialog('value=$font')
+	dialog := font_dialog('value=${font}')
 	dialog.popup(pos_current, pos_current)
 
 	if dialog.get_bool('status') {

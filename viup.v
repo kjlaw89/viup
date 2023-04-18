@@ -12,13 +12,13 @@ fn C.IupClose()
 
 fn C.IupFlush()
 
-fn C.IupGetGlobal() voidptr
+fn C.IupGetGlobal(charptr) voidptr
 
 fn C.IupGetHandle(charptr) voidptr
 
 fn C.IupHelp(charptr) int
 
-fn C.IupLog(charptr, charptr, voidptr)
+fn C.IupLog(charptr, charptr)
 
 fn C.IupLoopStep() int
 
@@ -26,7 +26,7 @@ fn C.IupMainLoop() int
 
 fn C.IupMessage(charptr, charptr)
 
-fn C.IupOpen(int, voidptr)
+fn C.IupOpen(&int, voidptr)
 
 fn C.IupSetGlobal(charptr, charptr)
 
@@ -35,7 +35,13 @@ fn C.IupSetHandle(charptr, voidptr)
 fn C.IupSetStrGlobal(charptr, charptr)
 
 fn init() {
-	C.IupOpen(&os.args.len, &os.args.data)
+	mut cargs := []&char{}
+	for i in 0 .. os.args.len {
+		cargs << &char(os.args[i].str)
+	}
+	cargs << &char(0)
+	mut argc := os.args.len
+	C.IupOpen(&argc, &cargs.data)
 }
 
 pub fn close() {

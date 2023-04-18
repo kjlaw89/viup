@@ -14,7 +14,7 @@ fn C.IupMessageDlg() voidptr
 
 fn C.IupLayoutDialog(voidptr) voidptr
 
-fn C.IupPopup(voidptr) int
+fn C.IupPopup(voidptr, x int, y int) int
 
 fn C.IupShow(voidptr) int
 
@@ -26,7 +26,7 @@ struct Dialog {
 
 // color_dialog opens a color picker with optional palette
 pub fn color_dialog(handle string, attrs ...string) &Dialog {
-	dialog := &Dialog(C.IupColorDlg())
+	dialog := unsafe { &Dialog(C.IupColorDlg()) }
 	dialog.set_handle(handle)
 	dialog.set_attrs(...attrs)
 
@@ -37,7 +37,7 @@ pub fn color_dialog(handle string, attrs ...string) &Dialog {
 // inspect the provided Dialog's layout
 // Note: This is intended for developers
 pub fn (control &Control) debug() &Dialog {
-	dialog := &Dialog(C.IupLayoutDialog(control))
+	dialog := unsafe { &Dialog(C.IupLayoutDialog(control)) }
 	return dialog.show()
 }
 
@@ -45,13 +45,13 @@ pub fn (control &Control) debug() &Dialog {
 // inspect the provided control's various properties
 // Note: This is intended for developers
 pub fn (control &Control) debug_props() &Dialog {
-	dialog := &Dialog(C.IupElementPropertiesDialog(C.NULL, control))
+	dialog := unsafe { &Dialog(C.IupElementPropertiesDialog(C.NULL, control)) }
 	return dialog.show()
 }
 
 // dialog creates a standard Window or Modal dialog control
 pub fn dialog(child &Control, handle string, attrs ...string) &Dialog {
-	dialog := &Dialog(C.IupDialog(child))
+	dialog := unsafe { &Dialog(C.IupDialog(child)) }
 	dialog.set_handle(handle)
 	dialog.set_attrs(...attrs)
 	return dialog
@@ -60,7 +60,7 @@ pub fn dialog(child &Control, handle string, attrs ...string) &Dialog {
 // file_dialog creates a file chooser dialog that can be used to
 // open or save files. If "dialogtype" is not provided, defaults to "open"
 pub fn file_dialog(handle string, attrs ...string) &Dialog {
-	dialog := &Dialog(C.IupFileDlg())
+	dialog := unsafe { &Dialog(C.IupFileDlg()) }
 	dialog.set_handle(handle)
 	dialog.set_attr('dialogtype', 'open')
 	dialog.set_attrs(...attrs)
@@ -69,7 +69,7 @@ pub fn file_dialog(handle string, attrs ...string) &Dialog {
 
 // font_dialog opens a font picker dialog
 pub fn font_dialog(handle string, attrs ...string) &Dialog {
-	dialog := &Dialog(C.IupFontDlg())
+	dialog := unsafe { &Dialog(C.IupFontDlg()) }
 	dialog.set_handle(handle)
 	dialog.set_attrs(...attrs)
 	return dialog
@@ -77,7 +77,7 @@ pub fn font_dialog(handle string, attrs ...string) &Dialog {
 
 // message_dialog opens customizable message modal box
 pub fn message_dialog(attrs ...string) &Dialog {
-	dialog := &Dialog(C.IupMessageDlg())
+	dialog := unsafe { &Dialog(C.IupMessageDlg()) }
 	dialog.set_attrs(...attrs)
 	return dialog
 }
