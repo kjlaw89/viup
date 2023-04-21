@@ -37,6 +37,7 @@ fn C.IupSbox(&IHandle) &IHandle
 fn C.IupScrollBox(&IHandle) &IHandle
 
 fn C.IupSpace() &IHandle
+fn C.IupSplit(&IHandle, &IHandle) &IHandle
 
 fn C.IupTabsv(&IHandle) &IHandle
 
@@ -204,6 +205,12 @@ pub fn space(attrs ...string) &IHandle {
 	space := C.IupSpace()
 	space.set_attrs(...attrs)
 	return space
+}
+
+pub fn split(child1 &IHandle, child2 &IHandle, attrs ...string) &IHandle {
+	split := C.IupSplit(child1, child2)
+	split.set_attrs(...attrs)
+	return split
 }
 
 // tabs creates a tab group that can be switched

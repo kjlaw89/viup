@@ -16,6 +16,7 @@ fn C.IupLayoutDialog(&IHandle) &IHandle
 
 fn C.IupPopup(&IHandle, x int, y int) int
 
+fn C.IupProgressDlg() &IHandle
 fn C.IupShow(&IHandle) int
 
 fn C.IupShowXY(&IHandle, int, int)
@@ -81,6 +82,13 @@ pub fn message_dialog(attrs ...string) &IHandle {
 // popup displays the dialog as a modal at `x`, `y` position
 pub fn (dialog &IHandle) popup(x int, y int) &IHandle {
 	C.IupPopup(dialog, x, y)
+	return dialog
+}
+
+pub fn progress_dialog(handle string, attrs ...string) &IHandle {
+	dialog := C.IupProgressDlg()
+	dialog.set_handle(handle)
+	dialog.set_attrs(...attrs)
 	return dialog
 }
 

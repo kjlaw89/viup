@@ -8,20 +8,25 @@ fn C.IupCalendar() &IHandle
 
 fn C.IupCanvas(charptr) &IHandle
 
+fn C.IupColorbar() &IHandle
 fn C.IupColorBrowser() &IHandle
-
+fn C.IupColorDial(charptr) &IHandle
+fn C.IupDial(charptr) &IHandle
 fn C.IupDatePick() &IHandle
 
 fn C.IupDropButton(&IHandle) &IHandle
 
 fn C.IupFlatButton(charptr) &IHandle
 
+fn C.IupFlatLabel(charptr) &IHandle
+fn C.IupFlatList() &IHandle
 fn C.IupFlatTree() &IHandle
 
 fn C.IupFlatToggle(charptr) &IHandle
 
 fn C.IupFlatVal(charptr) &IHandle
 
+fn C.IupGauge() &IHandle
 fn C.IupItem(charptr, charptr) &IHandle
 
 fn C.IupLabel(charptr) &IHandle
@@ -50,6 +55,15 @@ fn C.IupTree() &IHandle
 
 fn C.IupVal(charptr) &IHandle
 
+// iupcontrols.h
+fn C.IupControlsOpen() int
+fn C.IupCells() &IHandle
+fn C.IupMatrix(charptr) &IHandle
+fn C.IupMatrixList() &IHandle
+fn C.IupMatrixEx() &IHandle
+fn C.IupMatrixSetFormula(&IHandle, int, charptr, charptr)
+fn C.IupMatrixSetDynamic(&IHandle, charptr)
+
 // animated_label creates an control that can display an animation
 pub fn animated_label(animation &IHandle, attrs ...string) &IHandle {
 	animated_label := C.IupAnimatedLabel(animation)
@@ -77,10 +91,22 @@ pub fn canvas(attrs ...string) &IHandle {
 	return canvas
 }
 
+pub fn color_bar(attrs ...string) &IHandle {
+	color_bar := C.IupColorbar()
+	color_bar.set_attrs(...attrs)
+	return color_bar
+}
+
 pub fn color_browser(attrs ...string) &IHandle {
 	color_browser := C.IupColorBrowser()
 	color_browser.set_attrs(...attrs)
 	return color_browser
+}
+
+pub fn dial(type_ string, attrs ...string) &IHandle {
+	dial := C.IupColorDial(type_.str)
+	dial.set_attrs(...attrs)
+	return dial
 }
 
 pub fn date_picker(attrs ...string) &IHandle {
@@ -109,6 +135,18 @@ pub fn flat_button(title string, attrs ...string) &IHandle {
 	return flat_button
 }
 
+pub fn flat_label(title string, attrs ...string) &IHandle {
+	flat_label := C.IupFlatLabel(title.str)
+	flat_label.set_attrs(...attrs)
+	return flat_label
+}
+
+pub fn flat_list(attrs ...string) &IHandle {
+	flat_list := C.IupFlatList()
+	flat_list.set_attrs(...attrs)
+	return flat_list
+}
+
 pub fn flat_toggle(title string, attrs ...string) &IHandle {
 	flat_toggle := C.IupFlatToggle(title.str)
 	flat_toggle.set_attrs(...attrs)
@@ -125,6 +163,12 @@ pub fn flat_tree(attrs ...string) &IHandle {
 	flat_tree := C.IupFlatTree()
 	flat_tree.set_attrs(...attrs)
 	return flat_tree
+}
+
+pub fn gauge(attrs ...string) &IHandle {
+	gauge := C.IupGauge()
+	gauge.set_attrs(...attrs)
+	return gauge
 }
 
 // label is used to draw simple text or images
@@ -223,4 +267,33 @@ pub fn toggle(title string, attrs ...string) &IHandle {
 	toggle := C.IupToggle(title.str, 0)
 	toggle.set_attrs(...attrs)
 	return toggle
+}
+
+// iupcontrols.h
+pub fn controls_open() int {
+	return C.IupControlsOpen()
+}
+
+pub fn cells() &IHandle {
+	return C.IupCells()
+}
+
+pub fn matrix(action string) &IHandle {
+	return C.IupMatrix(action.str)
+}
+
+pub fn matrix_list() &IHandle {
+	return C.IupMatrixList()
+}
+
+pub fn matrix_ex() &IHandle {
+	return C.IupMatrixEx()
+}
+
+pub fn (matrix &IHandle) matrix_set_formula(col int, formula string, init string) {
+	C.IupMatrixSetFormula(matrix, col, formula.str, init.str)
+}
+
+pub fn (matrix &IHandle) matrix_set_dynamic(init string) {
+	C.IupMatrixSetDynamic(matrix, init.str)
 }

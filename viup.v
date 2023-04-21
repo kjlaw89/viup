@@ -35,11 +35,13 @@ pub:
 
 fn C.IupClose()
 
+fn C.IupClipboard() &IHandle
+
 fn C.IupFlush()
 
 fn C.IupGetGlobal(charptr) voidptr
 
-fn C.IupGetHandle(charptr) voidptr
+fn C.IupGetHandle(charptr) &IHandle
 
 fn C.IupHelp(charptr) int
 
@@ -55,9 +57,13 @@ fn C.IupOpen(&int, voidptr)
 
 fn C.IupSetGlobal(charptr, charptr)
 
-fn C.IupSetHandle(charptr, voidptr)
+fn C.IupSetHandle(charptr, &IHandle)
 
 fn C.IupSetStrGlobal(charptr, charptr)
+
+fn C.IupThread() &IHandle
+fn C.IupTimer() &IHandle
+fn C.IupUser() &IHandle
 
 fn init() {
 	mut cargs := []&char{}
@@ -71,6 +77,10 @@ fn init() {
 
 pub fn close() {
 	C.IupClose()
+}
+
+pub fn clipboard() &IHandle {
+	return C.IupClipboard()
 }
 
 pub fn flush() {
@@ -126,4 +136,16 @@ pub fn set_global_value(name string, data string) {
 pub fn set_handle(handle string, control &IHandle) &IHandle {
 	C.IupSetHandle(handle.str, control)
 	return control
+}
+
+pub fn thread() &IHandle {
+	return C.IupThread()
+}
+
+pub fn timer() &IHandle {
+	return C.IupTimer()
+}
+
+pub fn user() &IHandle {
+	return C.IupUser()
 }
