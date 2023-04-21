@@ -20,14 +20,12 @@ a native "V" feel and modernizes some of the calls.
 - [x] basic controls
 - [x] containers
 - [x] dialogs
-- [ ] gl
-  - [x] gl rendering
-  - [ ] gl controls
-- [ ] scintilla
-- [ ] plot
-- [ ] extra controls
-- [ ] clipboard
-- [ ] browser
+- [x] gl
+- [x] scintilla
+- [x] plot
+- [x] extra controls
+- [x] clipboard
+- [x] browser
 
 ## Setup
 
