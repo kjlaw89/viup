@@ -27,7 +27,7 @@ fn main() {
 	viup.close()
 }
 
-fn redraw(control &viup.Control, x f32, y f32) viup.FuncResult {
+fn redraw(control &viup.IHandle, x f32, y f32) viup.FuncResult {
 	gl.make_current(control)
 
 	C.glClear(C.GL_COLOR_BUFFER_BIT)

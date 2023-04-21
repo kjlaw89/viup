@@ -8,6 +8,31 @@ import os
 //#flag @VOUTPUT/manifest.syso    // `@VOUTPUT` doesn't exist, compilers will compain about this file next existing
 #include "iup.h"
 
+[heap]
+pub struct IHandle {
+mut:
+	sig    [4]i8
+	iclass voidptr
+	attrib voidptr
+	serial int
+	handle voidptr
+	expand int
+	flags  int
+pub:
+	x              int
+	y              int
+	user_width     int
+	user_height    int
+	natural_width  int
+	natural_height int
+	current_width  int
+	current_height int
+	parent         &IHandle = unsafe { nil } // Auto-initialized to nil, use with caution!
+	first_child    &IHandle = unsafe { nil } // Auto-initialized to nil, use with caution!
+	sibling        &IHandle = unsafe { nil } // Auto-initialized to nil, use with caution!
+	data           voidptr
+}
+
 fn C.IupClose()
 
 fn C.IupFlush()
@@ -57,12 +82,12 @@ pub fn get_global_reference(name string) voidptr {
 }
 
 pub fn get_global_value(name string) string {
-	return unsafe { tos3(C.IupGetGlobal(name.to_upper().trim_space().str)) }
+	return unsafe { tos_clone(C.IupGetGlobal(name.to_upper().trim_space().str)) }
 }
 
 // get_handle returns a component with the provided handle name
 // Note: This method can cause issues with autofree
-pub fn get_handle(handle string) &Control {
+pub fn get_handle(handle string) &IHandle {
 	return C.IupGetHandle(handle.str)
 }
 
@@ -98,7 +123,7 @@ pub fn set_global_value(name string, data string) {
 // set_handle adds a component to the global scope based on
 // the provided handle name. Note, currently accessing a component
 // on the global scope with autofree enabled can cause crashes
-pub fn set_handle(handle string, control &Control) &Control {
+pub fn set_handle(handle string, control &IHandle) &IHandle {
 	C.IupSetHandle(handle.str, control)
 	return control
 }

@@ -117,7 +117,7 @@ fn main() {
 }
 
 // menu_clicked handles when different menu items are clicked
-fn menu_clicked(control &viup.Control) viup.FuncResult {
+fn menu_clicked(control &viup.IHandle) viup.FuncResult {
 	name := control.get_attr('name')
 	match name {
 		'MenuAbout' {
@@ -171,7 +171,7 @@ fn menu_clicked(control &viup.Control) viup.FuncResult {
 
 // numbers_changed handles when the spinner or slider are updated
 // and links all three controls together automatically
-fn numbers_changed(control &viup.Control) viup.FuncResult {
+fn numbers_changed(control &viup.IHandle) viup.FuncResult {
 	value := control.get_attr('value')
 	viup.get_handle('spin1').set_attr('value', value.int().str())
 	viup.get_handle('slider1').set_attr('value', value)
@@ -181,13 +181,13 @@ fn numbers_changed(control &viup.Control) viup.FuncResult {
 }
 
 // button_clicked shows a dialog when the test button is clicked
-fn button_clicked(control &viup.Control) viup.FuncResult {
+fn button_clicked(control &viup.IHandle) viup.FuncResult {
 	viup.message('Button Click', 'Button clicked!')
 	return .cont
 }
 
 // font_button_clicked shows a font dialog when the font button is clicked
-fn font_button_clicked(control &viup.Control) viup.FuncResult {
+fn font_button_clicked(control &viup.IHandle) viup.FuncResult {
 	font := control.get_font().show_picker()
 	control.set_font(font).set_attr('title', font.face)
 
@@ -195,7 +195,7 @@ fn font_button_clicked(control &viup.Control) viup.FuncResult {
 }
 
 // color_button_clicked shows a color dialog when the color button is clicked
-fn color_button_clicked(control &viup.Control) viup.FuncResult {
+fn color_button_clicked(control &viup.IHandle) viup.FuncResult {
 	color, table := control.get_bgcolor().show_picker()
 	println(table)
 	control.set_bgcolor(color)

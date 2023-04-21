@@ -10,8 +10,8 @@ import viup
 
 fn C.IupWebBrowser() voidptr
 
-pub fn new(attrs ...string) &viup.Control {
-	control := unsafe { &viup.Control(C.IupWebBrowser()) }
+pub fn new(attrs ...string) &viup.IHandle{
+	control := unsafe { &viup.IHandle(C.IupWebBrowser()) }
 	control.set_attrs(...attrs)
 	return control
 }

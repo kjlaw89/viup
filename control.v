@@ -1,172 +1,137 @@
 module viup
 
-fn C.IupAppend(voidptr, voidptr) voidptr
+fn C.IupAppend(&IHandle, &IHandle) &IHandle
 
-fn C.IupDestroy(voidptr)
+fn C.IupDestroy(&IHandle)
 
-fn C.IupDetach(voidptr)
+fn C.IupDetach(&IHandle)
 
-fn C.IupGetClassName(voidptr) charptr
+fn C.IupGetClassName(&IHandle) charptr
 
-fn C.IupGetClassType(voidptr) charptr
+fn C.IupGetClassType(&IHandle) charptr
 
-fn C.IupGetFocus() voidptr
+fn C.IupGetFocus() &IHandle
 
-fn C.IupInsert(voidptr, voidptr, voidptr) voidptr
+fn C.IupInsert(&IHandle, &IHandle, &IHandle) &IHandle
 
-fn C.IupNextField(voidptr) voidptr
+fn C.IupNextField(&IHandle) &IHandle
 
-fn C.IupMap(voidptr) int
+fn C.IupMap(&IHandle) int
 
-fn C.IupPreviousField(voidptr) voidptr
+fn C.IupPreviousField(&IHandle) &IHandle
 
-fn C.IupRefresh(voidptr)
+fn C.IupRefresh(&IHandle)
 
-fn C.IupRefreshChildren(voidptr)
+fn C.IupRefreshChildren(&IHandle)
 
-fn C.IupSaveClassAttributes(voidptr)
+fn C.IupSaveClassAttributes(&IHandle)
 
-fn C.IupSetFocus(voidptr) voidptr
+fn C.IupSetFocus(&IHandle) &IHandle
 
-fn C.IupUnmap(voidptr)
+fn C.IupUnmap(&IHandle)
 
-[heap]
-pub struct Control {
-mut:
-	sig    [4]i8
-	iclass voidptr
-	attrib voidptr
-	serial int
-	handle voidptr
-	expand int
-	flags  int
-pub:
-	x              int
-	y              int
-	user_width     int
-	user_height    int
-	natural_width  int
-	natural_height int
-	current_width  int
-	current_height int
-	parent         &Control
-	first_child    &Control
-	sibling        &Control
-	data           voidptr
-}
-
-pub fn (control &Control) append(new_control &Control) &Control {
+pub fn (control &IHandle) append(new_control &IHandle) &IHandle {
 	return C.IupAppend(control, new_control)
 }
 
-pub fn (control &Control) destroy() {
+pub fn (control &IHandle) destroy() {
 	C.IupDestroy(control)
 }
 
-pub fn (control &Control) detach() {
+pub fn (control &IHandle) detach() {
 	C.IupDetach(control)
 }
 
 // focus sets focus on to the current control and
 // returns back the previously focused control
-pub fn (control &Control) focus() &Control {
+pub fn (control &IHandle) focus() &IHandle {
 	return C.IupSetFocus(control)
 }
 
 // focus_next focuses on the next element that can have focus
 // Note: This may not produce the same results as tabbing
-pub fn (control &Control) focus_next() &Control {
+pub fn (control &IHandle) focus_next() &IHandle {
 	return C.IupNextField(control)
 }
 
 // focus_prev focuses on the previous element that can have focus
 // Note: This may not produce the same results as tabbing
-pub fn (control &Control) focus_prev() &Control {
+pub fn (control &IHandle) focus_prev() &IHandle {
 	return C.IupPreviousField(control)
 }
 
-// free destroys this control and releases its memory (used by autofree)
-pub fn (mut control Control) free() {
-	if control.handle == 0 {
-		return
-	}
-
-	control.destroy()
-	control.handle = unsafe { nil }
-}
-
 // get_bgcolor gets the background color for the control
-pub fn (control &Control) get_bgcolor() Color {
+pub fn (control &IHandle) get_bgcolor() Color {
 	return parse_color(control.get_attr('bgcolor'))
 }
 
-pub fn (control &Control) get_class_name() string {
-	return unsafe { tos3(C.IupGetClassName(control)) }
+pub fn (control &IHandle) get_class_name() string {
+	return unsafe { tos_clone(C.IupGetClassName(control)) }
 }
 
-pub fn (control &Control) get_class_type() string {
-	return unsafe { tos3(C.IupGetClassType(control)) }
+pub fn (control &IHandle) get_class_type() string {
+	return unsafe { tos_clone(C.IupGetClassType(control)) }
 }
 
 // get_fgcolor gets the foreground color for the control
-pub fn (control &Control) get_fgcolor() Color {
+pub fn (control &IHandle) get_fgcolor() Color {
 	return parse_color(control.get_attr('fgcolor'))
 }
 
 // get_focused returns back the control that currently has focus
 // Note: This method can cause issues with autofree
-pub fn get_focused() &Control {
+pub fn get_focused() &IHandle {
 	return C.IupGetFocus()
 }
 
 // get_font returns back a formatted `Font` object for this control
-pub fn (control &Control) get_font() Font {
+pub fn (control &IHandle) get_font() Font {
 	return parse_font(control.get_attr('font'))
 }
 
 // insert inserts a `new_control` into this control after `ref_control` if provided
-pub fn (control &Control) insert(new_control &Control, ref_control &Control) &Control {
+pub fn (control &IHandle) insert(new_control &IHandle, ref_control &IHandle) &IHandle {
 	return C.IupInsert(control, new_control, ref_control)
 }
 
-pub fn (control &Control) map_control() int {
+pub fn (control &IHandle) map_control() int {
 	return C.IupMap(control)
 }
 
-pub fn (control &Control) refresh() {
+pub fn (control &IHandle) refresh() {
 	C.IupRefresh(control)
 }
 
-pub fn (control &Control) refresh_children() {
+pub fn (control &IHandle) refresh_children() {
 	C.IupRefreshChildren(control)
 }
 
 // set_bgcolor updates the background color for this control to the provided `Color`
-pub fn (control &Control) set_bgcolor(color Color) &Control {
+pub fn (control &IHandle) set_bgcolor(color Color) &IHandle {
 	return control.set_attr('bgcolor', color.str())
 }
 
 // set_fgcolor updates the foreground color for this control to the provided `Color`
-pub fn (control &Control) set_fgcolor(color Color) &Control {
+pub fn (control &IHandle) set_fgcolor(color Color) &IHandle {
 	return control.set_attr('fgcolor', color.str())
 }
 
 // set_font updates the font for this control to the provided `Font`
-pub fn (control &Control) set_font(font Font) &Control {
+pub fn (control &IHandle) set_font(font Font) &IHandle {
 	return control.set_attr('font', font.str())
 }
 
 // set_handle is a helper function for `Control` that calls the global
 // `set_handle` function. Returns back an instance of `Control` for chaining
-pub fn (control &Control) set_handle(name string) &Control {
+pub fn (control &IHandle) set_handle(name string) &IHandle {
 	return set_handle(name, control)
 }
 
-pub fn (control &Control) set_image(handle string) &Control {
+pub fn (control &IHandle) set_image(handle string) &IHandle {
 	return control.set_attr('image', handle)
 }
 
-pub fn (control &Control) unmap_control(save_attrs bool) {
+pub fn (control &IHandle) unmap_control(save_attrs bool) {
 	if save_attrs {
 		C.IupSaveClassAttributes(control)
 	}
