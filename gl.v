@@ -3,64 +3,67 @@ module viup
 #flag -I @VROOT/headers
 #flag -L .
 #flag -liupgl
+#include "iup.h"
 #include "iupgl.h"
 
 fn C.IupGLCanvasOpen()
-
-fn C.IupGLBackgroundBox(&IHandle) &IHandle
-fn C.IupGLCanvas(charptr) &IHandle
-
-fn C.IupGLIsCurrent(&IHandle) int
-
-fn C.IupGLMakeCurrent(&IHandle)
-
-fn C.IupGLPalette(&IHandle, int, f32, f32, f32)
-
-fn C.IupGLSwapBuffers(&IHandle)
-
-fn C.IupGLUseFont(&IHandle, int, int, int)
-
+fn C.IupGLBackgroundBox(&Ihandle) &Ihandle
+fn C.IupGLCanvas(charptr) &Ihandle
+fn C.IupGLIsCurrent(&Ihandle) int
+fn C.IupGLMakeCurrent(&Ihandle)
+fn C.IupGLPalette(&Ihandle, int, f32, f32, f32)
+fn C.IupGLSwapBuffers(&Ihandle)
+fn C.IupGLUseFont(&Ihandle, int, int, int)
 fn C.IupGLWait(int)
 
+// gl_canvas_open must be called after a `open`
 pub fn gl_canvas_open() {
 	C.IupGLCanvasOpen()
 }
 
-pub fn gl_canvas(attrs ...string) &IHandle {
+// gl_canvas creates an OpenGL canvas (drawing area for OpenGL)
+pub fn gl_canvas(attrs ...string) &Ihandle {
 	canvas := C.IupGLCanvas(0)
 	canvas.set_attr('buffer', 'double')
 	canvas.set_attrs(...attrs)
 	return canvas
 }
 
-pub fn gl_is_current(control &IHandle) bool {
-	return C.IupGLIsCurrent(control) > 0
+// gl_is_current returns true if the given `canvas` is the current OpenGL context
+pub fn gl_is_current(canvas &Ihandle) bool {
+	return C.IupGLIsCurrent(canvas) > 0
 }
 
-pub fn gl_make_current(control &IHandle) &IHandle {
-	C.IupGLMakeCurrent(control)
-	return control
+// gl_make_current activates the given `canvas` as the current OpenGL context
+pub fn gl_make_current(canvas &Ihandle) &Ihandle {
+	C.IupGLMakeCurrent(canvas)
+	return unsafe { canvas }
 }
 
-pub fn gl_set_palette(control &IHandle, index int, r f32, g f32, b f32) &IHandle {
-	C.IupGLPalette(control, index, r, g, b)
-	return control
+// gl_palette defines a color in the color palette, this function is necessary when INDEX color is used
+pub fn gl_palette(canvas &Ihandle, index int, r f32, g f32, b f32) &Ihandle {
+	C.IupGLPalette(canvas, index, r, g, b)
+	return unsafe { canvas }
 }
 
-pub fn gl_swap_buffers(control &IHandle) &IHandle {
-	C.IupGLSwapBuffers(control)
-	return control
+// gl_swap_buffers makes the BACK buffer visible, this function is necessary when a double buffer is used
+pub fn gl_swap_buffers(canvas &Ihandle) &Ihandle {
+	C.IupGLSwapBuffers(canvas)
+	return unsafe { canvas }
 }
 
+// gl_wait if `is_gl` is true it will call glFinish or glXWaitGL, else will call GdiFlush or glXWaitX
 pub fn gl_wait(is_gl bool) {
 	C.IupGLWait(is_gl)
 }
 
-pub fn (gl &IHandle) gl_background_box() &IHandle {
+// gl_background_box creates a simple native container without decorations, but with OpenGL enabled
+pub fn (gl &Ihandle) gl_background_box() &Ihandle {
 	return C.IupGLBackgroundBox(gl)
 }
 
-pub fn (gl &IHandle) gl_use_font(first int, count int, list_base int) &IHandle {
+// gl_use_font creates a bitmap display list from the current FONT attribute
+pub fn (gl &Ihandle) gl_use_font(first int, count int, list_base int) &Ihandle {
 	C.IupGLUseFont(gl, first, count, list_base)
-	return gl
+	return unsafe { gl }
 }

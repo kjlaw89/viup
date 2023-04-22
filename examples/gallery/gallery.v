@@ -2,7 +2,6 @@ module main
 
 import os
 import viup
-import viup.image
 
 //#flag windows "path\\to\\manifest.syso"
 
@@ -16,26 +15,26 @@ It gives a simple overview of all of the available controls and some sample use 
 )
 
 fn main() {
-	vlogo := image.load(os.resource_abs_path('./v-logo.png'), 'resize=64x64')!
+	vlogo := viup.load_image(os.resource_abs_path('./v-logo.png'), 'resize=64x64')!
 	vlogo.set_handle('logo')
 
 	// Create our menu with the typical "File | Edit | About" layout
 	menu_event := viup.ActionFunc(menu_clicked)
 	menu := viup.menu([
 		viup.sub_menu('&File', viup.menu([
-			viup.menu_item('&Open File...', 'name=MenuOpen').on_action(menu_event),
-			viup.menu_item('&Save File...', 'name=MenuSave').on_action(menu_event),
-			viup.menu_sep(),
-			viup.menu_item('E&xit', 'name=MenuExit').on_action(menu_event),
+			viup.item('&Open File...', 'name=MenuOpen').on_action(menu_event),
+			viup.item('&Save File...', 'name=MenuSave').on_action(menu_event),
+			viup.separator(),
+			viup.item('E&xit', 'name=MenuExit').on_action(menu_event),
 		])),
 		viup.sub_menu('&Edit', viup.menu([
-			viup.menu_item('Debug &Window', 'name=MenuDebugWindow').on_action(menu_event),
-			viup.menu_item('Debug &Control', 'name=MenuDebugControl').on_action(menu_event),
+			viup.item('Debug &Window', 'name=MenuDebugWindow').on_action(menu_event),
+			viup.item('Debug &Control', 'name=MenuDebugControl').on_action(menu_event),
 		])),
 		viup.sub_menu('&Help', viup.menu([
-			viup.menu_item('&Repository', 'name=MenuRepository').on_action(menu_event),
-			viup.menu_sep(),
-			viup.menu_item('&About', 'name=MenuAbout').on_action(menu_event),
+			viup.item('&Repository', 'name=MenuRepository').on_action(menu_event),
+			viup.separator(),
+			viup.item('&About', 'name=MenuAbout').on_action(menu_event),
 		])),
 	])
 
@@ -47,7 +46,7 @@ fn main() {
 	// | toggle        | | slider ('value')    |
 	// | text          | | progress            |
 	// | label         | |---------------------|
-	// | divider       | |----frame "Lists"----|
+	// | flat_separator| |----frame "Lists"----|
 	// | date_picker   | | dropdown            |
 	// | button        | | editable-dropdown   |
 	// | image         | | radio-group         |
@@ -62,7 +61,7 @@ fn main() {
 				viup.text('expand=horizontal', 'value=Text Field'),
 				viup.label('Label'),
 				viup.link('https://www.vlang.io', 'Link'),
-				viup.divider(),
+				viup.flat_separator(),
 				viup.button('Set font...', 'expand=horizontal').set_handle('font_btn').on_action(font_button_clicked),
 				viup.date_picker('expand=horizontal', 'order=MDY'),
 				viup.button('', 'bgcolor=0 0 0', 'expand=horizontal', 'padding=10x0').unset_attr('title').set_handle('color_btn').on_action(color_button_clicked),
@@ -75,7 +74,7 @@ fn main() {
 				viup.text('expand=horizontal', 'spin=yes', 'spinmax=100', 'value=50').set_handle('spin1').on_value_changed(numbers_changed),
 				viup.slider('horizontal', 'expand=horizontal', 'max=100', 'showticks=yes',
 					'step=5', 'tickspos=reverse', 'value=50').set_handle('slider1').on_value_changed(numbers_changed),
-				viup.progress('expand=horizontal', 'max=100', 'value=50').set_handle('progress1'),
+				viup.progress_bar('expand=horizontal', 'max=100', 'value=50').set_handle('progress1'),
 				viup.fill(),
 			]), 'title=Numbers', 'margin=10x10', 'minsize=500x'),
 			viup.frame(viup.vbox([
@@ -117,7 +116,7 @@ fn main() {
 }
 
 // menu_clicked handles when different menu items are clicked
-fn menu_clicked(control &viup.IHandle) viup.FuncResult {
+fn menu_clicked(control &viup.Ihandle) viup.FuncResult {
 	name := control.get_attr('name')
 	match name {
 		'MenuAbout' {
@@ -171,7 +170,7 @@ fn menu_clicked(control &viup.IHandle) viup.FuncResult {
 
 // numbers_changed handles when the spinner or slider are updated
 // and links all three controls together automatically
-fn numbers_changed(control &viup.IHandle) viup.FuncResult {
+fn numbers_changed(control &viup.Ihandle) viup.FuncResult {
 	value := control.get_attr('value')
 	viup.get_handle('spin1').set_attr('value', value.int().str())
 	viup.get_handle('slider1').set_attr('value', value)
@@ -181,13 +180,13 @@ fn numbers_changed(control &viup.IHandle) viup.FuncResult {
 }
 
 // button_clicked shows a dialog when the test button is clicked
-fn button_clicked(control &viup.IHandle) viup.FuncResult {
+fn button_clicked(control &viup.Ihandle) viup.FuncResult {
 	viup.message('Button Click', 'Button clicked!')
 	return .cont
 }
 
 // font_button_clicked shows a font dialog when the font button is clicked
-fn font_button_clicked(control &viup.IHandle) viup.FuncResult {
+fn font_button_clicked(control &viup.Ihandle) viup.FuncResult {
 	font := control.get_font().show_picker()
 	control.set_font(font).set_attr('title', font.face)
 
@@ -195,7 +194,7 @@ fn font_button_clicked(control &viup.IHandle) viup.FuncResult {
 }
 
 // color_button_clicked shows a color dialog when the color button is clicked
-fn color_button_clicked(control &viup.IHandle) viup.FuncResult {
+fn color_button_clicked(control &viup.Ihandle) viup.FuncResult {
 	color, table := control.get_bgcolor().show_picker()
 	println(table)
 	control.set_bgcolor(color)

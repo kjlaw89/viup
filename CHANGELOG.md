@@ -1,3 +1,9 @@
+## VUIP 0.6.0
+*22 Apr 2023*
+
+- Add most missing controls from iup
+
+
 ## VUIP 0.5.0
 *27 Feb 2021*
 

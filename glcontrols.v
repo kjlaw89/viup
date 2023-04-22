@@ -1,109 +1,160 @@
 module viup
 
+#flag -I @VROOT/headers
+#flag -L .
+#flag -liupglcontrols
+#include "iup.h"
+#include "iupglcontrols.h"
+
 fn C.IupGLControlsOpen() int
-fn C.IupGLCanvasBoxv(&IHandle) &IHandle
-fn C.IupGLSubCanvas() &IHandle
-fn C.IupGLLabel(charptr) &IHandle
-fn C.IupGLSeparator() &IHandle
-fn C.IupGLButton(charptr) &IHandle
-fn C.IupGLToggle(charptr) &IHandle
-fn C.IupGLLink(charptr, charptr) &IHandle
-fn C.IupGLProgressBar() &IHandle
-fn C.IupGLVal() &IHandle
-fn C.IupGLFrame(&IHandle) &IHandle
-fn C.IupGLExpander(&IHandle) &IHandle
-fn C.IupGLScrollBox(&IHandle) &IHandle
-fn C.IupGLSizeBox(&IHandle) &IHandle
-fn C.IupGLText() &IHandle
-fn C.IupGLDrawImage(&IHandle, charptr, int, int, int)
-fn C.IupGLDrawText(&IHandle, charptr, int, int, int)
-fn C.IupGLDrawGetTextSize(&IHandle, charptr, &int, &int)
+fn C.IupGLCanvasBoxv(&Ihandle) &Ihandle
+fn C.IupGLSubCanvas() &Ihandle
+fn C.IupGLLabel(charptr) &Ihandle
+fn C.IupGLSeparator() &Ihandle
+fn C.IupGLButton(charptr) &Ihandle
+fn C.IupGLToggle(charptr) &Ihandle
+fn C.IupGLLink(charptr, charptr) &Ihandle
+fn C.IupGLProgressBar() &Ihandle
+fn C.IupGLVal() &Ihandle
+fn C.IupGLFrame(&Ihandle) &Ihandle
+fn C.IupGLExpander(&Ihandle) &Ihandle
+fn C.IupGLScrollBox(&Ihandle) &Ihandle
+fn C.IupGLSizeBox(&Ihandle) &Ihandle
+fn C.IupGLText() &Ihandle
+fn C.IupGLDrawImage(&Ihandle, charptr, int, int, int)
+fn C.IupGLDrawText(&Ihandle, charptr, int, int, int)
+fn C.IupGLDrawGetTextSize(&Ihandle, charptr, &int, &int)
 fn C.IupGLDrawGetImageInfo(charptr, &int, &int, &int)
 
+// gl_controls_open must be called after `open`
 pub fn gl_controls_open() int {
 	return C.IupGLControlsOpen()
 }
 
-pub fn gl_canvas_boxv(children []&IHandle, attrs ...string) &IHandle {
-	mut ptrs := []&IHandle{}
+// gl_canvas_boxv creates an OpenGL canvas container, place `children` in the box
+pub fn gl_canvas_boxv(children []&Ihandle, attrs ...string) &Ihandle {
+	mut ptrs := []&Ihandle{}
 	for child in children {
 		ptrs << child
 	}
-	ptrs << unsafe { (&IHandle(nil)) } // Add null value
+	ptrs << unsafe { (&Ihandle(nil)) } // Add null value
 	box := C.IupGLCanvasBoxv(ptrs.data)
 	box.set_attrs(...attrs)
 	return box
 }
 
-pub fn gl_sub_canvas() &IHandle {
-	return C.IupGLSubCanvas()
+// gl_sub_canvas creates an embedded OpenGL sub-canvas, it exists only inside an `gl_canvas_box`
+pub fn gl_sub_canvas(attrs ...string) &Ihandle {
+	gl_sub_canvas := C.IupGLSubCanvas()
+	gl_sub_canvas.set_attrs(...attrs)
+	return gl_sub_canvas
 }
 
-pub fn gl_label(title string) &IHandle {
-	return C.IupGLLabel(title.str)
+// gl_label creates an embedded OpenGL label interface element, which displays a `title` and/or an image
+pub fn gl_label(title string, attrs ...string) &Ihandle {
+	gl_label := C.IupGLLabel(title.str)
+	gl_label.set_attrs(...attrs)
+	return gl_label
 }
 
-pub fn gl_separator() &IHandle {
-	return C.IupGLSeparator()
+// gl_separator creates an embedded OpenGL separator interface element, which displays a vertical or horizontal line
+pub fn gl_separator(attrs ...string) &Ihandle {
+	gl_separator := C.IupGLSeparator()
+	gl_separator.set_attrs(...attrs)
+	return gl_separator
 }
 
-pub fn gl_button(title string) &IHandle {
-	return C.IupGLButton(title.str)
+// gl_button creates an embedded OpenGL button
+pub fn gl_button(title string, attrs ...string) &Ihandle {
+	gl_button := C.IupGLButton(title.str)
+	gl_button.set_attrs(...attrs)
+	return gl_button
 }
 
-pub fn gl_toggle(title string) &IHandle {
-	return C.IupGLToggle(title.str)
+// gl_toggle creates an embedded OpenGL toggle interface element
+pub fn gl_toggle(title string, attrs ...string) &Ihandle {
+	gl_toggle := C.IupGLToggle(title.str)
+	gl_toggle.set_attrs(...attrs)
+	return gl_toggle
 }
 
-pub fn gl_link(url string, title string) &IHandle {
-	return C.IupGLLink(url.str, title.str)
+// gl_link creates an embedded OpenGL label that displays an underlined clickable `title`
+pub fn gl_link(url string, title string, attrs ...string) &Ihandle {
+	gl_link := C.IupGLLink(url.str, title.str)
+	gl_link.set_attrs(...attrs)
+	return gl_link
 }
 
-pub fn gl_progress_bar() &IHandle {
-	return C.IupGLProgressBar()
+// gl_progress_bar creates an embedded OpenGL progress bar control
+pub fn gl_progress_bar(attrs ...string) &Ihandle {
+	gl_progress_bar := C.IupGLProgressBar()
+	gl_progress_bar.set_attrs(...attrs)
+	return gl_progress_bar
 }
 
-pub fn gl_val() &IHandle {
-	return C.IupGLVal()
+// gl_slider creates an embedded OpenGL Valuator control
+pub fn gl_slider(attrs ...string) &Ihandle {
+	gl_slider := C.IupGLVal()
+	gl_slider.set_attrs(...attrs)
+	return gl_slider
 }
 
-pub fn gl_frame(child &IHandle) &IHandle {
-	return C.IupGLFrame(child)
+// gl_frame creates an embedded OpenGL container, which draws a frame with a title around its child
+pub fn gl_frame(child &Ihandle, attrs ...string) &Ihandle {
+	gl_frame := C.IupGLFrame(child)
+	gl_frame.set_attrs(...attrs)
+	return gl_frame
 }
 
-pub fn gl_expander(child &IHandle) &IHandle {
-	return C.IupGLExpander(child)
+// gl_expander creates an embedded OpenGL container that can interactively show or hide its child
+pub fn gl_expander(child &Ihandle, attrs ...string) &Ihandle {
+	gl_expander := C.IupGLExpander(child)
+	gl_expander.set_attrs(...attrs)
+	return gl_expander
 }
 
-pub fn gl_scroll_box(child &IHandle) &IHandle {
-	return C.IupGLScrollBox(child)
+// gl_scroll_box creates an embedded OpenGL container that allows its child to be scrolled
+pub fn gl_scroll_box(child &Ihandle, attrs ...string) &Ihandle {
+	gl_scroll_box := C.IupGLScrollBox(child)
+	gl_scroll_box.set_attrs(...attrs)
+	return gl_scroll_box
 }
 
-pub fn gl_size_box(child &IHandle) &IHandle {
-	return C.IupGLSizeBox(child)
+// gl_size_box creates a void container that allows its child to be resized
+pub fn gl_size_box(child &Ihandle, attrs ...string) &Ihandle {
+	gl_size_box := C.IupGLSizeBox(child)
+	gl_size_box.set_attrs(...attrs)
+	return gl_size_box
 }
 
-pub fn gl_text() &IHandle {
-	return C.IupGLText()
+// gl_text creates an embedded OpenGL text interface element, which displays a text and allows to edit it when clicked
+pub fn gl_text(attrs ...string) &Ihandle {
+	gl_text := C.IupGLText()
+	gl_text.set_attrs(...attrs)
+	return gl_text
 }
 
-pub fn (gl_control &IHandle) gl_draw_image(name string, x int, y int, active int) &IHandle {
+// gl_draw_image draws an image given its `name`
+pub fn (gl_control &Ihandle) gl_draw_image(name string, x int, y int, active int) &Ihandle {
 	C.IupGLDrawImage(gl_control, name.str, x, y, active)
-	return gl_control
+	return unsafe { gl_control }
 }
 
-pub fn (gl_control &IHandle) gl_draw_text(str string, x int, y int) &IHandle {
+// gl_draw_text draws a `str` in the given position(`x`,`y`) using the current FONT
+pub fn (gl_control &Ihandle) gl_draw_text(str string, x int, y int) &Ihandle {
 	C.IupGLDrawText(gl_control, str.str, str.len, x, y)
-	return gl_control
+	return unsafe { gl_control }
 }
 
-pub fn (gl_control &IHandle) gl_draw_get_text_size(str string) (int, int) {
+// gl_draw_get_text_size returns the given `str` size using the current FONT
+pub fn (gl_control &Ihandle) gl_draw_get_text_size(str string) (int, int) {
 	mut w := int(0)
 	mut h := int(0)
 	C.IupGLDrawGetTextSize(gl_control, str.str, &w, &h)
 	return w, h
 }
 
+// gl_draw_get_image_info returns the given image `name` size and bits per pixel. bpp can be 8, 24 or 32
 pub fn gl_draw_get_image_info(name string) (int, int, int) {
 	mut w := int(0)
 	mut h := int(0)

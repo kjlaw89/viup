@@ -1,7 +1,6 @@
 module main
 
 import viup
-import viup.gl
 
 #flag linux -lGL
 #flag windows -lopengl32
@@ -15,7 +14,9 @@ fn C.glEnd()
 fn C.glFlush()
 
 fn main() {
-	canvas := gl.create_context().set_handle('context').on_draw(redraw)
+	viup.gl_canvas_open()
+
+	canvas := viup.gl_canvas().set_handle('context').on_draw(redraw)
 
 	viup.dialog(viup.hbox([
 		viup.fill(),
@@ -27,8 +28,8 @@ fn main() {
 	viup.close()
 }
 
-fn redraw(control &viup.IHandle, x f32, y f32) viup.FuncResult {
-	gl.make_current(control)
+fn redraw(control &viup.Ihandle, x f32, y f32) viup.FuncResult {
+	viup.gl_make_current(control)
 
 	C.glClear(C.GL_COLOR_BUFFER_BIT)
 
@@ -41,7 +42,7 @@ fn redraw(control &viup.IHandle, x f32, y f32) viup.FuncResult {
 	C.glVertex3f(0, 0.75, 0)
 	C.glEnd()
 
-	gl.swap(control)
+	viup.gl_swap_buffers(control)
 
 	return .cont
 }

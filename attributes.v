@@ -1,26 +1,19 @@
 module viup
 
-fn C.IupGetAttribute(voidptr, charptr) charptr
+fn C.IupGetAttribute(&Ihandle, charptr) charptr
+fn C.IupGetDouble(&Ihandle, charptr) f64
+fn C.IupGetFloat(&Ihandle, charptr) f32
+fn C.IupGetInt(&Ihandle, charptr) int
+fn C.IupGetIntInt(&Ihandle, charptr, voidptr, voidptr) int
+fn C.IupGetRGB(&Ihandle, charptr, voidptr, voidptr, voidptr)
+fn C.IupGetRGBA(&Ihandle, charptr, voidptr, voidptr, voidptr, voidptr)
+fn C.IupSetAttribute(&Ihandle, charptr, charptr)
+fn C.IupSetStrAttribute(&Ihandle, charptr, charptr)
 
-fn C.IupGetDouble(voidptr, charptr) f64
-
-fn C.IupGetFloat(voidptr, charptr) f32
-
-fn C.IupGetInt(voidptr, charptr) int
-
-fn C.IupGetIntInt(voidptr, charptr, voidptr, voidptr) int
-
-fn C.IupGetRGB(voidptr, charptr, voidptr, voidptr, voidptr)
-
-fn C.IupGetRGBA(voidptr, charptr, voidptr, voidptr, voidptr, voidptr)
-
-fn C.IupSetAttribute(voidptr, charptr, charptr)
-
-fn C.IupSetStrAttribute(voidptr, charptr, charptr)
-
-pub fn (control &IHandle) get_attr(name string) string {
+// get_attr retrieves a string attribute
+pub fn (control &Ihandle) get_attr(name string) string {
 	ptr := C.IupGetAttribute(control, name.to_upper().trim_space().str)
-	if ptr == 0 {
+	if isnil(ptr) {
 		return ''
 	}
 
@@ -28,40 +21,40 @@ pub fn (control &IHandle) get_attr(name string) string {
 }
 
 // get_bool retrieves an bool attribute (technically int > 0)
-pub fn (control &IHandle) get_bool(name string) bool {
+pub fn (control &Ihandle) get_bool(name string) bool {
 	return C.IupGetInt(control, name.to_upper().trim_space().str) > 0
 }
 
 // get_data gets some data that has been associated with this control based on `name`
-pub fn (control &IHandle) get_data(name string) voidptr {
+pub fn (control &Ihandle) get_data(name string) voidptr {
 	return C.IupGetAttribute(control, '${name}_data'.to_upper().trim_space().str)
 }
 
 // get_f32 retrieves a float attribute
-pub fn (control &IHandle) get_f32(name string) f32 {
+pub fn (control &Ihandle) get_f32(name string) f32 {
 	return C.IupGetFloat(control, name.to_upper().trim_space().str)
 }
 
 // get_f64 retrieves an f64 attribute
-pub fn (control &IHandle) get_f64(name string) f64 {
+pub fn (control &Ihandle) get_f64(name string) f64 {
 	return C.IupGetDouble(control, name.to_upper().trim_space().str)
 }
 
 // get_int retrieves an int attribute
-pub fn (control &IHandle) get_int(name string) int {
+pub fn (control &Ihandle) get_int(name string) int {
 	return C.IupGetInt(control, name.to_upper().trim_space().str)
 }
 
 // get_int_int retrieves an attribute that has a divider (x, :, -)
 // It returns the amount of values (0, 1, 2) and each value
-pub fn (control &IHandle) get_int_int(name string) (int, int, int) {
-	v1 := 0
-	v2 := 0
+pub fn (control &Ihandle) get_int_int(name string) (int, int, int) {
+	v1 := int(0)
+	v2 := int(0)
 	return C.IupGetIntInt(control, name.to_upper().trim_space().str, &v1, &v2), v1, v2
 }
 
 // get_rgb retrieves an attribute and returns it back in r, g, b form
-pub fn (control &IHandle) get_rgb(name string) (byte, byte, byte) {
+pub fn (control &Ihandle) get_rgb(name string) (byte, byte, byte) {
 	r := byte(0)
 	g := byte(0)
 	b := byte(0)
@@ -71,7 +64,7 @@ pub fn (control &IHandle) get_rgb(name string) (byte, byte, byte) {
 }
 
 // get_rgba retrieves an attribute and returns it back in r, g, b, a form
-pub fn (control &IHandle) get_rgba(name string) (byte, byte, byte, byte) {
+pub fn (control &Ihandle) get_rgba(name string) (byte, byte, byte, byte) {
 	r := byte(0)
 	g := byte(0)
 	b := byte(0)
@@ -83,15 +76,15 @@ pub fn (control &IHandle) get_rgba(name string) (byte, byte, byte, byte) {
 
 // set_attr sets an attribute on `Control` and
 // returns `Control` back for chaining
-pub fn (control &IHandle) set_attr(name string, value string) &IHandle {
+pub fn (control &Ihandle) set_attr(name string, value string) &Ihandle {
 	C.IupSetStrAttribute(control, name.to_upper().trim_space().str, value.trim_space().str)
 
-	return control
+	return unsafe { control }
 }
 
 // set_attrs takes all x=x values and applies them to `Control` and
 // returns `Control` back for chaining
-pub fn (control &IHandle) set_attrs(attrs ...string) &IHandle {
+pub fn (control &Ihandle) set_attrs(attrs ...string) &Ihandle {
 	for attr in attrs {
 		split := attr.split_nth('=', 2)
 		if split.len == 1 {
@@ -101,19 +94,19 @@ pub fn (control &IHandle) set_attrs(attrs ...string) &IHandle {
 		control.set_attr(split[0], split[1])
 	}
 
-	return control
+	return unsafe { control }
 }
 
 // set_data associates the provided `data` with `Control` and
 // returns `Control` back for chaining
-pub fn (control &IHandle) set_data(name string, data voidptr) &IHandle {
+pub fn (control &Ihandle) set_data(name string, data voidptr) &Ihandle {
 	C.IupSetAttribute(control, '${name}_data'.to_upper().trim_space().str, charptr(data))
 
-	return control
+	return unsafe { control }
 }
 
 // unset_attr clears the provided attribute
-pub fn (control &IHandle) unset_attr(name string) &IHandle {
+pub fn (control &Ihandle) unset_attr(name string) &Ihandle {
 	C.IupSetAttribute(control, name.to_upper().trim_space().str, C.NULL)
-	return control
+	return unsafe { control }
 }
