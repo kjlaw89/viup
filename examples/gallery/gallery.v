@@ -5,10 +5,10 @@ import viup
 
 //#flag windows "path\\to\\manifest.syso"
 $if arm64 {
-        #flag -L /usr/lib/iup
-        #flag -L /lib/gcc/aarch64-linux-gnu/11/
-        #flag -L /lib/aarch64-linux-gnu/
-        #flag -lgcc
+	#flag -L /usr/lib/iup
+	#flag -L /lib/gcc/aarch64-linux-gnu/11/
+	#flag -L /lib/aarch64-linux-gnu/
+	#flag -lgcc
 }
 
 const (

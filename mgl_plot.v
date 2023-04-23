@@ -69,7 +69,8 @@ pub fn (mgl_plot &Ihandle) mgl_plot_add3d(x f64, y f64, z f64) &Ihandle {
 }
 
 // mgl_plot_end adds the dataset to the plot and returns the dataset index. The dataset can be empty. Redraw is NOT done until the REDRAW attribute is set. Also it will change the current dataset index (CURRENT) to the return value. You can only set attributes of a dataset AFTER you added the dataset. Can only be called if `mgl_plot_begin` was called. Whenever you create a dataset all its "DS_*" attributes will be set to the default values. Notice that DS_MODE must be set before other "DS_*" attributes. Linear data only.
-pub fn (mgl_plot &Ihandle) mgl_plot_end() int {
+pub fn (mgl_plot &Ihandle) mgl_plot_end(attrs ...string) int {
+	mgl_plot.set_attrs(...attrs)
 	return C.IupMglPlotEnd(mgl_plot)
 }
 
@@ -184,15 +185,20 @@ pub fn (mgl_plot &Ihandle) mgl_plot_set_from_formula(ds_index int, formula strin
 }
 
 // mgl_plot_transform converts coordinates from plot coordinates to pixels. It can be used only inside PREDRAW_CB and POSTDRAW_CB callbacks
-pub fn (mgl_plot &Ihandle) mgl_plot_transform(x f64, y f64, z f64, ix &int, iy &int) &Ihandle {
-	C.IupMglPlotTransform(mgl_plot, x, y, z, ix, iy)
-	return unsafe { mgl_plot }
+pub fn (mgl_plot &Ihandle) mgl_plot_transform(x f64, y f64, z f64) (int, int) {
+	mut ix := int(0)
+	mut iy := int(0)
+	C.IupMglPlotTransform(mgl_plot, x, y, z, &ix, &iy)
+	return ix, iy
 }
 
 // mgl_plot_transform_to converts coordinates from pixels to plot coordinates. It can be used only inside PREDRAW_CB and POSTDRAW_CB callbacks
-pub fn (mgl_plot &Ihandle) mgl_plot_transform_to(ix int, iy int, x &f64, y &f64, z &f64) &Ihandle {
-	C.IupMglPlotTransformTo(mgl_plot, ix, iy, x, y, z)
-	return unsafe { mgl_plot }
+pub fn (mgl_plot &Ihandle) mgl_plot_transform_to(ix int, iy int) (f64, f64, f64) {
+	mut x := f64(0)
+	mut y := f64(0)
+	mut z := f64(0)
+	C.IupMglPlotTransformTo(mgl_plot, ix, iy, &x, &y, &z)
+	return x, y, z
 }
 
 // mgl_plot_draw_mark draws a mark at given position in plot coordinates. It can be used only inside PREDRAW_CB and POSTDRAW_CB callbacks. The attributes DRAWCOLOR, DRAWMARKSTYLE and DRAWMARKSIZE can be used to control mark appearance
