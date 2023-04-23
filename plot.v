@@ -1,6 +1,6 @@
 module viup
 
-#flag -I @VROOT/headers
+#flag -I @VROOT/headers/iup
 #flag -L .
 #flag -liup_plot
 #include "iup.h"

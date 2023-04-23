@@ -1,6 +1,7 @@
 module viup
 
 #flag -L .
+#flag -I @VROOT/headers/iup
 #include "iup.h"
 #include "iupdraw.h"
 

@@ -1,6 +1,6 @@
 module viup
 
-#flag -I @VROOT/headers
+#flag -I @VROOT/headers/iup
 #flag -L .
 #flag windows -lole
 #include "iup.h"

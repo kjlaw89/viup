@@ -25,7 +25,7 @@ fn main() {
 	vlogo.set_handle('logo')
 
 	// Create our menu with the typical "File | Edit | About" layout
-	menu_event := viup.ActionFunc(menu_clicked)
+	menu_event := viup.IFn(menu_clicked)
 	menu := viup.menu([
 		viup.sub_menu('&File', viup.menu([
 			viup.item('&Open File...', 'name=MenuOpen').on_action(menu_event),

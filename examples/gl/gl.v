@@ -23,7 +23,7 @@ fn C.glFlush()
 fn main() {
 	viup.gl_canvas_open()
 
-	canvas := viup.gl_canvas().set_handle('context').on_draw(redraw)
+	canvas := viup.gl_canvas().set_handle('context').on_redraw(redraw)
 
 	viup.dialog(viup.hbox([
 		viup.fill(),

@@ -1,6 +1,6 @@
 module viup
 
-#flag -I @VROOT/headers
+#flag -I @VROOT/headers/iup
 #flag -L .
 #flag -liupcontrols
 #include "iup.h"
@@ -96,6 +96,13 @@ pub fn date_picker(attrs ...string) &Ihandle {
 	date_picker := C.IupDatePick()
 	date_picker.set_attrs(...attrs)
 	return date_picker
+}
+
+// dial creates a dial for regulating a given angular variable
+pub fn dial(orientation string, attrs ...string) &Ihandle {
+	dial := C.IupDial(orientation.str)
+	dial.set_attrs(...attrs)
+	return dial
 }
 
 // flat_separator creates a simple line divider element (horizontal by default)
