@@ -1,7 +1,7 @@
 module viup
 
 #flag -I @VROOT/headers/iup
-#flag -L .
+#flag -L /usr/lib/iup
 #flag -liup_scintilla
 #include "iup.h"
 #include "iup_scintilla.h"

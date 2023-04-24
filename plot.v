@@ -2,7 +2,7 @@ module viup
 
 #flag -I @VROOT/headers/iup
 #flag -L .
-#flag -liup_plot
+#flag -liup_plot -lcd -lcdcontextplus -lcdgl
 #include "iup.h"
 #include "iup_plot.h"
 
@@ -15,7 +15,7 @@ fn C.IupPlotAddStr(&Ihandle, charptr, f64)
 fn C.IupPlotEnd(&Ihandle) int
 fn C.IupPlotLoadData(&Ihandle, charptr, int) int
 fn C.IupPlotInsert(&Ihandle, int, int, f64, f64)
-fn C.IupPlotInsertSegment(&Ihandle, int, int, charptr, f64)
+fn C.IupPlotInsertSegment(&Ihandle, int, int, f64, f64)
 fn C.IupPlotInsertStr(&Ihandle, int, int, charptr, f64)
 fn C.IupPlotInsertSamples(&Ihandle, int, int, &f64, &f64, int)
 fn C.IupPlotInsertStrSamples(&Ihandle, int, int, voidptr, &f64, int)
@@ -93,8 +93,8 @@ pub fn (plot &Ihandle) plot_insert(ds_index int, sample_index int, x f64, y f64)
 }
 
 // plot_insert_segment inserts a sample in a dataset at the given `sample_index`. Can be used only after the dataset is added to the plot
-pub fn (plot &Ihandle) plot_insert_segment(ds_index int, sample_index int, x string, y f64) &Ihandle {
-	C.IupPlotInsertSegment(plot, ds_index, sample_index, x.str, y)
+pub fn (plot &Ihandle) plot_insert_segment(ds_index int, sample_index int, x f64, y f64) &Ihandle {
+	C.IupPlotInsertSegment(plot, ds_index, sample_index, x, y)
 	return unsafe { plot }
 }
 

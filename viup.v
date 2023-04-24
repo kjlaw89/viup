@@ -3,7 +3,7 @@ module viup
 import os
 
 #flag -I @VROOT/headers/iup
-#flag -L .
+#flag -L /usr/lib/iup
 #flag -liup
 //#flag @VOUTPUT/manifest.syso    // `@VOUTPUT` doesn't exist, compilers will compain about this file next existing
 #include "iup.h"
@@ -120,8 +120,8 @@ pub fn thread(attrs ...string) &Ihandle {
 // timer creates a timer which periodically invokes a callback `func` when the time is up
 pub fn timer(func IFn, attrs ...string) &Ihandle {
 	timer := C.IupTimer()
-	timer.on_action(func)
 	timer.set_attrs(...attrs)
+	C.IupSetCallback(timer, c'ACTION_CB', func)
 	return timer
 }
 

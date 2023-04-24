@@ -731,7 +731,7 @@ pub fn (control &Ihandle) on_thread(func IFn) &Ihandle {
 
 // ==============Timer==============
 
-// ACTION: called every time the defined time interval is reached. To stop the callback from being called simply stop de timer with RUN=NO. Inside the callback the attribute ELAPSEDTIME returns the time elapsed since the timer was started in milliseconds
+// ACTION_CB: called every time the defined time interval is reached. To stop the callback from being called simply stop de timer with RUN=NO. Inside the callback the attribute ELAPSEDTIME returns the time elapsed since the timer was started in milliseconds
 
 // ==============Tree==============
 

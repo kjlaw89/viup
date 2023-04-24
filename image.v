@@ -1,7 +1,7 @@
 module viup
 
 #flag -I @VROOT/headers/iup
-#flag -L .
+#flag -L /usr/lib/iup
 #flag -liupim
 #flag -liupimglib
 #include "iup.h"

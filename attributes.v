@@ -77,7 +77,11 @@ pub fn (control &Ihandle) get_rgba(name string) (byte, byte, byte, byte) {
 // set_attr sets an attribute on `Control` and
 // returns `Control` back for chaining
 pub fn (control &Ihandle) set_attr(name string, value string) &Ihandle {
-	C.IupSetStrAttribute(control, name.to_upper().trim_space().str, value.trim_space().str)
+	local_name := name.to_upper().trim_space()
+	local_value := value.trim_space()
+
+	// println('set_attr ${local_name}=${local_value}')
+	C.IupSetStrAttribute(control, local_name.str, local_value.str)
 
 	return unsafe { control }
 }
@@ -90,7 +94,6 @@ pub fn (control &Ihandle) set_attrs(attrs ...string) &Ihandle {
 		if split.len == 1 {
 			continue
 		}
-
 		control.set_attr(split[0], split[1])
 	}
 

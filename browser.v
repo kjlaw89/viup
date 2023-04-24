@@ -1,7 +1,7 @@
 module viup
 
 #flag -I @VROOT/headers/iup
-#flag -L .
+#flag -L /usr/lib/iup
 #flag windows -lole
 #flag linux -lwebkit2gtk-4.0 -lgio-2.0 -liupweb
 #include "iup.h"

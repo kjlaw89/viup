@@ -1,8 +1,8 @@
 module viup
 
 #flag -I @VROOT/headers/iup
-#flag -L .
-#flag -liupglcontrols
+#flag -L /usr/lib/iup
+#flag -liupglcontrols -lftgl
 #include "iup.h"
 #include "iupglcontrols.h"
 
