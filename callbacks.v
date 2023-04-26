@@ -431,6 +431,12 @@ pub fn (control &Ihandle) on_extra_button(func IFnii) &Ihandle {
 // FLAT_ACTION : Action generated when the button 1 (usually left) is selected. This callback is called only after the mouse is released and when it is released inside the button area
 // VALUECHANGED_CB : Called after the value was interactively changed by the user. Called only when TOGGLE=Yes. Called after the ACTION callback, but under the same context
 
+// on_flat_button will be called when key pressed or mouse button pressed
+pub fn (control &Ihandle) on_flat_button(func IFniiiis) &Ihandle {
+	C.IupSetCallback(control, c'FLAT_BUTTON_CB', func)
+	return unsafe { control }
+}
+
 // ==============FlatList==============
 
 // FLAT_ACTION : Action generated when the state of an item in the list is interactively changed

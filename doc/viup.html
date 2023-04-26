@@ -32,7 +32,7 @@
           <div class="info">
             <div class="module">viup</div>
             <div class="toggle-version-container">
-              <span>0.6.0 bf749b3</span>
+              <span>0.6.0 d8167b8</span>
               <div id="dark-mode-toggle" role="switch" aria-checked="false" aria-label="Toggle dark mode"><svg xmlns="http://www.w3.org/2000/svg" class="light-icon" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z"/></svg>
 <svg xmlns="http://www.w3.org/2000/svg" class="dark-icon" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24"><g><rect fill="none" height="24" width="24"/></g><g><g><g><path d="M11.1,12.08C8.77,7.57,10.6,3.6,11.63,2.01C6.27,2.2,1.98,6.59,1.98,12c0,0.14,0.02,0.28,0.02,0.42 C2.62,12.15,3.29,12,4,12c1.66,0,3.18,0.83,4.1,2.15C9.77,14.63,11,16.17,11,18c0,1.52-0.87,2.83-2.12,3.51 c0.98,0.32,2.03,0.5,3.11,0.5c3.5,0,6.58-1.8,8.37-4.52C18,17.72,13.38,16.52,11.1,12.08z"/></g><path d="M7,16l-0.18,0C6.4,14.84,5.3,14,4,14c-1.66,0-3,1.34-3,3s1.34,3,3,3c0.62,0,2.49,0,3,0c1.1,0,2-0.9,2-2 C9,16.9,8.1,16,7,16z"/></g></g></svg>
 </div>
@@ -309,6 +309,9 @@
 </ul>
 </li>
 <li class="open"><a href="#message_dialog">fn message_dialog</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#message_error">fn message_error</a>        <ul>
 </ul>
 </li>
 <li class="open"><a href="#mgl_label">fn mgl_label</a>        <ul>
@@ -666,6 +669,7 @@
 <li><a href="#Ihandle.gl_draw_image">fn gl_draw_image</a></li>
 <li><a href="#Ihandle.gl_draw_text">fn gl_draw_text</a></li>
 <li><a href="#Ihandle.gl_use_font">fn gl_use_font</a></li>
+<li><a href="#Ihandle.hide">fn hide</a></li>
 <li><a href="#Ihandle.insert">fn insert</a></li>
 <li><a href="#Ihandle.map_control">fn map_control</a></li>
 <li><a href="#Ihandle.mgl_plot_add1d">fn mgl_plot_add1d</a></li>
@@ -721,6 +725,7 @@
 <li><a href="#Ihandle.on_extended">fn on_extended</a></li>
 <li><a href="#Ihandle.on_extra_button">fn on_extra_button</a></li>
 <li><a href="#Ihandle.on_flat_action">fn on_flat_action</a></li>
+<li><a href="#Ihandle.on_flat_button">fn on_flat_button</a></li>
 <li><a href="#Ihandle.on_focus">fn on_focus</a></li>
 <li><a href="#Ihandle.on_focused">fn on_focused</a></li>
 <li><a href="#Ihandle.on_help">fn on_help</a></li>
@@ -1299,7 +1304,7 @@
 
 </section>
 						<section id="matrix" class="doc-node">
-							<div class="title"><h2>fn matrix <a href="#matrix">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">matrix</span><span class="token punctuation">(</span>action <span class="token builtin">string</span><span class="token punctuation">,</span> attrs <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">&</span>Ihandle</code></pre>
+							<div class="title"><h2>fn matrix <a href="#matrix">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">matrix</span><span class="token punctuation">(</span>attrs <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">&</span>Ihandle</code></pre>
 <p>matrix creates a matrix of alphanumeric fields, all values of the matrix fields are strings</p>
 
 </section>
@@ -1326,6 +1331,11 @@
 						<section id="message_dialog" class="doc-node">
 							<div class="title"><h2>fn message_dialog <a href="#message_dialog">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">message_dialog</span><span class="token punctuation">(</span>attrs <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">&</span>Ihandle</code></pre>
 <p>message_dialog opens customizable message modal box</p>
+
+</section>
+						<section id="message_error" class="doc-node">
+							<div class="title"><h2>fn message_error <a href="#message_error">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">message_error</span><span class="token punctuation">(</span>message <span class="token builtin">string</span><span class="token punctuation">,</span> attrs <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span></code></pre>
+<p>message_error shows a modal dialog containing an error message</p>
 
 </section>
 						<section id="mgl_label" class="doc-node">
@@ -2066,6 +2076,11 @@ to be multi-line, number formatted, etc.</p>
 <p>gl_use_font creates a bitmap display list from the current FONT attribute</p>
 
 </section>
+						<section id="Ihandle.hide" class="doc-node">
+							<div class="title"><h2>fn (Ihandle) hide <a href="#Ihandle.hide">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Ihandle<span class="token punctuation">)</span> <span class="token function">hide</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int</span></code></pre>
+<p>hide hides an interface element</p>
+
+</section>
 						<section id="Ihandle.insert" class="doc-node">
 							<div class="title"><h2>fn (Ihandle) insert <a href="#Ihandle.insert">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Ihandle<span class="token punctuation">)</span> <span class="token function">insert</span><span class="token punctuation">(</span>new_control <span class="token operator">&</span>Ihandle<span class="token punctuation">,</span> ref_control <span class="token operator">&</span>Ihandle<span class="token punctuation">)</span> <span class="token operator">&</span>Ihandle</code></pre>
 <p>insert inserts a <code>new_control</code> into this control after <code>ref_control</code> if provided</p>
@@ -2349,6 +2364,11 @@ Can be used for linear, planar or volumetric data, but linear data is limited to
 						<section id="Ihandle.on_flat_action" class="doc-node">
 							<div class="title"><h2>fn (Ihandle) on_flat_action <a href="#Ihandle.on_flat_action">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Ihandle<span class="token punctuation">)</span> <span class="token function">on_flat_action</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Ihandle</code></pre>
 <p>on_flat_action action generated when the button 1 (usually left) is selected. This callback is called only after the mouse is released and when it is released inside the button area. Called only when DROPONARROW=Yes</p>
+
+</section>
+						<section id="Ihandle.on_flat_button" class="doc-node">
+							<div class="title"><h2>fn (Ihandle) on_flat_button <a href="#Ihandle.on_flat_button">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Ihandle<span class="token punctuation">)</span> <span class="token function">on_flat_button</span><span class="token punctuation">(</span>func IFniiiis<span class="token punctuation">)</span> <span class="token operator">&</span>Ihandle</code></pre>
+<p>on_flat_button will be called when key pressed or mouse button pressed</p>
 
 </section>
 						<section id="Ihandle.on_focus" class="doc-node">
@@ -2748,7 +2768,7 @@ When the element is a dialog, it is called after the layout is updated. For all 
 
 </section>
 						<section id="Ihandle.plot_insert_segment" class="doc-node">
-							<div class="title"><h2>fn (Ihandle) plot_insert_segment <a href="#Ihandle.plot_insert_segment">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>plot <span class="token operator">&</span>Ihandle<span class="token punctuation">)</span> <span class="token function">plot_insert_segment</span><span class="token punctuation">(</span>ds_index <span class="token builtin">int</span><span class="token punctuation">,</span> sample_index <span class="token builtin">int</span><span class="token punctuation">,</span> x <span class="token builtin">string</span><span class="token punctuation">,</span> y <span class="token builtin">f64</span><span class="token punctuation">)</span> <span class="token operator">&</span>Ihandle</code></pre>
+							<div class="title"><h2>fn (Ihandle) plot_insert_segment <a href="#Ihandle.plot_insert_segment">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>plot <span class="token operator">&</span>Ihandle<span class="token punctuation">)</span> <span class="token function">plot_insert_segment</span><span class="token punctuation">(</span>ds_index <span class="token builtin">int</span><span class="token punctuation">,</span> sample_index <span class="token builtin">int</span><span class="token punctuation">,</span> x <span class="token builtin">f64</span><span class="token punctuation">,</span> y <span class="token builtin">f64</span><span class="token punctuation">)</span> <span class="token operator">&</span>Ihandle</code></pre>
 <p>plot_insert_segment inserts a sample in a dataset at the given <code>sample_index</code>. Can be used only after the dataset is added to the plot</p>
 
 </section>
@@ -3112,7 +3132,7 @@ When the element is a dialog, it is called after the layout is updated. For all 
 </section>
 
           <div class="footer">
-            Powered by vdoc. Generated on: 23 Apr 2023 17:55:25
+            Powered by vdoc. Generated on: 26 Apr 2023 22:23:14
           </div>
         </div>
         
