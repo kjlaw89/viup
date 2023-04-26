@@ -7,6 +7,7 @@ fn C.IupFileDlg() &Ihandle
 fn C.IupFontDlg() &Ihandle
 fn C.IupMessage(charptr, charptr)
 fn C.IupMessageDlg() &Ihandle
+fn C.IupMessageError(&Ihandle, charptr)
 fn C.IupLayoutDialog(&Ihandle) &Ihandle
 fn C.IupPopup(&Ihandle, x int, y int) int
 fn C.IupProgressDlg() &Ihandle
@@ -74,6 +75,11 @@ pub fn message_dialog(attrs ...string) &Ihandle {
 	dialog := C.IupMessageDlg()
 	dialog.set_attrs(...attrs)
 	return dialog
+}
+
+// message_error shows a modal dialog containing an error message
+pub fn message_error(message string, attrs ...string) {
+	C.IupMessageError(0, message.str)
 }
 
 // popup displays the dialog as a modal at `x`, `y` position
