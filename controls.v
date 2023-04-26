@@ -278,8 +278,8 @@ pub fn cells(attrs ...string) &Ihandle {
 }
 
 // matrix creates a matrix of alphanumeric fields, all values of the matrix fields are strings
-pub fn matrix(action string, attrs ...string) &Ihandle {
-	matrix := C.IupMatrix(action.str)
+pub fn matrix(attrs ...string) &Ihandle {
+	matrix := C.IupMatrix(0)
 	matrix.set_attrs(...attrs)
 	return matrix
 }
