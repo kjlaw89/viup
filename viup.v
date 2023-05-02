@@ -2,13 +2,14 @@ module viup
 
 import os
 
-#flag -I @VROOT/headers/iup
-#flag -L /usr/lib/iup
+#flag -I @VMODROOT/headers/iup
+#flag windows -L @VMODROOT/windows
+#flag linux -L /usr/lib/iup
 #flag -liup
 //#flag @VOUTPUT/manifest.syso    // `@VOUTPUT` doesn't exist, compilers will compain about this file next existing
 #include "iup.h"
 
-struct C.Ihandle {}
+pub struct C.Ihandle {}
 
 pub type Ihandle = C.Ihandle
 

@@ -248,9 +248,6 @@
 <li class="open"><a href="#help">fn help</a>        <ul>
 </ul>
 </li>
-<li class="open"><a href="#im_open">fn im_open</a>        <ul>
-</ul>
-</li>
 <li class="open"><a href="#is_alt">fn is_alt</a>        <ul>
 </ul>
 </li>
@@ -273,15 +270,6 @@
 </ul>
 </li>
 <li class="open"><a href="#list">fn list</a>        <ul>
-</ul>
-</li>
-<li class="open"><a href="#load_animation">fn load_animation</a>        <ul>
-</ul>
-</li>
-<li class="open"><a href="#load_animation_frames">fn load_animation_frames</a>        <ul>
-</ul>
-</li>
-<li class="open"><a href="#load_image">fn load_image</a>        <ul>
 </ul>
 </li>
 <li class="open"><a href="#log">fn log</a>        <ul>
@@ -329,22 +317,7 @@
 <li class="open"><a href="#multi_line">fn multi_line</a>        <ul>
 </ul>
 </li>
-<li class="open"><a href="#new_grayscale">fn new_grayscale</a>        <ul>
-</ul>
-</li>
-<li class="open"><a href="#new_rgb">fn new_rgb</a>        <ul>
-</ul>
-</li>
-<li class="open"><a href="#new_rgba">fn new_rgba</a>        <ul>
-</ul>
-</li>
 <li class="open"><a href="#normalizer">fn normalizer</a>        <ul>
-</ul>
-</li>
-<li class="open"><a href="#ole_control">fn ole_control</a>        <ul>
-</ul>
-</li>
-<li class="open"><a href="#ole_control_open">fn ole_control_open</a>        <ul>
 </ul>
 </li>
 <li class="open"><a href="#parse_color">fn parse_color</a>        <ul>
@@ -369,15 +342,6 @@
 </ul>
 </li>
 <li class="open"><a href="#resizer">fn resizer</a>        <ul>
-</ul>
-</li>
-<li class="open"><a href="#scintilla">fn scintilla</a>        <ul>
-</ul>
-</li>
-<li class="open"><a href="#scintilla_dlg">fn scintilla_dlg</a>        <ul>
-</ul>
-</li>
-<li class="open"><a href="#scintilla_open">fn scintilla_open</a>        <ul>
 </ul>
 </li>
 <li class="open"><a href="#scroll">fn scroll</a>        <ul>
@@ -431,22 +395,10 @@
 <li class="open"><a href="#tree">fn tree</a>        <ul>
 </ul>
 </li>
-<li class="open"><a href="#tuio_client">fn tuio_client</a>        <ul>
-</ul>
-</li>
-<li class="open"><a href="#tuio_open">fn tuio_open</a>        <ul>
-</ul>
-</li>
 <li class="open"><a href="#user">fn user</a>        <ul>
 </ul>
 </li>
 <li class="open"><a href="#vbox">fn vbox</a>        <ul>
-</ul>
-</li>
-<li class="open"><a href="#web_browser">fn web_browser</a>        <ul>
-</ul>
-</li>
-<li class="open"><a href="#web_browser_open">fn web_browser_open</a>        <ul>
 </ul>
 </li>
 <li class="open"><a href="#zbox">fn zbox</a>        <ul>
@@ -820,8 +772,6 @@
 <li><a href="#Ihandle.refresh">fn refresh</a></li>
 <li><a href="#Ihandle.refresh_children">fn refresh_children</a></li>
 <li><a href="#Ihandle.reset_clip">fn reset_clip</a></li>
-<li><a href="#Ihandle.save_image">fn save_image</a></li>
-<li><a href="#Ihandle.scintilla_send_message">fn scintilla_send_message</a></li>
 <li><a href="#Ihandle.set_attr">fn set_attr</a></li>
 <li><a href="#Ihandle.set_attrs">fn set_attrs</a></li>
 <li><a href="#Ihandle.set_bgcolor">fn set_bgcolor</a></li>
@@ -854,6 +804,9 @@
 </ul>
 </li>
 <li class="open"><a href="#MouseButton">enum MouseButton</a>        <ul>
+</ul>
+</li>
+<li class="open"><a href="#C.Ihandle">struct C.Ihandle</a>        <ul>
 </ul>
 </li>
 <li class="open"><a href="#Color">struct Color</a>        <ul>
@@ -1228,11 +1181,6 @@
 <p>help opens a browser to the provided <code>url</code></p>
 
 </section>
-						<section id="im_open" class="doc-node">
-							<div class="title"><h2>fn im_open <a href="#im_open">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">im_open</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
-<p>im_open must be called after <code>open</code></p>
-
-</section>
 						<section id="is_alt" class="doc-node">
 							<div class="title"><h2>fn is_alt <a href="#is_alt">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">is_alt</span><span class="token punctuation">(</span>key Key<span class="token punctuation">)</span> <span class="token builtin">bool</span></code></pre>
 
@@ -1271,21 +1219,6 @@
 						<section id="list" class="doc-node">
 							<div class="title"><h2>fn list <a href="#list">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">list</span><span class="token punctuation">(</span>attrs <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">&</span>Ihandle</code></pre>
 <p>list creates a component that can list multiple values</p>
-
-</section>
-						<section id="load_animation" class="doc-node">
-							<div class="title"><h2>fn load_animation <a href="#load_animation">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">load_animation</span><span class="token punctuation">(</span>path <span class="token builtin">string</span><span class="token punctuation">,</span> attrs <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">!</span><span class="token operator">&</span>Ihandle</code></pre>
-<p>load_animation loading of multiple images from the <code>path</code> for the following formats: GIF, TIFF, AVI (additional library) and WMV  (additional library)</p>
-
-</section>
-						<section id="load_animation_frames" class="doc-node">
-							<div class="title"><h2>fn load_animation_frames <a href="#load_animation_frames">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">load_animation_frames</span><span class="token punctuation">(</span>paths <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span><span class="token punctuation">,</span> attrs <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">!</span><span class="token operator">&</span>Ihandle</code></pre>
-<p>load_animation_frames load multiple frames from <code>paths</code></p>
-
-</section>
-						<section id="load_image" class="doc-node">
-							<div class="title"><h2>fn load_image <a href="#load_image">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">load_image</span><span class="token punctuation">(</span>path <span class="token builtin">string</span><span class="token punctuation">,</span> attrs <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">!</span><span class="token operator">&</span>Ihandle</code></pre>
-<p>load_image load a image from <code>path</code>, BMP, JPEG, GIF, TIFF, PNG, PNM, PCX, ICO and others</p>
 
 </section>
 						<section id="log" class="doc-node">
@@ -1363,35 +1296,9 @@
 <p>multi_line creates a multiline chooser component</p>
 
 </section>
-						<section id="new_grayscale" class="doc-node">
-							<div class="title"><h2>fn new_grayscale <a href="#new_grayscale">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">new_grayscale</span><span class="token punctuation">(</span>width <span class="token builtin">int</span><span class="token punctuation">,</span> height <span class="token builtin">int</span><span class="token punctuation">,</span> pixels <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> attrs <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">&</span>Ihandle</code></pre>
-<p>new_grayscale creates an image to be shown on a label, button, toggle, or as a cursor</p>
-
-</section>
-						<section id="new_rgb" class="doc-node">
-							<div class="title"><h2>fn new_rgb <a href="#new_rgb">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">new_rgb</span><span class="token punctuation">(</span>width <span class="token builtin">int</span><span class="token punctuation">,</span> height <span class="token builtin">int</span><span class="token punctuation">,</span> pixels <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> attrs <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">&</span>Ihandle</code></pre>
-<p>new_rgb creates an image to be shown on a label, button, toggle, or as a cursor</p>
-
-</section>
-						<section id="new_rgba" class="doc-node">
-							<div class="title"><h2>fn new_rgba <a href="#new_rgba">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">new_rgba</span><span class="token punctuation">(</span>width <span class="token builtin">int</span><span class="token punctuation">,</span> height <span class="token builtin">int</span><span class="token punctuation">,</span> pixels <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> attrs <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">&</span>Ihandle</code></pre>
-<p>new_rgba creates an image to be shown on a label, button, toggle, or as a cursor</p>
-
-</section>
 						<section id="normalizer" class="doc-node">
 							<div class="title"><h2>fn normalizer <a href="#normalizer">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">normalizer</span><span class="token punctuation">(</span>children <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&</span>Ihandle<span class="token punctuation">,</span> attrs <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">&</span>Ihandle</code></pre>
 <p>normalizer creates a container that does not affect the dialog layout</p>
-
-</section>
-						<section id="ole_control" class="doc-node">
-							<div class="title"><h2>fn ole_control <a href="#ole_control">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">ole_control</span><span class="token punctuation">(</span>progid <span class="token builtin">string</span><span class="token punctuation">,</span> attrs <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">&</span>Ihandle</code></pre>
-<p>ole_control hosts an windows OLE control (also named ActiveX control), allowing it to be used inside IUP dialogs. There are many OLE controls available, like calendars, internet browsers, PDF readers etc.<br>
-<code>progid</code> is the programmatic identifier of the OLE control. This can be found in the documentation of the OLE control or by browsing the list of registered controls, using tools like OleView.</p>
-
-</section>
-						<section id="ole_control_open" class="doc-node">
-							<div class="title"><h2>fn ole_control_open <a href="#ole_control_open">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">ole_control_open</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int</span></code></pre>
-<p>ole_control_open must be called after a <code>open</code></p>
 
 </section>
 						<section id="parse_color" class="doc-node">
@@ -1432,21 +1339,6 @@
 						<section id="resizer" class="doc-node">
 							<div class="title"><h2>fn resizer <a href="#resizer">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">resizer</span><span class="token punctuation">(</span>child <span class="token operator">&</span>Ihandle<span class="token punctuation">,</span> attrs <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">&</span>Ihandle</code></pre>
 <p>resizer creates a container that allows its <code>child</code> to be resized</p>
-
-</section>
-						<section id="scintilla" class="doc-node">
-							<div class="title"><h2>fn scintilla <a href="#scintilla">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">scintilla</span><span class="token punctuation">(</span>attrs <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">&</span>Ihandle</code></pre>
-<p>scintilla creates a multiline source code text editor that uses the Scintilla library</p>
-
-</section>
-						<section id="scintilla_dlg" class="doc-node">
-							<div class="title"><h2>fn scintilla_dlg <a href="#scintilla_dlg">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">scintilla_dlg</span><span class="token punctuation">(</span>attrs <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">&</span>Ihandle</code></pre>
-<p>scintilla_dlg creates a notepad dialog using the IupScintilla control. It is a predefined dialog for a text notepad. The dialog can be shown with <code>show</code>, <code>show_xy</code> or <code>popup</code></p>
-
-</section>
-						<section id="scintilla_open" class="doc-node">
-							<div class="title"><h2>fn scintilla_open <a href="#scintilla_open">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">scintilla_open</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
-<p>scintilla_open must be called after a <code>open</code></p>
 
 </section>
 						<section id="scroll" class="doc-node">
@@ -1536,16 +1428,6 @@ to be multi-line, number formatted, etc.</p>
 <p>tree creates a tree containing nodes of branches or leaves</p>
 
 </section>
-						<section id="tuio_client" class="doc-node">
-							<div class="title"><h2>fn tuio_client <a href="#tuio_client">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">tuio_client</span><span class="token punctuation">(</span>port <span class="token builtin">int</span><span class="token punctuation">,</span> attrs <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">&</span>Ihandle</code></pre>
-<p>tuio_client implements an interface to the TUIO protocol client that allows the use of multi-touch devices. It can use any TUIO server, but it was tested with the Community Core Vision (CCV) from the NUI Group <code>port</code> is the UDP port used to connect to the TUIO server. If 0 is specified then the default value of 3333 will be used</p>
-
-</section>
-						<section id="tuio_open" class="doc-node">
-							<div class="title"><h2>fn tuio_open <a href="#tuio_open">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">tuio_open</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int</span></code></pre>
-<p>tuio_open must be called after a <code>open</code></p>
-
-</section>
 						<section id="user" class="doc-node">
 							<div class="title"><h2>fn user <a href="#user">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">user</span><span class="token punctuation">(</span>attrs <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">&</span>Ihandle</code></pre>
 <p>user creates a user element in IUP, which is not associated to any interface element</p>
@@ -1554,16 +1436,6 @@ to be multi-line, number formatted, etc.</p>
 						<section id="vbox" class="doc-node">
 							<div class="title"><h2>fn vbox <a href="#vbox">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">vbox</span><span class="token punctuation">(</span>children <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">&</span>Ihandle<span class="token punctuation">,</span> attrs <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">&</span>Ihandle</code></pre>
 <p>vbox is a container that displays its children in a column</p>
-
-</section>
-						<section id="web_browser" class="doc-node">
-							<div class="title"><h2>fn web_browser <a href="#web_browser">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">web_browser</span><span class="token punctuation">(</span>attrs <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">&</span>Ihandle</code></pre>
-<p>web_browser creates a web browser control. It is responsible for managing the drawing of the web browser content and forwarding of its events</p>
-
-</section>
-						<section id="web_browser_open" class="doc-node">
-							<div class="title"><h2>fn web_browser_open <a href="#web_browser_open">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">web_browser_open</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int</span></code></pre>
-<p>web_browser_open must be called after <code>open</code></p>
 
 </section>
 						<section id="zbox" class="doc-node">
@@ -2842,16 +2714,6 @@ When the element is a dialog, it is called after the layout is updated. For all 
 <p>reset_clip reset the clipping area to none</p>
 
 </section>
-						<section id="Ihandle.save_image" class="doc-node">
-							<div class="title"><h2>fn (Ihandle) save_image <a href="#Ihandle.save_image">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>img <span class="token operator">&</span>Ihandle<span class="token punctuation">)</span> <span class="token function">save_image</span><span class="token punctuation">(</span>filename <span class="token builtin">string</span><span class="token punctuation">,</span> format <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">int</span></code></pre>
-<p>save_image save current image to <code>filename</code>, BMP, JPEG, GIF, TIFF, PNG, PNM, PCX, ICO and others</p>
-
-</section>
-						<section id="Ihandle.scintilla_send_message" class="doc-node">
-							<div class="title"><h2>fn (Ihandle) scintilla_send_message <a href="#Ihandle.scintilla_send_message">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>scintilla <span class="token operator">&</span>Ihandle<span class="token punctuation">)</span> <span class="token function">scintilla_send_message</span><span class="token punctuation">(</span>msg <span class="token builtin">u32</span><span class="token punctuation">,</span> w_param <span class="token builtin">u32</span><span class="token punctuation">,</span> l_param <span class="token builtin">u32</span><span class="token punctuation">)</span> <span class="token builtin">u32</span></code></pre>
-<p>scintilla_send_message sends a message to the Scintilla control in any platform</p>
-
-</section>
 						<section id="Ihandle.set_attr" class="doc-node">
 							<div class="title"><h2>fn (Ihandle) set_attr <a href="#Ihandle.set_attr">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Ihandle<span class="token punctuation">)</span> <span class="token function">set_attr</span><span class="token punctuation">(</span>name <span class="token builtin">string</span><span class="token punctuation">,</span> value <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">&</span>Ihandle</code></pre>
 <p>set_attr sets an attribute on <code>Control</code> and returns <code>Control</code> back for chaining</p>
@@ -3098,6 +2960,11 @@ When the element is a dialog, it is called after the layout is updated. For all 
 
 
 </section>
+						<section id="C.Ihandle" class="doc-node">
+							<div class="title"><h2>struct C.Ihandle <a href="#C.Ihandle">#</a></h2></div><pre class="signature"><code><span class="token keyword">struct</span> C<span class="token punctuation">.</span><span class="token symbol">Ihandle</span> <span class="token punctuation">{</span><span class="token punctuation">}</span></code></pre>
+
+
+</section>
 						<section id="Color" class="doc-node">
 							<div class="title"><h2>struct Color <a href="#Color">#</a></h2></div><pre class="signature"><code><span class="token keyword">struct</span> <span class="token symbol">Color</span> <span class="token punctuation">{</span>
 <span class="token keyword">pub</span> <span class="token keyword">mut</span><span class="token punctuation">:</span>
@@ -3132,7 +2999,7 @@ When the element is a dialog, it is called after the layout is updated. For all 
 </section>
 
           <div class="footer">
-            Powered by vdoc. Generated on: 26 Apr 2023 22:23:14
+            Powered by vdoc. Generated on: 2 May 2023 21:07:51
           </div>
         </div>
         

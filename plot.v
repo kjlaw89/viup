@@ -1,7 +1,9 @@
 module viup
 
-#flag -I @VROOT/headers/iup
-#flag -L .
+#flag -I @VMODROOT/headers/iup
+#flag windows -L @VMODROOT/windows
+#flag linux -L /usr/lib/iup
+
 #flag -liup_plot -lcd -lcdcontextplus -lcdgl
 #include "iup.h"
 #include "iup_plot.h"

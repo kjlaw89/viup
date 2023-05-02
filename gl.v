@@ -1,7 +1,9 @@
 module viup
 
-#flag -I @VROOT/headers/iup
-#flag -L /usr/lib/iup
+#flag -I @VMODROOT/headers/iup
+#flag windows -L @VMODROOT/windows
+#flag linux -L /usr/lib/iup
+
 #flag -liupgl
 #include "iup.h"
 #include "iupgl.h"

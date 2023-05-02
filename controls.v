@@ -1,9 +1,12 @@
 module viup
 
-#flag -I @VROOT/headers/iup
-#flag -L .
+#flag -I @VMODROOT/headers/iup
+#flag windows -L @VMODROOT/windows
+#flag linux -L /usr/lib/iup
+
 #flag -liupcontrols
 #include "iup.h"
+#include "iupcontrols.h"
 
 fn C.IupControlsOpen() int
 fn C.IupAnimatedLabel(&Ihandle) &Ihandle
