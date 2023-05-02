@@ -19,6 +19,7 @@ fn C.IupFlush()
 fn C.IupGetGlobal(charptr) voidptr
 fn C.IupGetHandle(charptr) &Ihandle
 fn C.IupHelp(charptr) int
+fn C.IupIsOpened() int
 fn C.IupLog(charptr, charptr)
 fn C.IupLoopStep() int
 fn C.IupMainLoop() int
@@ -38,6 +39,12 @@ fn init() {
 	cargs << &char(0)
 	mut argc := os.args.len
 	C.IupOpen(&argc, &cargs.data)
+}
+
+fn cleanup() {
+	if C.IupIsOpened() > 0 {
+		C.IupClose()
+	}
 }
 
 // close ends the IUP toolkit and releases internal memory. It will also automatically destroy all dialogs and all elements that have names
