@@ -1,6 +1,7 @@
 module main
 
 import viup
+import viup.gl
 
 $if arm64 {
 	#flag -L /usr/lib/iup
@@ -21,22 +22,19 @@ fn C.glEnd()
 fn C.glFlush()
 
 fn main() {
-	viup.gl_canvas_open()
-
-	canvas := viup.gl_canvas().set_handle('context').on_redraw(redraw)
+	canvas := gl.gl_canvas().set_handle('context').on_redraw(redraw)
 
 	viup.dialog(viup.hbox([
 		viup.fill(),
-		canvas,
+		&viup.Control(canvas),
 		viup.fill(),
 	]), 'title=GL Example', 'rastersize=640x480').show()
 
 	viup.main_loop()
-	viup.close()
 }
 
-fn redraw(control &viup.Ihandle, x f32, y f32) viup.FuncResult {
-	viup.gl_make_current(control)
+fn redraw(gl_canvas &gl.GL_Canvas, x f32, y f32) viup.FuncResult {
+	gl.gl_make_current(gl_canvas)
 
 	C.glClear(C.GL_COLOR_BUFFER_BIT)
 
@@ -49,7 +47,7 @@ fn redraw(control &viup.Ihandle, x f32, y f32) viup.FuncResult {
 	C.glVertex3f(0, 0.75, 0)
 	C.glEnd()
 
-	viup.gl_swap_buffers(control)
+	gl.gl_swap_buffers(gl_canvas)
 
 	return .cont
 }

@@ -2,6 +2,8 @@ module main
 
 import os
 import viup
+import viup.im
+import viup.menu
 
 //#flag windows "path\\to\\manifest.syso"
 $if arm64 {
@@ -21,26 +23,26 @@ It gives a simple overview of all of the available controls and some sample use 
 )
 
 fn main() {
-	vlogo := viup.load_image(os.resource_abs_path('./v-logo.png'), 'resize=64x64')!
+	vlogo := im.load_image(os.resource_abs_path('./v-logo.png'), 'resize=64x64')!
 	vlogo.set_handle('logo')
 
 	// Create our menu with the typical "File | Edit | About" layout
 	menu_event := viup.IFn(menu_clicked)
-	menu := viup.menu([
-		viup.sub_menu('&File', viup.menu([
-			viup.item('&Open File...', 'name=MenuOpen').on_action(menu_event),
-			viup.item('&Save File...', 'name=MenuSave').on_action(menu_event),
-			viup.separator(),
-			viup.item('E&xit', 'name=MenuExit').on_action(menu_event),
+	app_menu := menu.menu([
+		menu.sub_menu('&File', menu.menu([
+			menu.item('&Open File...', 'name=MenuOpen').on_action(menu_event),
+			menu.item('&Save File...', 'name=MenuSave').on_action(menu_event),
+			menu.separator(),
+			menu.item('E&xit', 'name=MenuExit').on_action(menu_event),
 		])),
-		viup.sub_menu('&Edit', viup.menu([
-			viup.item('Debug &Window', 'name=MenuDebugWindow').on_action(menu_event),
-			viup.item('Debug &Control', 'name=MenuDebugControl').on_action(menu_event),
+		menu.sub_menu('&Edit', menu.menu([
+			menu.item('Debug &Window', 'name=MenuDebugWindow').on_action(menu_event),
+			menu.item('Debug &Control', 'name=MenuDebugControl').on_action(menu_event),
 		])),
-		viup.sub_menu('&Help', viup.menu([
-			viup.item('&Repository', 'name=MenuRepository').on_action(menu_event),
-			viup.separator(),
-			viup.item('&About', 'name=MenuAbout').on_action(menu_event),
+		menu.sub_menu('&Help', menu.menu([
+			menu.item('&Repository', 'name=MenuRepository').on_action(menu_event),
+			menu.separator(),
+			menu.item('&About', 'name=MenuAbout').on_action(menu_event),
 		])),
 	])
 
@@ -114,15 +116,14 @@ fn main() {
 	// automatically calculated by components
 
 	dialog := viup.dialog(viup.scroll(hbox), 'MainWindow', 'title=Control Gallery')
-	dialog.set_menu('app_menu', menu)
+	dialog.set_menu('app_menu', app_menu)
 	dialog.show_xy(viup.pos_center, viup.pos_center)
 
 	viup.main_loop()
-	viup.close()
 }
 
 // menu_clicked handles when different menu items are clicked
-fn menu_clicked(control &viup.Ihandle) viup.FuncResult {
+fn menu_clicked(control &viup.Control) viup.FuncResult {
 	name := control.get_attr('name')
 	match name {
 		'MenuAbout' {
@@ -148,7 +149,7 @@ fn menu_clicked(control &viup.Ihandle) viup.FuncResult {
 			focused.debug_props()
 		}
 		'MenuDebugWindow' {
-			window := viup.get_handle('MainWindow')
+			window := viup.get_dialog_handle('MainWindow')
 			window.debug() // when autofree is enabled this will cause a crash as the mainwindow will go out of scope and be freed
 		}
 		'MenuRepository' {
@@ -176,7 +177,7 @@ fn menu_clicked(control &viup.Ihandle) viup.FuncResult {
 
 // numbers_changed handles when the spinner or slider are updated
 // and links all three controls together automatically
-fn numbers_changed(control &viup.Ihandle) viup.FuncResult {
+fn numbers_changed(control &viup.Control) viup.FuncResult {
 	value := control.get_attr('value')
 	viup.get_handle('spin1').set_attr('value', value.int().str())
 	viup.get_handle('slider1').set_attr('value', value)
@@ -186,13 +187,13 @@ fn numbers_changed(control &viup.Ihandle) viup.FuncResult {
 }
 
 // button_clicked shows a dialog when the test button is clicked
-fn button_clicked(control &viup.Ihandle) viup.FuncResult {
+fn button_clicked(control &viup.Control) viup.FuncResult {
 	viup.message('Button Click', 'Button clicked!')
 	return .cont
 }
 
 // font_button_clicked shows a font dialog when the font button is clicked
-fn font_button_clicked(control &viup.Ihandle) viup.FuncResult {
+fn font_button_clicked(control &viup.Control) viup.FuncResult {
 	font := control.get_font().show_picker()
 	control.set_font(font).set_attr('title', font.face)
 
@@ -200,7 +201,7 @@ fn font_button_clicked(control &viup.Ihandle) viup.FuncResult {
 }
 
 // color_button_clicked shows a color dialog when the color button is clicked
-fn color_button_clicked(control &viup.Ihandle) viup.FuncResult {
+fn color_button_clicked(control &viup.Control) viup.FuncResult {
 	color, table := control.get_bgcolor().show_picker()
 	println(table)
 	control.set_bgcolor(color)

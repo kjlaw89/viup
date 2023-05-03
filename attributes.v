@@ -79,7 +79,7 @@ pub fn (control &Ihandle) get_rgba(name string) (byte, byte, byte, byte) {
 pub fn (control &Ihandle) set_attr(name string, value string) &Ihandle {
 	C.IupSetStrAttribute(control, name.to_upper().trim_space().str, value.trim_space().str)
 
-	return unsafe { control }
+	return control
 }
 
 // set_attrs takes all x=x values and applies them to `Control` and
@@ -93,7 +93,7 @@ pub fn (control &Ihandle) set_attrs(attrs ...string) &Ihandle {
 		control.set_attr(split[0], split[1])
 	}
 
-	return unsafe { control }
+	return control
 }
 
 // set_data associates the provided `data` with `Control` and
@@ -101,11 +101,11 @@ pub fn (control &Ihandle) set_attrs(attrs ...string) &Ihandle {
 pub fn (control &Ihandle) set_data(name string, data voidptr) &Ihandle {
 	C.IupSetAttribute(control, '${name}_data'.to_upper().trim_space().str, charptr(data))
 
-	return unsafe { control }
+	return control
 }
 
 // unset_attr clears the provided attribute
 pub fn (control &Ihandle) unset_attr(name string) &Ihandle {
 	C.IupSetAttribute(control, name.to_upper().trim_space().str, C.NULL)
-	return unsafe { control }
+	return control
 }

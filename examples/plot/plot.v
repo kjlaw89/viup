@@ -1,6 +1,7 @@
 module main
 
 import viup
+import viup.plot as plot_module
 
 const (
 	max_plot = 6
@@ -9,23 +10,20 @@ const (
 [heap]
 struct Plot {
 pub mut:
-	plot  []&viup.Ihandle
-	vboxr []&viup.Ihandle
+	plot  []&viup.Control
+	vboxr []&viup.Control
 }
 
 fn main() {
-	viup.controls_open()
-	viup.plot_open()
 	mut plot := Plot{}
 	plot_test(mut plot)
 	viup.main_loop()
-	viup.close()
 }
 
 fn plot_test(mut plot Plot) {
 	// create plots
 	for _ in 0 .. max_plot {
-		plot.plot << viup.plot('menuitemproperties=Yes')
+		plot.plot << &viup.Control(plot_module.plot('menuitemproperties=Yes'))
 	}
 	/*
 	left panel: plot control
@@ -60,7 +58,7 @@ fn plot_test(mut plot Plot) {
 	// right panel: tabs with plots
 	for i in 0 .. max_plot {
 		plot.vboxr << viup.vbox([plot.plot[i]], 'tabtitle=Plot ${i}')
-		viup.set_handle(plot.vboxr[i].get_attr('tabtitle'), plot.vboxr[i])
+		viup.set_handle(plot.vboxr[i].get_attr('tabtitle'), &viup.Ihandle(plot.vboxr[i]))
 	}
 
 	// plot.vboxr[MAXPLOT] = NULL; /* mark end of array */
