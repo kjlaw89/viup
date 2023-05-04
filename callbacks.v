@@ -198,8 +198,8 @@ pub fn (control &Control) on_action(func IFn) &Control {
 }
 
 // ==============Button==============
-// on_left_button_click generated when the button 1 (usually left) is selected. This callback is called only after the mouse is released and when it is released inside the button area
-pub fn (control &Control) on_left_button_click(func IFn) &Control {
+// on_click generated when the button 1 (usually left) is selected. This callback is called only after the mouse is released and when it is released inside the button area
+pub fn (control &Control) on_click(func IFn) &Control {
 	C.IupSetCallback(control, c'ACTION', func)
 	return control
 }

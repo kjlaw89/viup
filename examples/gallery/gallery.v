@@ -64,15 +64,15 @@ fn main() {
 	hbox := viup.hbox([
 		viup.vbox([
 			viup.frame(viup.vbox([
-				viup.button('Button', 'expand=horizontal').on_left_button_click(button_clicked),
+				viup.button('Button', 'expand=horizontal').on_click(button_clicked),
 				viup.toggle('Checkbox', 'action1'),
 				viup.text('expand=horizontal', 'value=Text Field'),
 				viup.label('Label'),
 				viup.link('https://www.vlang.io', 'Link'),
 				viup.flat_separator(),
-				viup.button('Set font...', 'expand=horizontal').set_handle('font_btn').on_left_button_click(font_button_clicked),
+				viup.button('Set font...', 'expand=horizontal').set_handle('font_btn').on_click(font_button_clicked),
 				viup.date_picker('expand=horizontal', 'order=MDY'),
-				viup.button('', 'bgcolor=0 0 0', 'expand=horizontal', 'padding=10x0').unset_attr('title').set_handle('color_btn').on_left_button_click(color_button_clicked),
+				viup.button('', 'bgcolor=0 0 0', 'expand=horizontal', 'padding=10x0').unset_attr('title').set_handle('color_btn').on_click(color_button_clicked),
 				viup.label('', 'size=64x64', 'alignment=acenter', 'expand=horizontal').set_image('logo'),
 				viup.fill(),
 			]), 'title=Basic Controls', 'margin=10x10', 'expand=yes'),

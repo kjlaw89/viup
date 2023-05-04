@@ -556,6 +556,7 @@
 <li><a href="#Control.on_caret">fn on_caret</a></li>
 <li><a href="#Control.on_cell">fn on_cell</a></li>
 <li><a href="#Control.on_change">fn on_change</a></li>
+<li><a href="#Control.on_click">fn on_click</a></li>
 <li><a href="#Control.on_dbl_click">fn on_dbl_click</a></li>
 <li><a href="#Control.on_destroy">fn on_destroy</a></li>
 <li><a href="#Control.on_detached">fn on_detached</a></li>
@@ -587,7 +588,6 @@
 <li><a href="#Control.on_key">fn on_key</a></li>
 <li><a href="#Control.on_key_press">fn on_key_press</a></li>
 <li><a href="#Control.on_layout_update">fn on_layout_update</a></li>
-<li><a href="#Control.on_left_button_click">fn on_left_button_click</a></li>
 <li><a href="#Control.on_link">fn on_link</a></li>
 <li><a href="#Control.on_list_item">fn on_list_item</a></li>
 <li><a href="#Control.on_map">fn on_map</a></li>
@@ -1832,6 +1832,11 @@ to be multi-line, number formatted, etc.</p>
 <p>on_change called when the user releases the left mouse button over the control, defining the selected color</p>
 
 </section>
+						<section id="Control.on_click" class="doc-node">
+							<div class="title"><h2>fn (Control) on_click <a href="#Control.on_click">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_click</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
+<p>==============Button============== on_click generated when the button 1 (usually left) is selected. This callback is called only after the mouse is released and when it is released inside the button area</p>
+
+</section>
 						<section id="Control.on_dbl_click" class="doc-node">
 							<div class="title"><h2>fn (Control) on_dbl_click <a href="#Control.on_dbl_click">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_dbl_click</span><span class="token punctuation">(</span>func IFnis<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
 <p>on_dbl_click action generated when the user double click an item</p>
@@ -1985,11 +1990,6 @@ to be multi-line, number formatted, etc.</p>
 						<section id="Control.on_layout_update" class="doc-node">
 							<div class="title"><h2>fn (Control) on_layout_update <a href="#Control.on_layout_update">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_layout_update</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
 <p>on_layout_update action generated when the layout is updated after a scroll operation</p>
-
-</section>
-						<section id="Control.on_left_button_click" class="doc-node">
-							<div class="title"><h2>fn (Control) on_left_button_click <a href="#Control.on_left_button_click">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_left_button_click</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
-<p>==============Button============== on_left_button_click generated when the button 1 (usually left) is selected. This callback is called only after the mouse is released and when it is released inside the button area</p>
 
 </section>
 						<section id="Control.on_link" class="doc-node">
@@ -2490,7 +2490,7 @@ When the element is a dialog, it is called after the layout is updated. For all 
 </section>
 
           <div class="footer">
-            Powered by vdoc. Generated on: 4 May 2023 11:25:26
+            Powered by vdoc. Generated on: 4 May 2023 11:34:09
           </div>
         </div>
         
