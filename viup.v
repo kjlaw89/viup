@@ -20,6 +20,7 @@ fn C.IupClipboard() &Ihandle
 fn C.IupFlush()
 fn C.IupGetGlobal(charptr) voidptr
 fn C.IupGetHandle(charptr) &Ihandle
+fn C.IupGetAllNames(voidptr, int) int
 fn C.IupHelp(charptr) int
 fn C.IupIsOpened() int
 fn C.IupLog(charptr, charptr)
@@ -125,6 +126,18 @@ pub fn set_global_value(name string, data string) {
 pub fn set_handle(handle string, control &Ihandle) &Ihandle {
 	C.IupSetHandle(handle.str, control)
 	return control
+}
+
+// get_all_handle_names returns the names of all interface elements that have an associated name using IupSetHandle or using LED
+pub fn get_all_handle_names(max_n int) []string {
+	mut cnames := unsafe { []&char{len: max_n + 1, init: nil} }
+	ret := C.IupGetAllNames(cnames.data, max_n)
+
+	mut names := []string{}
+	for i in 0 .. ret {
+		names << unsafe { tos_clone(cnames[i]) }
+	}
+	return names
 }
 
 // thread creates a thread element in IUP, which is not associated to any interface element. It is a very simple support to create and manage threads in a multithread environment

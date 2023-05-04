@@ -7,7 +7,6 @@ fn C.IupDetach(&Control)
 fn C.IupGetClassName(&Control) charptr
 fn C.IupGetClassType(&Control) charptr
 fn C.IupGetFocus() &Control
-fn C.IupHide(&Control) int
 fn C.IupInsert(&Control, &Control, &Control) &Control
 fn C.IupNextField(&Control) &Control
 fn C.IupMap(&Control) int
@@ -80,11 +79,6 @@ pub fn get_focused() &Control {
 // get_font returns back a formatted `Font` object for this control
 pub fn (control &Control) get_font() Font {
 	return parse_font(control.get_attr('font'))
-}
-
-// hide hides an interface element
-pub fn (control &Control) hide() int {
-	return C.IupHide(control)
 }
 
 // insert inserts a `new_control` into this control after `ref_control` if provided

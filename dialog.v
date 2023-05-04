@@ -20,6 +20,7 @@ fn C.IupGetText(charptr, charptr, int) int
 fn C.IupGetColor(int, int, charptr, charptr, charptr) int
 fn C.IupGetParamv(charptr, Iparamcb, voidptr, charptr, int, int, voidptr) int
 fn C.IupGlobalsDialog() &Dialog
+fn C.IupHide(&Dialog) int
 fn C.IupLayoutDialog(&Dialog) &Dialog
 fn C.IupListDialog(int, charptr, int, voidptr, int, int, int, []int) int
 fn C.IupMessage(charptr, charptr)
@@ -156,6 +157,11 @@ pub fn globals_dialog(attrs ...string) &Dialog {
 	globals_dialog := C.IupGlobalsDialog()
 	globals_dialog.set_attrs(...attrs)
 	return globals_dialog
+}
+
+// hide hides an interface element
+pub fn (dialog &Dialog) hide() int {
+	return C.IupHide(dialog)
 }
 
 // list_dialog shows a modal dialog to select items from a simple or multiple selection list

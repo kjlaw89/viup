@@ -152,6 +152,9 @@
 <li class="open"><a href="#gauge">fn gauge</a>        <ul>
 </ul>
 </li>
+<li class="open"><a href="#get_all_handle_names">fn get_all_handle_names</a>        <ul>
+</ul>
+</li>
 <li class="open"><a href="#get_color">fn get_color</a>        <ul>
 </ul>
 </li>
@@ -542,7 +545,6 @@
 <li><a href="#Control.get_class_type">fn get_class_type</a></li>
 <li><a href="#Control.get_fgcolor">fn get_fgcolor</a></li>
 <li><a href="#Control.get_font">fn get_font</a></li>
-<li><a href="#Control.hide">fn hide</a></li>
 <li><a href="#Control.insert">fn insert</a></li>
 <li><a href="#Control.map_control">fn map_control</a></li>
 <li><a href="#Control.on_action">fn on_action</a></li>
@@ -641,6 +643,7 @@
 </li>
 <li class="open"><a href="#Dialog">struct Dialog</a>        <ul>
 <li><a href="#Dialog.debug">fn debug</a></li>
+<li><a href="#Dialog.hide">fn hide</a></li>
 <li><a href="#Dialog.on_close">fn on_close</a></li>
 <li><a href="#Dialog.on_copy_data">fn on_copy_data</a></li>
 <li><a href="#Dialog.on_custom_frame">fn on_custom_frame</a></li>
@@ -893,6 +896,11 @@ return the number of the button selected by the user (1, 2 or 3) , or 0 if faile
 						<section id="gauge" class="doc-node">
 							<div class="title"><h2>fn gauge <a href="#gauge">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">gauge</span><span class="token punctuation">(</span>attrs <span class="token punctuation">...</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
 <p>gauge creates a Gauge control, shows a percent value that can be updated to simulate a progression</p>
+
+</section>
+						<section id="get_all_handle_names" class="doc-node">
+							<div class="title"><h2>fn get_all_handle_names <a href="#get_all_handle_names">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">get_all_handle_names</span><span class="token punctuation">(</span>max_n <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">string</span></code></pre>
+<p>get_all_handle_names returns the names of all interface elements that have an associated name using IupSetHandle or using LED</p>
 
 </section>
 						<section id="get_color" class="doc-node">
@@ -1769,11 +1777,6 @@ to be multi-line, number formatted, etc.</p>
 <p>get_font returns back a formatted <code>Font</code> object for this control</p>
 
 </section>
-						<section id="Control.hide" class="doc-node">
-							<div class="title"><h2>fn (Control) hide <a href="#Control.hide">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">hide</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int</span></code></pre>
-<p>hide hides an interface element</p>
-
-</section>
 						<section id="Control.insert" class="doc-node">
 							<div class="title"><h2>fn (Control) insert <a href="#Control.insert">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">insert</span><span class="token punctuation">(</span>new_control <span class="token operator">&</span>Control<span class="token punctuation">,</span> ref_control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
 <p>insert inserts a <code>new_control</code> into this control after <code>ref_control</code> if provided</p>
@@ -2257,6 +2260,11 @@ When the element is a dialog, it is called after the layout is updated. For all 
 <p>debug shows a layout dialog that can be used to inspect the provided Dialog's layout Note: This is intended for developers</p>
 
 </section>
+						<section id="Dialog.hide" class="doc-node">
+							<div class="title"><h2>fn (Dialog) hide <a href="#Dialog.hide">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>dialog <span class="token operator">&</span>Dialog<span class="token punctuation">)</span> <span class="token function">hide</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token builtin">int</span></code></pre>
+<p>hide hides an interface element</p>
+
+</section>
 						<section id="Dialog.on_close" class="doc-node">
 							<div class="title"><h2>fn (Dialog) on_close <a href="#Dialog.on_close">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>dialog <span class="token operator">&</span>Dialog<span class="token punctuation">)</span> <span class="token function">on_close</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Dialog</code></pre>
 <p>on_close called just before a dialog is closed when the user clicks the close button of the title bar or an equivalent action.</p>
@@ -2482,7 +2490,7 @@ When the element is a dialog, it is called after the layout is updated. For all 
 </section>
 
           <div class="footer">
-            Powered by vdoc. Generated on: 4 May 2023 10:45:42
+            Powered by vdoc. Generated on: 4 May 2023 11:25:26
           </div>
         </div>
         
