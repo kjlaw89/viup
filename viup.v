@@ -12,7 +12,25 @@ import os
 // `Ihandle` is a dummy struct here, because we never use its member, only a pointer
 [heap]
 pub struct Ihandle {
-	dummy u32
+	sig           [4]u8   // IUP Signature, initialized with "IUP", cleared on destroy
+	iclass        voidptr // Ihandle Class
+	attrib        voidptr // attributes table
+	serial        int     // serial number used for controls that need a numeric id, initialized with -1
+	handle        voidptr // native handle. initialized when mapped. InativeHandle definition is system dependent.
+	expand        int     // expand configuration, a combination of \ref Iexpand, for containers is a combination of the children expand's
+	flags         int     // flags configuration, a combination of \ref Iflags
+	x             int
+	y             int // upper-left corner relative to the native parent. always 0 for the dialog.
+	userwidth     int
+	userheight    int // user defined size for the control using SIZE or RASTERSIZE
+	naturalwidth  int
+	naturalheight int // the calculated size based in the control contents and the user size
+	currentwidth  int
+	currentheight int     // actual size of the control in pixels (window size, including decorations and margins).
+	parent        voidptr // previous control in the hierarchy tree
+	firstchild    voidptr // first child control in the hierarchy tree
+	brother       voidptr // next control inside parent
+	data          voidptr // private control data. automatically freed if not NULL in destroy
 }
 
 fn C.IupClose()
