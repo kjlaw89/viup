@@ -577,48 +577,28 @@
 <li><a href="#Control.on_extra_button">fn on_extra_button</a></li>
 <li><a href="#Control.on_flat_action">fn on_flat_action</a></li>
 <li><a href="#Control.on_flat_button">fn on_flat_button</a></li>
+<li><a href="#Control.on_flat_toggle">fn on_flat_toggle</a></li>
 <li><a href="#Control.on_focus">fn on_focus</a></li>
 <li><a href="#Control.on_focused">fn on_focused</a></li>
 <li><a href="#Control.on_help">fn on_help</a></li>
-<li><a href="#Control.on_highlight">fn on_highlight</a></li>
+<li><a href="#Control.on_item_state">fn on_item_state</a></li>
 <li><a href="#Control.on_key">fn on_key</a></li>
 <li><a href="#Control.on_key_press">fn on_key_press</a></li>
 <li><a href="#Control.on_layout_update">fn on_layout_update</a></li>
+<li><a href="#Control.on_left_button_click">fn on_left_button_click</a></li>
 <li><a href="#Control.on_link">fn on_link</a></li>
 <li><a href="#Control.on_list_item">fn on_list_item</a></li>
 <li><a href="#Control.on_map">fn on_map</a></li>
-<li><a href="#Control.on_menu_close">fn on_menu_close</a></li>
 <li><a href="#Control.on_motion">fn on_motion</a></li>
 <li><a href="#Control.on_mouse_move">fn on_mouse_move</a></li>
 <li><a href="#Control.on_multi_select">fn on_multi_select</a></li>
 <li><a href="#Control.on_multi_selection">fn on_multi_selection</a></li>
+<li><a href="#Control.on_multi_touch">fn on_multi_touch</a></li>
 <li><a href="#Control.on_multi_unselect">fn on_multi_unselect</a></li>
 <li><a href="#Control.on_node_removed">fn on_node_removed</a></li>
-<li><a href="#Control.on_open">fn on_open</a></li>
 <li><a href="#Control.on_open_close">fn on_open_close</a></li>
 <li><a href="#Control.on_param">fn on_param</a></li>
-<li><a href="#Control.on_plot_click_sample">fn on_plot_click_sample</a></li>
-<li><a href="#Control.on_plot_click_segment">fn on_plot_click_segment</a></li>
-<li><a href="#Control.on_plot_delete">fn on_plot_delete</a></li>
-<li><a href="#Control.on_plot_delete_begin">fn on_plot_delete_begin</a></li>
-<li><a href="#Control.on_plot_delete_end">fn on_plot_delete_end</a></li>
-<li><a href="#Control.on_plot_draw_sample">fn on_plot_draw_sample</a></li>
-<li><a href="#Control.on_plot_ds_properties_changed">fn on_plot_ds_properties_changed</a></li>
-<li><a href="#Control.on_plot_ds_properties_validate">fn on_plot_ds_properties_validate</a></li>
-<li><a href="#Control.on_plot_edit_sample">fn on_plot_edit_sample</a></li>
-<li><a href="#Control.on_plot_menu_context">fn on_plot_menu_context</a></li>
-<li><a href="#Control.on_plot_menu_context_close">fn on_plot_menu_context_close</a></li>
-<li><a href="#Control.on_plot_plot_button">fn on_plot_plot_button</a></li>
-<li><a href="#Control.on_plot_plot_motion">fn on_plot_plot_motion</a></li>
-<li><a href="#Control.on_plot_post_draw">fn on_plot_post_draw</a></li>
-<li><a href="#Control.on_plot_pre_draw">fn on_plot_pre_draw</a></li>
-<li><a href="#Control.on_plot_properties_changed">fn on_plot_properties_changed</a></li>
-<li><a href="#Control.on_plot_properties_validate">fn on_plot_properties_validate</a></li>
-<li><a href="#Control.on_plot_select">fn on_plot_select</a></li>
-<li><a href="#Control.on_plot_select_begin">fn on_plot_select_begin</a></li>
-<li><a href="#Control.on_plot_select_end">fn on_plot_select_end</a></li>
-<li><a href="#Control.on_plot_xtick_format_number">fn on_plot_xtick_format_number</a></li>
-<li><a href="#Control.on_plot_ytick_format_number">fn on_plot_ytick_format_number</a></li>
+<li><a href="#Control.on_redraw">fn on_redraw</a></li>
 <li><a href="#Control.on_rename">fn on_rename</a></li>
 <li><a href="#Control.on_resize">fn on_resize</a></li>
 <li><a href="#Control.on_restored">fn on_restored</a></li>
@@ -632,14 +612,18 @@
 <li><a href="#Control.on_tab_change">fn on_tab_change</a></li>
 <li><a href="#Control.on_tab_change_pos">fn on_tab_change_pos</a></li>
 <li><a href="#Control.on_tab_close">fn on_tab_close</a></li>
+<li><a href="#Control.on_text_caret">fn on_text_caret</a></li>
 <li><a href="#Control.on_text_edit">fn on_text_edit</a></li>
 <li><a href="#Control.on_thread">fn on_thread</a></li>
+<li><a href="#Control.on_timer">fn on_timer</a></li>
 <li><a href="#Control.on_toggle_value">fn on_toggle_value</a></li>
+<li><a href="#Control.on_touch">fn on_touch</a></li>
 <li><a href="#Control.on_unfocused">fn on_unfocused</a></li>
 <li><a href="#Control.on_unmap">fn on_unmap</a></li>
 <li><a href="#Control.on_value_changed">fn on_value_changed</a></li>
 <li><a href="#Control.on_value_changing">fn on_value_changing</a></li>
 <li><a href="#Control.on_wheel">fn on_wheel</a></li>
+<li><a href="#Control.on_wom">fn on_wom</a></li>
 <li><a href="#Control.refresh">fn refresh</a></li>
 <li><a href="#Control.refresh_children">fn refresh_children</a></li>
 <li><a href="#Control.set_attr">fn set_attr</a></li>
@@ -658,7 +642,25 @@
 <li class="open"><a href="#Dialog">struct Dialog</a>        <ul>
 <li><a href="#Dialog.debug">fn debug</a></li>
 <li><a href="#Dialog.on_close">fn on_close</a></li>
+<li><a href="#Dialog.on_copy_data">fn on_copy_data</a></li>
+<li><a href="#Dialog.on_custom_frame">fn on_custom_frame</a></li>
+<li><a href="#Dialog.on_custom_frame_activate">fn on_custom_frame_activate</a></li>
+<li><a href="#Dialog.on_destroy">fn on_destroy</a></li>
+<li><a href="#Dialog.on_drop_files">fn on_drop_files</a></li>
+<li><a href="#Dialog.on_entered">fn on_entered</a></li>
+<li><a href="#Dialog.on_exited">fn on_exited</a></li>
+<li><a href="#Dialog.on_focus">fn on_focus</a></li>
+<li><a href="#Dialog.on_focused">fn on_focused</a></li>
+<li><a href="#Dialog.on_help">fn on_help</a></li>
+<li><a href="#Dialog.on_key">fn on_key</a></li>
+<li><a href="#Dialog.on_map">fn on_map</a></li>
+<li><a href="#Dialog.on_mdi_activate">fn on_mdi_activate</a></li>
+<li><a href="#Dialog.on_move">fn on_move</a></li>
+<li><a href="#Dialog.on_resize">fn on_resize</a></li>
 <li><a href="#Dialog.on_show">fn on_show</a></li>
+<li><a href="#Dialog.on_tray_click">fn on_tray_click</a></li>
+<li><a href="#Dialog.on_unfocused">fn on_unfocused</a></li>
+<li><a href="#Dialog.on_unmap">fn on_unmap</a></li>
 <li><a href="#Dialog.popup">fn popup</a></li>
 <li><a href="#Dialog.set_attr">fn set_attr</a></li>
 <li><a href="#Dialog.set_attrs">fn set_attrs</a></li>
@@ -1784,7 +1786,7 @@ to be multi-line, number formatted, etc.</p>
 </section>
 						<section id="Control.on_action" class="doc-node">
 							<div class="title"><h2>fn (Control) on_action <a href="#Control.on_action">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_action</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
-<p>==============Button============== ACTION: Action generated when the button 1 (usually left) is selected. This callback is called only after the mouse is released and when it is released inside the button area on_action is triggered when the primary function of the element is performed (e.g. clicking a button)</p>
+<p>on_action is triggered when the primary function of the element is performed (e.g. clicking a button)</p>
 
 </section>
 						<section id="Control.on_branch_close" class="doc-node">
@@ -1942,6 +1944,11 @@ to be multi-line, number formatted, etc.</p>
 <p>on_flat_button will be called when key pressed or mouse button pressed</p>
 
 </section>
+						<section id="Control.on_flat_toggle" class="doc-node">
+							<div class="title"><h2>fn (Control) on_flat_toggle <a href="#Control.on_flat_toggle">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_flat_toggle</span><span class="token punctuation">(</span>func IFni<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
+<p>==============FlatToggle============== on_flat_toggle : Action generated when the button 1 (usually left) is selected. This callback is called only after the mouse is released and when it is released inside the button area</p>
+
+</section>
 						<section id="Control.on_focus" class="doc-node">
 							<div class="title"><h2>fn (Control) on_focus <a href="#Control.on_focus">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_focus</span><span class="token punctuation">(</span>func IFni<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
 <p>on_focus called when the canvas gets or looses the focus. It is called after the common callbacks GETFOCUS_CB and KILL_FOCUS_CB</p>
@@ -1957,9 +1964,9 @@ to be multi-line, number formatted, etc.</p>
 <p>on_help action generated when the user press F1 at a control. In Motif is also activated by the Help button in some workstations keyboard</p>
 
 </section>
-						<section id="Control.on_highlight" class="doc-node">
-							<div class="title"><h2>fn (Control) on_highlight <a href="#Control.on_highlight">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_highlight</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
-<p>on_highlight action generated when the item is highlighted</p>
+						<section id="Control.on_item_state" class="doc-node">
+							<div class="title"><h2>fn (Control) on_item_state <a href="#Control.on_item_state">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_item_state</span><span class="token punctuation">(</span>func IFnsii<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
+<p>on_item_state : Action generated when the state of an item in the list is interactively changed</p>
 
 </section>
 						<section id="Control.on_key" class="doc-node">
@@ -1977,6 +1984,11 @@ to be multi-line, number formatted, etc.</p>
 <p>on_layout_update action generated when the layout is updated after a scroll operation</p>
 
 </section>
+						<section id="Control.on_left_button_click" class="doc-node">
+							<div class="title"><h2>fn (Control) on_left_button_click <a href="#Control.on_left_button_click">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_left_button_click</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
+<p>==============Button============== on_left_button_click generated when the button 1 (usually left) is selected. This callback is called only after the mouse is released and when it is released inside the button area</p>
+
+</section>
 						<section id="Control.on_link" class="doc-node">
 							<div class="title"><h2>fn (Control) on_link <a href="#Control.on_link">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_link</span><span class="token punctuation">(</span>func IFns<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
 <p>on_link action generated when the link is activated</p>
@@ -1991,11 +2003,6 @@ to be multi-line, number formatted, etc.</p>
 							<div class="title"><h2>fn (Control) on_map <a href="#Control.on_map">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_map</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
 <p>on_map called right after an element is mapped and its attributes updated in IupMap.<br>
 When the element is a dialog, it is called after the layout is updated. For all other elements is called before the layout is updated, so the element current size will still be 0x0 during MAP_CB</p>
-
-</section>
-						<section id="Control.on_menu_close" class="doc-node">
-							<div class="title"><h2>fn (Control) on_menu_close <a href="#Control.on_menu_close">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_menu_close</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
-<p>on_menu_close called just after the menu is closed</p>
 
 </section>
 						<section id="Control.on_motion" class="doc-node">
@@ -2018,6 +2025,11 @@ When the element is a dialog, it is called after the layout is updated. For all 
 <p>on_multi_selection action generated when multiple nodes are selected with the mouse and the shift key pressed</p>
 
 </section>
+						<section id="Control.on_multi_touch" class="doc-node">
+							<div class="title"><h2>fn (Control) on_multi_touch <a href="#Control.on_multi_touch">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_multi_touch</span><span class="token punctuation">(</span>func IFniIIII<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
+<p>on_multi_touch [Windows 7 Only]: Action generated when multiple touch events occurred. Must set TOUCH=Yes to receive this event</p>
+
+</section>
 						<section id="Control.on_multi_unselect" class="doc-node">
 							<div class="title"><h2>fn (Control) on_multi_unselect <a href="#Control.on_multi_unselect">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_multi_unselect</span><span class="token punctuation">(</span>func IFnIi<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
 <p>on_multi_unselect action generated before multiple nodes are unselected in one single operation</p>
@@ -2026,11 +2038,6 @@ When the element is a dialog, it is called after the layout is updated. For all 
 						<section id="Control.on_node_removed" class="doc-node">
 							<div class="title"><h2>fn (Control) on_node_removed <a href="#Control.on_node_removed">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_node_removed</span><span class="token punctuation">(</span>func IFnC<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
 <p>on_node_removed action generated when a node is about to be removed</p>
-
-</section>
-						<section id="Control.on_open" class="doc-node">
-							<div class="title"><h2>fn (Control) on_open <a href="#Control.on_open">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_open</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
-<p>on_open called just before the menu is opened</p>
 
 </section>
 						<section id="Control.on_open_close" class="doc-node">
@@ -2043,114 +2050,9 @@ When the element is a dialog, it is called after the layout is updated. For all 
 <p>on_param</p>
 
 </section>
-						<section id="Control.on_plot_click_sample" class="doc-node">
-							<div class="title"><h2>fn (Control) on_plot_click_sample <a href="#Control.on_plot_click_sample">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_plot_click_sample</span><span class="token punctuation">(</span>func IFniiddi<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
-<p>on_plot_click_sample action generated when a sample is clicked. Called when the mouse button is released, with no Ctrl key and IUP_BUTTON3 only when Shift is pressed, to avoid conflict with zoom and context menu situations. The sample is searched using IupPlotFindSample</p>
-
-</section>
-						<section id="Control.on_plot_click_segment" class="doc-node">
-							<div class="title"><h2>fn (Control) on_plot_click_segment <a href="#Control.on_plot_click_segment">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_plot_click_segment</span><span class="token punctuation">(</span>func IFniiddddi<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
-<p>on_plot_click_segment action generated when a segment is clicked. The segment is identified by the two samples that connects the segment. Called when the mouse button is released, with no Ctrl key and IUP_BUTTON3 only when Shift is pressed, to avoid conflict with zoom and context menu situations. If a sample is clicked this callback is ignored. The segment is searched using IupPlotFindSegment</p>
-
-</section>
-						<section id="Control.on_plot_delete" class="doc-node">
-							<div class="title"><h2>fn (Control) on_plot_delete <a href="#Control.on_plot_delete">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_plot_delete</span><span class="token punctuation">(</span>func IFniidd<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
-<p>on_plot_delete action generated when the Del key is pressed to removed a sample from a dataset. If multiple samples are selected it is called once for each selected sample</p>
-
-</section>
-						<section id="Control.on_plot_delete_begin" class="doc-node">
-							<div class="title"><h2>fn (Control) on_plot_delete_begin <a href="#Control.on_plot_delete_begin">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_plot_delete_begin</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
-<p>on_plot_delete_begin actions generated when a delete operation will begin</p>
-
-</section>
-						<section id="Control.on_plot_delete_end" class="doc-node">
-							<div class="title"><h2>fn (Control) on_plot_delete_end <a href="#Control.on_plot_delete_end">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_plot_delete_end</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
-<p>on_plot_delete_end actions generated when a delete operation will end</p>
-
-</section>
-						<section id="Control.on_plot_draw_sample" class="doc-node">
-							<div class="title"><h2>fn (Control) on_plot_draw_sample <a href="#Control.on_plot_draw_sample">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_plot_draw_sample</span><span class="token punctuation">(</span>func IFniiddi<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
-<p>on_plot_draw_sample action generated when a sample is drawn. When the plot is redraw, it is called for each sample, then it is called again for all selected samples, and this repeats for each data set, and this repeats for each data set</p>
-
-</section>
-						<section id="Control.on_plot_ds_properties_changed" class="doc-node">
-							<div class="title"><h2>fn (Control) on_plot_ds_properties_changed <a href="#Control.on_plot_ds_properties_changed">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_plot_ds_properties_changed</span><span class="token punctuation">(</span>func IFni<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
-<p>on_plot_ds_properties_changed called after the user changed dataset attributes using the &quot;Data Set Properties...&quot; dialog</p>
-
-</section>
-						<section id="Control.on_plot_ds_properties_validate" class="doc-node">
-							<div class="title"><h2>fn (Control) on_plot_ds_properties_validate <a href="#Control.on_plot_ds_properties_validate">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_plot_ds_properties_validate</span><span class="token punctuation">(</span>func IFnni<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
-<p>on_plot_ds_properties_validate called when the user pressed OK to change dataset attributes using the &quot;Data Set Properties...&quot; dialog. Called only once</p>
-
-</section>
-						<section id="Control.on_plot_edit_sample" class="doc-node">
-							<div class="title"><h2>fn (Control) on_plot_edit_sample <a href="#Control.on_plot_edit_sample">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_plot_edit_sample</span><span class="token punctuation">(</span>func IFniidd<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
-<p>on_plot_edit_sample action generated when a sample coordinates are changed in the &quot;Data Set Values...&quot; dialog if EDITABLEVALUES=Yes</p>
-
-</section>
-						<section id="Control.on_plot_menu_context" class="doc-node">
-							<div class="title"><h2>fn (Control) on_plot_menu_context <a href="#Control.on_plot_menu_context">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_plot_menu_context</span><span class="token punctuation">(</span>func IFnnii<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
-<p>on_plot_menu_context action generated after the context menu (right click) is created but before it is displayed, so the application can add or removed items from the menu. Called when the mouse button is pressed, with no Ctrl nor Shift keys. Only shown if MENUCONTEXT=Yes</p>
-
-</section>
-						<section id="Control.on_plot_menu_context_close" class="doc-node">
-							<div class="title"><h2>fn (Control) on_plot_menu_context_close <a href="#Control.on_plot_menu_context_close">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_plot_menu_context_close</span><span class="token punctuation">(</span>func IFnnii<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
-<p>on_plot_menu_context_close same as <code>MENUCONTEXT_CB</code>, but called after the context menu is closed. Only shown if MENUCONTEXT=Yes</p>
-
-</section>
-						<section id="Control.on_plot_plot_button" class="doc-node">
-							<div class="title"><h2>fn (Control) on_plot_plot_button <a href="#Control.on_plot_plot_button">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_plot_plot_button</span><span class="token punctuation">(</span>func IFniidds<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
-<p>on_plot_plot_button similar to BUTTON_CB but coordinates are in plot scale with double precision. It is called before the internal processing, if returns IUP_IGNORE internal processing will not be done</p>
-
-</section>
-						<section id="Control.on_plot_plot_motion" class="doc-node">
-							<div class="title"><h2>fn (Control) on_plot_plot_motion <a href="#Control.on_plot_plot_motion">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_plot_plot_motion</span><span class="token punctuation">(</span>func IFndds<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
-<p>on_plot_plot_motion similar to MOTION_CB but coordinates are in plot scale with double precision. It is called before the internal processing, if returns IUP_IGNORE internal processing will not be done</p>
-
-</section>
-						<section id="Control.on_plot_post_draw" class="doc-node">
-							<div class="title"><h2>fn (Control) on_plot_post_draw <a href="#Control.on_plot_post_draw">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_plot_post_draw</span><span class="token punctuation">(</span>func IFnv<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
-<p>on_plot_post_draw actions generated after the draw operation. Postdraw can be used to draw additional information in the plot. Postdraw is clipped to the dataset area. Postdraw is called before the legend and title are drawn (the last drawn elements). To position primitives in plot units, use the IupPlotTransform function</p>
-
-</section>
-						<section id="Control.on_plot_pre_draw" class="doc-node">
-							<div class="title"><h2>fn (Control) on_plot_pre_draw <a href="#Control.on_plot_pre_draw">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_plot_pre_draw</span><span class="token punctuation">(</span>func IFnv<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
-<p>on_plot_pre_draw actions generated before the draw operation. Predraw can be used to draw a different background. Predraw is called after the background is drawn. To position primitives in plot units, use the IupPlotTransform function</p>
-
-</section>
-						<section id="Control.on_plot_properties_changed" class="doc-node">
-							<div class="title"><h2>fn (Control) on_plot_properties_changed <a href="#Control.on_plot_properties_changed">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_plot_properties_changed</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
-<p>on_plot_properties_changed called when the user changed plot attributes using the &quot;Properties...&quot; dialog</p>
-
-</section>
-						<section id="Control.on_plot_properties_validate" class="doc-node">
-							<div class="title"><h2>fn (Control) on_plot_properties_validate <a href="#Control.on_plot_properties_validate">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_plot_properties_validate</span><span class="token punctuation">(</span>func IFnss<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
-<p>on_plot_properties_validate called for each attribute in the page, when the user pressed Apply to change plot attributes using the &quot;Properties...&quot; dialog</p>
-
-</section>
-						<section id="Control.on_plot_select" class="doc-node">
-							<div class="title"><h2>fn (Control) on_plot_select <a href="#Control.on_plot_select">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_plot_select</span><span class="token punctuation">(</span>func IFniiddi<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
-<p>on_plot_select action generated when a sample is selected. If multiple samples are selected it is called once for each new selected sample. It is called only if the selection state of the sample is about to be changed</p>
-
-</section>
-						<section id="Control.on_plot_select_begin" class="doc-node">
-							<div class="title"><h2>fn (Control) on_plot_select_begin <a href="#Control.on_plot_select_begin">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_plot_select_begin</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
-<p>on_plot_select_begin actions generated when a selection operation will begin</p>
-
-</section>
-						<section id="Control.on_plot_select_end" class="doc-node">
-							<div class="title"><h2>fn (Control) on_plot_select_end <a href="#Control.on_plot_select_end">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_plot_select_end</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
-<p>on_plot_select_end actions generated when a selection operation will end</p>
-
-</section>
-						<section id="Control.on_plot_xtick_format_number" class="doc-node">
-							<div class="title"><h2>fn (Control) on_plot_xtick_format_number <a href="#Control.on_plot_xtick_format_number">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_plot_xtick_format_number</span><span class="token punctuation">(</span>func IFnssds<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
-<p>on_plot_xtick_format_number allows to modify the displayed string of a tick number in the X axis. If the callback is not defined the internal function is used</p>
-
-</section>
-						<section id="Control.on_plot_ytick_format_number" class="doc-node">
-							<div class="title"><h2>fn (Control) on_plot_ytick_format_number <a href="#Control.on_plot_ytick_format_number">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_plot_ytick_format_number</span><span class="token punctuation">(</span>func IFnssds<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
-<p>on_plot_ytick_format_number allows to modify the displayed string of a tick number in the Y axis. If the callback is not defined the internal function is used</p>
+						<section id="Control.on_redraw" class="doc-node">
+							<div class="title"><h2>fn (Control) on_redraw <a href="#Control.on_redraw">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_redraw</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
+<p>==============Canvas============== on_redraw generated when the canvas needs to be redrawn</p>
 
 </section>
 						<section id="Control.on_rename" class="doc-node">
@@ -2218,6 +2120,11 @@ When the element is a dialog, it is called after the layout is updated. For all 
 <p>on_tab_close called when the user clicks on the close button. Called only when SHOWCLOSE=Yes</p>
 
 </section>
+						<section id="Control.on_text_caret" class="doc-node">
+							<div class="title"><h2>fn (Control) on_text_caret <a href="#Control.on_text_caret">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_text_caret</span><span class="token punctuation">(</span>func IFniii<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
+<p>BUTTON_CB : Action generated when any mouse button is pressed or released. Use IupConvertXYToPos to convert (x,y) coordinates in character positioning on_text_caret action generated when the caret/cursor position is changed.  Valid only when EDITBOX=YES</p>
+
+</section>
 						<section id="Control.on_text_edit" class="doc-node">
 							<div class="title"><h2>fn (Control) on_text_edit <a href="#Control.on_text_edit">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_text_edit</span><span class="token punctuation">(</span>func IFnis<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
 <p>on_text_edit action generated when the text is edited, but before its value is actually changed. Can be generated when using the keyboard, undo system or from the clipboard</p>
@@ -2228,9 +2135,19 @@ When the element is a dialog, it is called after the layout is updated. For all 
 <p>on_thread action generated when the thread is started. If this callback returns or does not exist the thread is terminated</p>
 
 </section>
+						<section id="Control.on_timer" class="doc-node">
+							<div class="title"><h2>fn (Control) on_timer <a href="#Control.on_timer">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_timer</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
+<p>on_timer called every time the defined time interval is reached. To stop the callback from being called simply stop de timer with RUN=NO. Inside the callback the attribute ELAPSEDTIME returns the time elapsed since the timer was started in milliseconds</p>
+
+</section>
 						<section id="Control.on_toggle_value" class="doc-node">
 							<div class="title"><h2>fn (Control) on_toggle_value <a href="#Control.on_toggle_value">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_toggle_value</span><span class="token punctuation">(</span>func IFnii<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
 <p>on_toggle_value action generated when the toggle's state was changed. The callback also receives the new toggle's state</p>
+
+</section>
+						<section id="Control.on_touch" class="doc-node">
+							<div class="title"><h2>fn (Control) on_touch <a href="#Control.on_touch">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_touch</span><span class="token punctuation">(</span>func IFniiis<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
+<p>on_touch [Windows 7 Only]: Action generated when a touch event occurred. Multiple touch events will trigger several calls. Must set TOUCH=Yes to receive this event</p>
 
 </section>
 						<section id="Control.on_unfocused" class="doc-node">
@@ -2256,6 +2173,11 @@ When the element is a dialog, it is called after the layout is updated. For all 
 						<section id="Control.on_wheel" class="doc-node">
 							<div class="title"><h2>fn (Control) on_wheel <a href="#Control.on_wheel">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_wheel</span><span class="token punctuation">(</span>func IFnfiis<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
 <p>on_wheel action generated when the mouse wheel is rotated</p>
+
+</section>
+						<section id="Control.on_wom" class="doc-node">
+							<div class="title"><h2>fn (Control) on_wom <a href="#Control.on_wom">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>control <span class="token operator">&</span>Control<span class="token punctuation">)</span> <span class="token function">on_wom</span><span class="token punctuation">(</span>func IFni<span class="token punctuation">)</span> <span class="token operator">&</span>Control</code></pre>
+<p>on_wom [Windows Only]: Action generated when an audio device receives an event</p>
 
 </section>
 						<section id="Control.refresh" class="doc-node">
@@ -2340,11 +2262,100 @@ When the element is a dialog, it is called after the layout is updated. For all 
 <p>on_close called just before a dialog is closed when the user clicks the close button of the title bar or an equivalent action.</p>
 
 </section>
+						<section id="Dialog.on_copy_data" class="doc-node">
+							<div class="title"><h2>fn (Dialog) on_copy_data <a href="#Dialog.on_copy_data">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>dialog <span class="token operator">&</span>Dialog<span class="token punctuation">)</span> <span class="token function">on_copy_data</span><span class="token punctuation">(</span>func IFnsi<span class="token punctuation">)</span> <span class="token operator">&</span>Dialog</code></pre>
+<p>on_copy_data [Windows Only]: Called at the first instance, when a second instance is running. Must set the global attribute SINGLEINSTANCE to be called</p>
+
+</section>
+						<section id="Dialog.on_custom_frame" class="doc-node">
+							<div class="title"><h2>fn (Dialog) on_custom_frame <a href="#Dialog.on_custom_frame">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>dialog <span class="token operator">&</span>Dialog<span class="token punctuation">)</span> <span class="token function">on_custom_frame</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Dialog</code></pre>
+<p>on_custom_frame [Windows Only]: Called when the dialog must be redraw. Although it is designed for drawing the frame elements, all the dialog must be painted. Works only when CUSTOMFRAME or CUSTOMFRAMEEX is defined. The dialog can be used just like an IupCanvas to draw its elements, the HDC_WMPAINT and CLIPRECT attributes are defined during the callback. For mouse callbacks use the same callbacks as IupCanvas, such as BUTTON_CB and MOTION_CB</p>
+
+</section>
+						<section id="Dialog.on_custom_frame_activate" class="doc-node">
+							<div class="title"><h2>fn (Dialog) on_custom_frame_activate <a href="#Dialog.on_custom_frame_activate">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>dialog <span class="token operator">&</span>Dialog<span class="token punctuation">)</span> <span class="token function">on_custom_frame_activate</span><span class="token punctuation">(</span>func IFni<span class="token punctuation">)</span> <span class="token operator">&</span>Dialog</code></pre>
+<p>on_custom_frame_activate [Windows Only]: Called when the dialog active state is changed (for instance the user Alt+Tab to another application, or clicked in another window). Works only when CUSTOMFRAME or CUSTOMFRAMEEX is defined</p>
+
+</section>
+						<section id="Dialog.on_destroy" class="doc-node">
+							<div class="title"><h2>fn (Dialog) on_destroy <a href="#Dialog.on_destroy">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>dialog <span class="token operator">&</span>Dialog<span class="token punctuation">)</span> <span class="token function">on_destroy</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Dialog</code></pre>
+<p>on_destroy called right before an element is destroyed</p>
+
+</section>
+						<section id="Dialog.on_drop_files" class="doc-node">
+							<div class="title"><h2>fn (Dialog) on_drop_files <a href="#Dialog.on_drop_files">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>dialog <span class="token operator">&</span>Dialog<span class="token punctuation">)</span> <span class="token function">on_drop_files</span><span class="token punctuation">(</span>func IFnsiii<span class="token punctuation">)</span> <span class="token operator">&</span>Dialog</code></pre>
+<p>on_drop_files [Windows and GTK Only]: Action generated when one or more files are dropped in the dialog</p>
+
+</section>
+						<section id="Dialog.on_entered" class="doc-node">
+							<div class="title"><h2>fn (Dialog) on_entered <a href="#Dialog.on_entered">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>dialog <span class="token operator">&</span>Dialog<span class="token punctuation">)</span> <span class="token function">on_entered</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Dialog</code></pre>
+<p>on_entered action generated when the mouse enters the native element</p>
+
+</section>
+						<section id="Dialog.on_exited" class="doc-node">
+							<div class="title"><h2>fn (Dialog) on_exited <a href="#Dialog.on_exited">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>dialog <span class="token operator">&</span>Dialog<span class="token punctuation">)</span> <span class="token function">on_exited</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Dialog</code></pre>
+<p>on_exited action generated when the mouse leaves the native element</p>
+
+</section>
+						<section id="Dialog.on_focus" class="doc-node">
+							<div class="title"><h2>fn (Dialog) on_focus <a href="#Dialog.on_focus">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>dialog <span class="token operator">&</span>Dialog<span class="token punctuation">)</span> <span class="token function">on_focus</span><span class="token punctuation">(</span>func IFni<span class="token punctuation">)</span> <span class="token operator">&</span>Dialog</code></pre>
+<p>on_focus called when the dialog or any of its children gets the focus, or when another dialog or any control in another dialog gets the focus. It is called after the common callbacks GETFOCUS_CB and KILL_FOCUS_CB</p>
+
+</section>
+						<section id="Dialog.on_focused" class="doc-node">
+							<div class="title"><h2>fn (Dialog) on_focused <a href="#Dialog.on_focused">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>dialog <span class="token operator">&</span>Dialog<span class="token punctuation">)</span> <span class="token function">on_focused</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Dialog</code></pre>
+<p>on_focused action generated when an element is given keyboard focus. This callback is called after the KILLFOCUS_CB of the element that loosed the focus. The IupGetFocus function during the callback returns the element that loosed the focus</p>
+
+</section>
+						<section id="Dialog.on_help" class="doc-node">
+							<div class="title"><h2>fn (Dialog) on_help <a href="#Dialog.on_help">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>dialog <span class="token operator">&</span>Dialog<span class="token punctuation">)</span> <span class="token function">on_help</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Dialog</code></pre>
+<p>on_help action generated when the user press F1 at a dialog. In Motif is also activated by the Help button in some workstations keyboard</p>
+
+</section>
+						<section id="Dialog.on_key" class="doc-node">
+							<div class="title"><h2>fn (Dialog) on_key <a href="#Dialog.on_key">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>dialog <span class="token operator">&</span>Dialog<span class="token punctuation">)</span> <span class="token function">on_key</span><span class="token punctuation">(</span>func IFni<span class="token punctuation">)</span> <span class="token operator">&</span>Dialog</code></pre>
+<p>on_key action generated when a keyboard event occurs</p>
+
+</section>
+						<section id="Dialog.on_map" class="doc-node">
+							<div class="title"><h2>fn (Dialog) on_map <a href="#Dialog.on_map">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>dialog <span class="token operator">&</span>Dialog<span class="token punctuation">)</span> <span class="token function">on_map</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Dialog</code></pre>
+<p>on_map called right after an element is mapped and its attributes updated in IupMap.<br>
+When the element is a dialog, it is called after the layout is updated. For all other elements is called before the layout is updated, so the element current size will still be 0x0 during MAP_CB</p>
+
+</section>
+						<section id="Dialog.on_mdi_activate" class="doc-node">
+							<div class="title"><h2>fn (Dialog) on_mdi_activate <a href="#Dialog.on_mdi_activate">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>dialog <span class="token operator">&</span>Dialog<span class="token punctuation">)</span> <span class="token function">on_mdi_activate</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Dialog</code></pre>
+<p>on_mdi_activate [Windows Only]: Called when a MDI child window is activated. Only the MDI child receive this message. It is not called when the child is shown for the first time</p>
+
+</section>
+						<section id="Dialog.on_move" class="doc-node">
+							<div class="title"><h2>fn (Dialog) on_move <a href="#Dialog.on_move">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>dialog <span class="token operator">&</span>Dialog<span class="token punctuation">)</span> <span class="token function">on_move</span><span class="token punctuation">(</span>func IFnii<span class="token punctuation">)</span> <span class="token operator">&</span>Dialog</code></pre>
+<p>on_move [Windows and GTK Only]: Called after the dialog was moved on screen. The coordinates are the same as the SCREENPOSITION attribute</p>
+
+</section>
+						<section id="Dialog.on_resize" class="doc-node">
+							<div class="title"><h2>fn (Dialog) on_resize <a href="#Dialog.on_resize">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>dialog <span class="token operator">&</span>Dialog<span class="token punctuation">)</span> <span class="token function">on_resize</span><span class="token punctuation">(</span>func IFnii<span class="token punctuation">)</span> <span class="token operator">&</span>Dialog</code></pre>
+<p>on_resize generated when the dialog size is changed</p>
+
+</section>
 						<section id="Dialog.on_show" class="doc-node">
 							<div class="title"><h2>fn (Dialog) on_show <a href="#Dialog.on_show">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>dialog <span class="token operator">&</span>Dialog<span class="token punctuation">)</span> <span class="token function">on_show</span><span class="token punctuation">(</span>func IFni<span class="token punctuation">)</span> <span class="token operator">&</span>Dialog</code></pre>
-<p>FOCUS_CB :  Called when the dialog or any of its children gets the focus, or when another dialog or any control in another dialog gets the focus. It is called after the common callbacks GETFOCUS_CB and KILL_FOCUS_CB.<br>
-RESIZE_CB : Action generated when the dialog size is changed.<br>
-on_show called right after the dialog is showed, hidden, maximized, minimized or restored from minimized/maximized.</p>
+<p>on_show called right after the dialog is showed, hidden, maximized, minimized or restored from minimized/maximized.</p>
+
+</section>
+						<section id="Dialog.on_tray_click" class="doc-node">
+							<div class="title"><h2>fn (Dialog) on_tray_click <a href="#Dialog.on_tray_click">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>dialog <span class="token operator">&</span>Dialog<span class="token punctuation">)</span> <span class="token function">on_tray_click</span><span class="token punctuation">(</span>func IFniii<span class="token punctuation">)</span> <span class="token operator">&</span>Dialog</code></pre>
+<p>on_tray_click [Windows and GTK Only]: Called right after the mouse button is pressed or released over the tray icon</p>
+
+</section>
+						<section id="Dialog.on_unfocused" class="doc-node">
+							<div class="title"><h2>fn (Dialog) on_unfocused <a href="#Dialog.on_unfocused">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>dialog <span class="token operator">&</span>Dialog<span class="token punctuation">)</span> <span class="token function">on_unfocused</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Dialog</code></pre>
+<p>on_unfocused action generated when an element loses keyboard focus. This callback is called before the GETFOCUS_CB of the element that gets the focus</p>
+
+</section>
+						<section id="Dialog.on_unmap" class="doc-node">
+							<div class="title"><h2>fn (Dialog) on_unmap <a href="#Dialog.on_unmap">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span>dialog <span class="token operator">&</span>Dialog<span class="token punctuation">)</span> <span class="token function">on_unmap</span><span class="token punctuation">(</span>func IFn<span class="token punctuation">)</span> <span class="token operator">&</span>Dialog</code></pre>
+<p>on_unmap called right before an element is unmapped</p>
 
 </section>
 						<section id="Dialog.popup" class="doc-node">
@@ -2471,7 +2482,7 @@ on_show called right after the dialog is showed, hidden, maximized, minimized or
 </section>
 
           <div class="footer">
-            Powered by vdoc. Generated on: 3 May 2023 22:52:51
+            Powered by vdoc. Generated on: 4 May 2023 10:45:42
           </div>
         </div>
         

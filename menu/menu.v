@@ -109,9 +109,3 @@ pub fn (menu &Menu) unset_attr(name string) &Menu {
 	C.IupSetAttribute(&Ihandle(menu), name.to_upper().trim_space().str, C.NULL)
 	return menu
 }
-
-// on_action is triggered when the menu is click
-pub fn (menu &Menu) on_action(func viup.IFn) &Menu {
-	C.IupSetCallback(&Ihandle(menu), c'ACTION', func)
-	return menu
-}

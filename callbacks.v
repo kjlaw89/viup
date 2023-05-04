@@ -191,10 +191,15 @@ pub fn (control &Control) on_help(func IFn) &Control {
 	return control
 }
 
-// ==============Button==============
-// ACTION: Action generated when the button 1 (usually left) is selected. This callback is called only after the mouse is released and when it is released inside the button area
 // on_action is triggered when the primary function of the element is performed (e.g. clicking a button)
 pub fn (control &Control) on_action(func IFn) &Control {
+	C.IupSetCallback(control, c'ACTION', func)
+	return control
+}
+
+// ==============Button==============
+// on_left_button_click generated when the button 1 (usually left) is selected. This callback is called only after the mouse is released and when it is released inside the button area
+pub fn (control &Control) on_left_button_click(func IFn) &Control {
 	C.IupSetCallback(control, c'ACTION', func)
 	return control
 }
@@ -211,6 +216,13 @@ pub fn (control &Control) on_button(func IFniiiis) &Control {
 // on_value_changed occurs when the value of an element is modified
 pub fn (control &Control) on_value_changed(func IFn) &Control {
 	C.IupSetCallback(control, c'VALUECHANGED_CB', func)
+	return control
+}
+
+// ==============Canvas==============
+// on_redraw generated when the canvas needs to be redrawn
+pub fn (control &Control) on_redraw(func IFn) &Control {
+	C.IupSetCallback(control, c'ACTION', func)
 	return control
 }
 
@@ -252,8 +264,17 @@ pub fn (control &Control) on_scroll(func IFniff) &Control {
 	return control
 }
 
-// TOUCH_CB: Windows 7 Only
-// MULTITOUCH_CB: Windows 7 Only
+// on_touch [Windows 7 Only]: Action generated when a touch event occurred. Multiple touch events will trigger several calls. Must set TOUCH=Yes to receive this event
+pub fn (control &Control) on_touch(func IFniiis) &Control {
+	C.IupSetCallback(control, c'TOUCH_CB', func)
+	return control
+}
+
+// on_multi_touch [Windows 7 Only]: Action generated when multiple touch events occurred. Must set TOUCH=Yes to receive this event
+pub fn (control &Control) on_multi_touch(func IFniIIII) &Control {
+	C.IupSetCallback(control, c'MULTITOUCH_CB', func)
+	return control
+}
 
 // on_wheel action generated when the mouse wheel is rotated
 pub fn (control &Control) on_wheel(func IFnfiis) &Control {
@@ -261,7 +282,11 @@ pub fn (control &Control) on_wheel(func IFnfiis) &Control {
 	return control
 }
 
-// WOM_CB: Windows Only
+// on_wom [Windows Only]: Action generated when an audio device receives an event
+pub fn (control &Control) on_wom(func IFni) &Control {
+	C.IupSetCallback(control, c'WOM_CB', func)
+	return control
+}
 
 // on_drag_begin notifies source that drag started. It is called when the mouse starts a drag operation
 pub fn (control &Control) on_drag_begin(func IFnii) &Control {
@@ -430,7 +455,11 @@ pub fn (control &Control) on_flat_button(func IFniiiis) &Control {
 
 // ==============FlatList==============
 
-// FLAT_ACTION : Action generated when the state of an item in the list is interactively changed
+// on_item_state : Action generated when the state of an item in the list is interactively changed
+pub fn (control &Control) on_item_state(func IFnsii) &Control {
+	C.IupSetCallback(control, c'FLAT_ACTION', func)
+	return control
+}
 
 // on_dbl_click action generated when the user double click an item
 pub fn (control &Control) on_dbl_click(func IFnis) &Control {
@@ -492,8 +521,12 @@ pub fn (control &Control) on_right_click(func IFni) &Control {
 // EXTRABUTTON_CB : Action generated when any mouse button is pressed or released
 
 // ==============FlatToggle==============
+// on_flat_toggle : Action generated when the button 1 (usually left) is selected. This callback is called only after the mouse is released and when it is released inside the button area
+pub fn (control &Control) on_flat_toggle(func IFni) &Control {
+	C.IupSetCallback(control, c'FLAT_ACTION', func)
+	return control
+}
 
-// FLAT_ACTION : Action generated when the button 1 (usually left) is selected. This callback is called only after the mouse is released and when it is released inside the button area
 // VALUECHANGED_CB : called after the value was interactively changed by the user. Called after the ACTION callback, but under the same context
 
 // ==============FlatTree==============
@@ -587,16 +620,6 @@ pub fn (control &Control) on_value_changing(func IFni) &Control {
 // ==============Gauge==============
 // MAP_CB, UNMAP_CB, DESTROY_CB: common callbacks are supported.
 
-// ==============Item==============
-
-// ACTION : Action generated when the item is selected. IUP_CLOSE will be processed. Even if inside a popup menu when IUP_CLOSE is returned, the current popup dialog or the main loop will be closed
-
-// on_highlight action generated when the item is highlighted
-pub fn (control &Control) on_highlight(func IFn) &Control {
-	C.IupSetCallback(control, c'HIGHLIGHT_CB', func)
-	return control
-}
-
 // ==============Label==============
 
 // BUTTON_CB : Action generated when any mouse button is pressed or released
@@ -644,22 +667,6 @@ pub fn (control &Control) on_edit(func IFnis) &Control {
 // MAP_CB, UNMAP_CB, DESTROY_CB, GETFOCUS_CB, KILLFOCUS_CB, ENTERWINDOW_CB, LEAVEWINDOW_CB, K_ANY, HELP_CB: All common callbacks are supported.
 // Drag & Drop attributes and callbacks are supported, but SHOWDRAGDROP must be set to NO.
 
-// ==============Menu==============
-
-// on_open called just before the menu is opened
-pub fn (control &Control) on_open(func IFn) &Control {
-	C.IupSetCallback(control, c'OPEN_CB', func)
-	return control
-}
-
-// on_menu_close called just after the menu is closed
-pub fn (control &Control) on_menu_close(func IFn) &Control {
-	C.IupSetCallback(control, c'MENUCLOSE_CB', func)
-	return control
-}
-
-// MAP_CB, UNMAP_CB, DESTROY_CB : common callbacks are supported.
-
 // ==============ParamBox==============
 
 // on_param
@@ -688,11 +695,6 @@ pub fn (control &Control) on_spin(func IFni) &Control {
 
 // VALUECHANGED_CB : Called after the value was interactively changed by the user
 
-// ==============Submenu==============
-
-// HIGHLIGHT_CB : Action generated when the submenu is highlighted
-// MAP_CB, UNMAP_CB, DESTROY_CB: common callbacks are supported.
-
 // ==============Tabs==============
 
 // TABCHANGE_CB : Callback called when the user changes the current tab. It is not called when the current tab is programmatically changed or removed
@@ -711,7 +713,12 @@ pub fn (control &Control) on_text_edit(func IFnis) &Control {
 }
 
 // BUTTON_CB : Action generated when any mouse button is pressed or released. Use IupConvertXYToPos to convert (x,y) coordinates in character positioning
-// CARET_CB : Action generated when the caret/cursor position is changed
+// on_text_caret action generated when the caret/cursor position is changed.  Valid only when EDITBOX=YES
+pub fn (control &Control) on_text_caret(func IFniii) &Control {
+	C.IupSetCallback(control, c'CARET_CB', func)
+	return control
+}
+
 // DROPFILES_CB : Action generated when one or more files are dropped in the element
 // MOTION_CB : Action generated when the mouse is moved. Use IupConvertXYToPos to convert (x,y) coordinates in character positioning
 // SPIN_CB : Action generated when a spin button is pressed. Valid only when SPIN=YES. When this callback is called the ACTION callback is not called. The VALUE attribute can be changed during this callback only if SPINAUTO=NO
@@ -728,7 +735,11 @@ pub fn (control &Control) on_thread(func IFn) &Control {
 
 // ==============Timer==============
 
-// ACTION_CB: called every time the defined time interval is reached. To stop the callback from being called simply stop de timer with RUN=NO. Inside the callback the attribute ELAPSEDTIME returns the time elapsed since the timer was started in milliseconds
+// on_timer called every time the defined time interval is reached. To stop the callback from being called simply stop de timer with RUN=NO. Inside the callback the attribute ELAPSEDTIME returns the time elapsed since the timer was started in milliseconds
+pub fn (control &Control) on_timer(func IFn) &Control {
+	C.IupSetCallback(control, c'ACTION_CB', func)
+	return control
+}
 
 // ==============Tree==============
 
@@ -759,147 +770,117 @@ pub fn (dialog &Dialog) on_close(func IFn) &Dialog {
 	return dialog
 }
 
-// FOCUS_CB :  Called when the dialog or any of its children gets the focus, or when another dialog or any control in another dialog gets the focus. It is called after the common callbacks GETFOCUS_CB and KILL_FOCUS_CB.
-// RESIZE_CB : Action generated when the dialog size is changed.
+// on_copy_data [Windows Only]: Called at the first instance, when a second instance is running. Must set the global attribute SINGLEINSTANCE to be called
+pub fn (dialog &Dialog) on_copy_data(func IFnsi) &Dialog {
+	C.IupSetCallback(dialog, c'COPYDATA_CB', func)
+	return dialog
+}
+
+// on_drop_files [Windows and GTK Only]: Action generated when one or more files are dropped in the dialog
+pub fn (dialog &Dialog) on_drop_files(func IFnsiii) &Dialog {
+	C.IupSetCallback(dialog, c'DROPFILES_CB', func)
+	return dialog
+}
+
+// on_custom_frame [Windows Only]: Called when the dialog must be redraw. Although it is designed for drawing the frame elements, all the dialog must be painted. Works only when CUSTOMFRAME or CUSTOMFRAMEEX is defined. The dialog can be used just like an IupCanvas to draw its elements, the HDC_WMPAINT and CLIPRECT attributes are defined during the callback. For mouse callbacks use the same callbacks as IupCanvas, such as BUTTON_CB and MOTION_CB
+pub fn (dialog &Dialog) on_custom_frame(func IFn) &Dialog {
+	C.IupSetCallback(dialog, c'CUSTOMFRAME_CB', func)
+	return dialog
+}
+
+// on_custom_frame_activate [Windows Only]: Called when the dialog active state is changed (for instance the user Alt+Tab to another application, or clicked in another window). Works only when CUSTOMFRAME or CUSTOMFRAMEEX is defined
+pub fn (dialog &Dialog) on_custom_frame_activate(func IFni) &Dialog {
+	C.IupSetCallback(dialog, c'CUSTOMFRAMEACTIVATE_CB', func)
+	return dialog
+}
+
+// on_focus called when the dialog or any of its children gets the focus, or when another dialog or any control in another dialog gets the focus. It is called after the common callbacks GETFOCUS_CB and KILL_FOCUS_CB
+pub fn (dialog &Dialog) on_focus(func IFni) &Dialog {
+	C.IupSetCallback(dialog, c'FOCUS_CB', func)
+	return dialog
+}
+
+// on_mdi_activate [Windows Only]: Called when a MDI child window is activated. Only the MDI child receive this message. It is not called when the child is shown for the first time
+pub fn (dialog &Dialog) on_mdi_activate(func IFn) &Dialog {
+	C.IupSetCallback(dialog, c'MDIACTIVATE_CB', func)
+	return dialog
+}
+
+// on_move [Windows and GTK Only]: Called after the dialog was moved on screen. The coordinates are the same as the SCREENPOSITION attribute
+pub fn (dialog &Dialog) on_move(func IFnii) &Dialog {
+	C.IupSetCallback(dialog, c'MOVE_CB', func)
+	return dialog
+}
+
+// on_resize generated when the dialog size is changed
+pub fn (dialog &Dialog) on_resize(func IFnii) &Dialog {
+	C.IupSetCallback(dialog, c'RESIZE_CB', func)
+	return dialog
+}
+
 // on_show called right after the dialog is showed, hidden, maximized, minimized or restored from minimized/maximized.
 pub fn (dialog &Dialog) on_show(func IFni) &Dialog {
 	C.IupSetCallback(dialog, c'SHOW_CB', func)
 	return dialog
 }
 
-// MAP_CB, UNMAP_CB, DESTROY_CB, GETFOCUS_CB, KILLFOCUS_CB, ENTERWINDOW_CB, LEAVEWINDOW_CB, K_ANY, HELP_CB: All common callbacks are supported.
-
-// https://iup.sourceforge.net/en/ctrl/iup_plot.html
-// ==============Plot==============
-
-// on_plot_click_sample action generated when a sample is clicked. Called when the mouse button is released, with no Ctrl key and IUP_BUTTON3 only when Shift is pressed, to avoid conflict with zoom and context menu situations. The sample is searched using IupPlotFindSample
-pub fn (control &Control) on_plot_click_sample(func IFniiddi) &Control {
-	C.IupSetCallback(control, c'CLICKSAMPLE_CB', func)
-	return control
+// on_tray_click [Windows and GTK Only]: Called right after the mouse button is pressed or released over the tray icon
+pub fn (dialog &Dialog) on_tray_click(func IFniii) &Dialog {
+	C.IupSetCallback(dialog, c'TRAYCLICK_CB', func)
+	return dialog
 }
 
-// on_plot_click_segment action generated when a segment is clicked. The segment is identified by the two samples that connects the segment. Called when the mouse button is released, with no Ctrl key and IUP_BUTTON3 only when Shift is pressed, to avoid conflict with zoom and context menu situations. If a sample is clicked this callback is ignored. The segment is searched using IupPlotFindSegment
-pub fn (control &Control) on_plot_click_segment(func IFniiddddi) &Control {
-	C.IupSetCallback(control, c'CLICKSEGMENT_CB', func)
-	return control
+// on_map called right after an element is mapped and its attributes updated in IupMap.
+// When the element is a dialog, it is called after the layout is updated. For all other elements is called before the layout is updated, so the element current size will still be 0x0 during MAP_CB
+pub fn (dialog &Dialog) on_map(func IFn) &Dialog {
+	C.IupSetCallback(dialog, c'MAP_CB', func)
+	return dialog
 }
 
-// on_plot_edit_sample action generated when a sample coordinates are changed in the "Data Set Values..." dialog if EDITABLEVALUES=Yes
-pub fn (control &Control) on_plot_edit_sample(func IFniidd) &Control {
-	C.IupSetCallback(control, c'EDITSAMPLE_CB', func)
-	return control
+// on_unmap called right before an element is unmapped
+pub fn (dialog &Dialog) on_unmap(func IFn) &Dialog {
+	C.IupSetCallback(dialog, c'UNMAP_CB', func)
+	return dialog
 }
 
-// on_plot_delete action generated when the Del key is pressed to removed a sample from a dataset. If multiple samples are selected it is called once for each selected sample
-pub fn (control &Control) on_plot_delete(func IFniidd) &Control {
-	C.IupSetCallback(control, c'DELETE_CB', func)
-	return control
+// on_destroy called right before an element is destroyed
+pub fn (dialog &Dialog) on_destroy(func IFn) &Dialog {
+	C.IupSetCallback(dialog, c'DESTROY_CB', func)
+	return dialog
 }
 
-// on_plot_delete_begin actions generated when a delete operation will begin
-pub fn (control &Control) on_plot_delete_begin(func IFn) &Control {
-	C.IupSetCallback(control, c'DELETEBEGIN_CB', func)
-	return control
+// on_focused action generated when an element is given keyboard focus. This callback is called after the KILLFOCUS_CB of the element that loosed the focus. The IupGetFocus function during the callback returns the element that loosed the focus
+pub fn (dialog &Dialog) on_focused(func IFn) &Dialog {
+	C.IupSetCallback(dialog, c'GETFOCUS_CB', func)
+	return dialog
 }
 
-// on_plot_delete_end actions generated when a delete operation will end
-pub fn (control &Control) on_plot_delete_end(func IFn) &Control {
-	C.IupSetCallback(control, c'DELETEEND_CB', func)
-	return control
+// on_unfocused action generated when an element loses keyboard focus. This callback is called before the GETFOCUS_CB of the element that gets the focus
+pub fn (dialog &Dialog) on_unfocused(func IFn) &Dialog {
+	C.IupSetCallback(dialog, c'KILLFOCUS_CB', func)
+	return dialog
 }
 
-// on_plot_draw_sample action generated when a sample is drawn. When the plot is redraw, it is called for each sample, then it is called again for all selected samples, and this repeats for each data set, and this repeats for each data set
-pub fn (control &Control) on_plot_draw_sample(func IFniiddi) &Control {
-	C.IupSetCallback(control, c'DRAWSAMPLE_CB', func)
-	return control
+// on_entered action generated when the mouse enters the native element
+pub fn (dialog &Dialog) on_entered(func IFn) &Dialog {
+	C.IupSetCallback(dialog, c'ENTERWINDOW_CB', func)
+	return dialog
 }
 
-// on_plot_menu_context action generated after the context menu (right click) is created but before it is displayed, so the application can add or removed items from the menu. Called when the mouse button is pressed, with no Ctrl nor Shift keys. Only shown if MENUCONTEXT=Yes
-pub fn (control &Control) on_plot_menu_context(func IFnnii) &Control {
-	C.IupSetCallback(control, c'MENUCONTEXT_CB', func)
-	return control
+// on_exited action generated when the mouse leaves the native element
+pub fn (dialog &Dialog) on_exited(func IFn) &Dialog {
+	C.IupSetCallback(dialog, c'LEAVEWINDOW_CB', func)
+	return dialog
 }
 
-// on_plot_menu_context_close same as `MENUCONTEXT_CB`, but called after the context menu is closed. Only shown if MENUCONTEXT=Yes
-pub fn (control &Control) on_plot_menu_context_close(func IFnnii) &Control {
-	C.IupSetCallback(control, c'MENUCONTEXTCLOSE_CB', func)
-	return control
+// on_key action generated when a keyboard event occurs
+pub fn (dialog &Dialog) on_key(func IFni) &Dialog {
+	C.IupSetCallback(dialog, c'K_ANY', func)
+	return dialog
 }
 
-// on_plot_ds_properties_changed called after the user changed dataset attributes using the "Data Set Properties..." dialog
-pub fn (control &Control) on_plot_ds_properties_changed(func IFni) &Control {
-	C.IupSetCallback(control, c'DSPROPERTIESCHANGED_CB', func)
-	return control
-}
-
-// on_plot_ds_properties_validate called when the user pressed OK to change dataset attributes using the "Data Set Properties..." dialog. Called only once
-pub fn (control &Control) on_plot_ds_properties_validate(func IFnni) &Control {
-	C.IupSetCallback(control, c'DSPROPERTIESVALIDATE_CB', func)
-	return control
-}
-
-// on_plot_properties_changed called when the user changed plot attributes using the "Properties..." dialog
-pub fn (control &Control) on_plot_properties_changed(func IFn) &Control {
-	C.IupSetCallback(control, c'PROPERTIESCHANGED_CB', func)
-	return control
-}
-
-// on_plot_properties_validate called for each attribute in the page, when the user pressed Apply to change plot attributes using the "Properties..." dialog
-pub fn (control &Control) on_plot_properties_validate(func IFnss) &Control {
-	C.IupSetCallback(control, c'PROPERTIESVALIDATE_CB', func)
-	return control
-}
-
-// on_plot_select action generated when a sample is selected. If multiple samples are selected it is called once for each new selected sample. It is called only if the selection state of the sample is about to be changed
-pub fn (control &Control) on_plot_select(func IFniiddi) &Control {
-	C.IupSetCallback(control, c'SELECT_CB', func)
-	return control
-}
-
-// on_plot_select_begin actions generated when a selection operation will begin
-pub fn (control &Control) on_plot_select_begin(func IFn) &Control {
-	C.IupSetCallback(control, c'SELECTBEGIN_CB', func)
-	return control
-}
-
-// on_plot_select_end actions generated when a selection operation will end
-pub fn (control &Control) on_plot_select_end(func IFn) &Control {
-	C.IupSetCallback(control, c'SELECTEND_CB', func)
-	return control
-}
-
-// on_plot_plot_button similar to BUTTON_CB but coordinates are in plot scale with double precision. It is called before the internal processing, if returns IUP_IGNORE internal processing will not be done
-pub fn (control &Control) on_plot_plot_button(func IFniidds) &Control {
-	C.IupSetCallback(control, c'PLOTBUTTON_CB', func)
-	return control
-}
-
-// on_plot_plot_motion similar to MOTION_CB but coordinates are in plot scale with double precision. It is called before the internal processing, if returns IUP_IGNORE internal processing will not be done
-pub fn (control &Control) on_plot_plot_motion(func IFndds) &Control {
-	C.IupSetCallback(control, c'PLOTMOTION_CB', func)
-	return control
-}
-
-// on_plot_xtick_format_number allows to modify the displayed string of a tick number in the X axis. If the callback is not defined the internal function is used
-pub fn (control &Control) on_plot_xtick_format_number(func IFnssds) &Control {
-	C.IupSetCallback(control, c'XTICKFORMATNUMBER_CB', func)
-	return control
-}
-
-// on_plot_ytick_format_number allows to modify the displayed string of a tick number in the Y axis. If the callback is not defined the internal function is used
-pub fn (control &Control) on_plot_ytick_format_number(func IFnssds) &Control {
-	C.IupSetCallback(control, c'YTICKFORMATNUMBER_CB', func)
-	return control
-}
-
-// on_plot_pre_draw actions generated before the draw operation. Predraw can be used to draw a different background. Predraw is called after the background is drawn. To position primitives in plot units, use the IupPlotTransform function
-pub fn (control &Control) on_plot_pre_draw(func IFnv) &Control {
-	C.IupSetCallback(control, c'PREDRAW_CB', func)
-	return control
-}
-
-// on_plot_post_draw actions generated after the draw operation. Postdraw can be used to draw additional information in the plot. Postdraw is clipped to the dataset area. Postdraw is called before the legend and title are drawn (the last drawn elements). To position primitives in plot units, use the IupPlotTransform function
-pub fn (control &Control) on_plot_post_draw(func IFnv) &Control {
-	C.IupSetCallback(control, c'POSTDRAW_CB', func)
-	return control
+// on_help action generated when the user press F1 at a dialog. In Motif is also activated by the Help button in some workstations keyboard
+pub fn (dialog &Dialog) on_help(func IFn) &Dialog {
+	C.IupSetCallback(dialog, c'HELP_CB', func)
+	return dialog
 }

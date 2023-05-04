@@ -27,22 +27,22 @@ fn main() {
 	vlogo.set_handle('logo')
 
 	// Create our menu with the typical "File | Edit | About" layout
-	menu_event := viup.IFn(menu_clicked)
+	menu_event := menu.IFn(menu_clicked)
 	app_menu := menu.menu([
 		menu.sub_menu('&File', menu.menu([
-			menu.item('&Open File...', 'name=MenuOpen').on_action(menu_event),
-			menu.item('&Save File...', 'name=MenuSave').on_action(menu_event),
+			menu.item('&Open File...', 'name=MenuOpen').on_selected(menu_event),
+			menu.item('&Save File...', 'name=MenuSave').on_selected(menu_event),
 			menu.separator(),
-			menu.item('E&xit', 'name=MenuExit').on_action(menu_event),
+			menu.item('E&xit', 'name=MenuExit').on_selected(menu_event),
 		])),
 		menu.sub_menu('&Edit', menu.menu([
-			menu.item('Debug &Window', 'name=MenuDebugWindow').on_action(menu_event),
-			menu.item('Debug &Control', 'name=MenuDebugControl').on_action(menu_event),
+			menu.item('Debug &Window', 'name=MenuDebugWindow').on_selected(menu_event),
+			menu.item('Debug &Control', 'name=MenuDebugControl').on_selected(menu_event),
 		])),
 		menu.sub_menu('&Help', menu.menu([
-			menu.item('&Repository', 'name=MenuRepository').on_action(menu_event),
+			menu.item('&Repository', 'name=MenuRepository').on_selected(menu_event),
 			menu.separator(),
-			menu.item('&About', 'name=MenuAbout').on_action(menu_event),
+			menu.item('&About', 'name=MenuAbout').on_selected(menu_event),
 		])),
 	])
 
@@ -64,15 +64,15 @@ fn main() {
 	hbox := viup.hbox([
 		viup.vbox([
 			viup.frame(viup.vbox([
-				viup.button('Button', 'expand=horizontal').on_action(button_clicked),
+				viup.button('Button', 'expand=horizontal').on_left_button_click(button_clicked),
 				viup.toggle('Checkbox', 'action1'),
 				viup.text('expand=horizontal', 'value=Text Field'),
 				viup.label('Label'),
 				viup.link('https://www.vlang.io', 'Link'),
 				viup.flat_separator(),
-				viup.button('Set font...', 'expand=horizontal').set_handle('font_btn').on_action(font_button_clicked),
+				viup.button('Set font...', 'expand=horizontal').set_handle('font_btn').on_left_button_click(font_button_clicked),
 				viup.date_picker('expand=horizontal', 'order=MDY'),
-				viup.button('', 'bgcolor=0 0 0', 'expand=horizontal', 'padding=10x0').unset_attr('title').set_handle('color_btn').on_action(color_button_clicked),
+				viup.button('', 'bgcolor=0 0 0', 'expand=horizontal', 'padding=10x0').unset_attr('title').set_handle('color_btn').on_left_button_click(color_button_clicked),
 				viup.label('', 'size=64x64', 'alignment=acenter', 'expand=horizontal').set_image('logo'),
 				viup.fill(),
 			]), 'title=Basic Controls', 'margin=10x10', 'expand=yes'),
@@ -123,8 +123,8 @@ fn main() {
 }
 
 // menu_clicked handles when different menu items are clicked
-fn menu_clicked(control &viup.Control) viup.FuncResult {
-	name := control.get_attr('name')
+fn menu_clicked(app_menu &menu.Menu) viup.FuncResult {
+	name := app_menu.get_attr('name')
 	match name {
 		'MenuAbout' {
 			viup.message_dialog('title=About', 'value=${about}', 'dialogtype=information').popup(viup.pos_current,

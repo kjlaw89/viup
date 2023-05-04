@@ -133,12 +133,3 @@ pub fn (gl_canvas &GL_Canvas) unset_attr(name string) &GL_Canvas {
 	C.IupSetAttribute(&Ihandle(gl_canvas), name.to_upper().trim_space().str, C.NULL)
 	return gl_canvas
 }
-
-// ==============GL_Canvas==============
-pub type IFnff = fn (&GL_Canvas, f32, f32) viup.FuncResult // canvas_action
-
-// on_redraw Action generated when the gl_canvas needs to be redrawn
-pub fn (gl_canvas &GL_Canvas) on_redraw(func IFnff) &GL_Canvas {
-	C.IupSetCallback(&Ihandle(gl_canvas), c'ACTION', func)
-	return gl_canvas
-}

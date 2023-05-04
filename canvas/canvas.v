@@ -204,12 +204,3 @@ pub fn (cavas &Canvas) unset_attr(name string) &Canvas {
 	C.IupSetAttribute(&Ihandle(cavas), name.to_upper().trim_space().str, C.NULL)
 	return cavas
 }
-
-// ==============Canvas==============
-pub type IFnff = fn (&Canvas, f32, f32) viup.FuncResult // canvas_action
-
-// on_redraw Action generated when the canvas needs to be redrawn
-pub fn (cavas &Canvas) on_redraw(func IFnff) &Canvas {
-	C.IupSetCallback(&Ihandle(cavas), c'ACTION', func)
-	return cavas
-}
