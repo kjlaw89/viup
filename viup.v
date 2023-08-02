@@ -70,6 +70,8 @@ pub fn init_iup() {
 		cargs << &char(0)
 		mut argc := os.args.len
 		C.IupOpen(&argc, &cargs.data)
+		C.IupSetGlobal(c'UTF8MODE', c'YES')
+		C.IupSetGlobal(c'UTF8MODE_FILE', c'YES')
 	}
 }
 
