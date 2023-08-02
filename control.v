@@ -57,12 +57,12 @@ pub fn (control &Control) get_bgcolor() Color {
 
 // get_class_name get current control class name
 pub fn (control &Control) get_class_name() string {
-	return unsafe { tos_clone(C.IupGetClassName(control)) }
+	return unsafe { cstring_to_vstring(C.IupGetClassName(control)) }
 }
 
 // get_class_type get current control class type
 pub fn (control &Control) get_class_type() string {
-	return unsafe { tos_clone(C.IupGetClassType(control)) }
+	return unsafe { cstring_to_vstring(C.IupGetClassType(control)) }
 }
 
 // get_fgcolor gets the foreground color for the control

@@ -99,7 +99,7 @@ pub fn get_global_reference(name string) voidptr {
 
 // get_global_value returns attribute `name` value from the global environment
 pub fn get_global_value(name string) string {
-	return unsafe { tos_clone(C.IupGetGlobal(name.to_upper().trim_space().str)) }
+	return unsafe { cstring_to_vstring(C.IupGetGlobal(name.to_upper().trim_space().str)) }
 }
 
 // get_handle returns a component with the provided handle name
@@ -153,7 +153,7 @@ pub fn get_all_handle_names(max_n int) []string {
 
 	mut names := []string{}
 	for i in 0 .. ret {
-		names << unsafe { tos_clone(cnames[i]) }
+		names << unsafe { cstring_to_vstring(cnames[i]) }
 	}
 	return names
 }

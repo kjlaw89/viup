@@ -17,7 +17,7 @@ pub fn (control &Ihandle) get_attr(name string) string {
 		return ''
 	}
 
-	return unsafe { tos_clone(ptr) }
+	return unsafe { cstring_to_vstring(ptr) }
 }
 
 // get_bool retrieves an bool attribute (technically int > 0)
@@ -54,21 +54,21 @@ pub fn (control &Ihandle) get_int_int(name string) (int, int, int) {
 }
 
 // get_rgb retrieves an attribute and returns it back in r, g, b form
-pub fn (control &Ihandle) get_rgb(name string) (byte, byte, byte) {
-	r := byte(0)
-	g := byte(0)
-	b := byte(0)
+pub fn (control &Ihandle) get_rgb(name string) (u8, u8, u8) {
+	r := u8(0)
+	g := u8(0)
+	b := u8(0)
 
 	C.IupGetRGB(control, name.to_upper().trim_space().str, &r, &g, &b)
 	return r, g, b
 }
 
 // get_rgba retrieves an attribute and returns it back in r, g, b, a form
-pub fn (control &Ihandle) get_rgba(name string) (byte, byte, byte, byte) {
-	r := byte(0)
-	g := byte(0)
-	b := byte(0)
-	a := byte(0)
+pub fn (control &Ihandle) get_rgba(name string) (u8, u8, u8, u8) {
+	r := u8(0)
+	g := u8(0)
+	b := u8(0)
+	a := u8(0)
 
 	C.IupGetRGBA(control, name.to_upper().trim_space().str, &r, &g, &b, &a)
 	return r, g, b, a

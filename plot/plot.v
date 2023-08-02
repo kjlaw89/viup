@@ -161,7 +161,7 @@ pub fn (plot &Plot) plot_get_sample_str(ds_index int, sample_index int) (string,
 	mut ptr := charptr(0)
 	mut y := f64(0)
 	C.IupPlotGetSampleStr(plot, ds_index, sample_index, ptr, &y)
-	x := unsafe { tos_clone(ptr) }
+	x := unsafe { cstring_to_vstring(ptr) }
 	return x, y
 }
 
