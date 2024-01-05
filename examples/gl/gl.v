@@ -3,6 +3,13 @@ module main
 import viup
 import viup.gl
 
+$if arm64 {
+	#flag -L /usr/lib/iup
+	#flag -L /lib/gcc/aarch64-linux-gnu/11/
+	#flag -L /lib/aarch64-linux-gnu/
+	#flag -lgcc
+}
+
 #flag linux -lGL
 #flag windows -lopengl32
 #include <GL/gl.h>
@@ -15,20 +22,19 @@ fn C.glEnd()
 fn C.glFlush()
 
 fn main() {
-	canvas := gl.create_context().set_handle('context').on_draw(redraw)
+	canvas := gl.gl_canvas().set_handle('context').on_redraw(redraw)
 
 	viup.dialog(viup.hbox([
 		viup.fill(),
-		canvas,
+		&viup.Control(canvas),
 		viup.fill(),
 	]), 'title=GL Example', 'rastersize=640x480').show()
 
 	viup.main_loop()
-	viup.close()
 }
 
-fn redraw(control &viup.Control, x f32, y f32) viup.FuncResult {
-	gl.make_current(control)
+fn redraw(gl_canvas &gl.GL_Canvas, x f32, y f32) viup.FuncResult {
+	gl.gl_make_current(gl_canvas)
 
 	C.glClear(C.GL_COLOR_BUFFER_BIT)
 
@@ -41,7 +47,7 @@ fn redraw(control &viup.Control, x f32, y f32) viup.FuncResult {
 	C.glVertex3f(0, 0.75, 0)
 	C.glEnd()
 
-	gl.swap(control)
+	gl.gl_swap_buffers(gl_canvas)
 
 	return .cont
 }
