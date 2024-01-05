@@ -122,50 +122,50 @@ pub type IFniiddddi = fn (&OLE, int, int, f64, f64, f64, f64, int) FuncResult
 
 pub type IFnv = fn (&OLE, voidptr) FuncResult
 
-pub fn (ole &OLE) set_callback(name string, func voidptr) &OLE {
-	C.IupSetCallback(ole, name.str, func)
-	return ole
+pub fn (ole_control &OLE) set_callback(name string, func voidptr) &OLE {
+	C.IupSetCallback(ole_control, name.str, func)
+	return ole_control
 }
 
 // on_map called right after an element is mapped and its attributes updated in IupMap.
 // When the element is a dialog, it is called after the layout is updated. For all other elements is called before the layout is updated, so the element current size will still be 0x0 during MAP_CB
-pub fn (ole &OLE) on_map(func IFn) &OLE {
-	C.IupSetCallback(ole, c'MAP_CB', func)
-	return ole
+pub fn (ole_control &OLE) on_map(func IFn) &OLE {
+	C.IupSetCallback(ole_control, c'MAP_CB', func)
+	return ole_control
 }
 
 // on_unmap called right before an element is unmapped
-pub fn (ole &OLE) on_unmap(func IFn) &OLE {
-	C.IupSetCallback(ole, c'UNMAP_CB', func)
-	return ole
+pub fn (ole_control &OLE) on_unmap(func IFn) &OLE {
+	C.IupSetCallback(ole_control, c'UNMAP_CB', func)
+	return ole_control
 }
 
 // on_destroy called right before an element is destroyed
-pub fn (ole &OLE) on_destroy(func IFn) &OLE {
-	C.IupSetCallback(ole, c'DESTROY_CB', func)
-	return ole
+pub fn (ole_control &OLE) on_destroy(func IFn) &OLE {
+	C.IupSetCallback(ole_control, c'DESTROY_CB', func)
+	return ole_control
 }
 
 // on_focused action generated when an element is given keyboard focus. This callback is called after the KILLFOCUS_CB of the element that loosed the focus. The IupGetFocus function during the callback returns the element that loosed the focus
-pub fn (ole &OLE) on_focused(func IFn) &OLE {
-	C.IupSetCallback(ole, c'GETFOCUS_CB', func)
-	return ole
+pub fn (ole_control &OLE) on_focused(func IFn) &OLE {
+	C.IupSetCallback(ole_control, c'GETFOCUS_CB', func)
+	return ole_control
 }
 
 // on_unfocused action generated when an element loses keyboard focus. This callback is called before the GETFOCUS_CB of the element that gets the focus
-pub fn (ole &OLE) on_unfocused(func IFn) &OLE {
-	C.IupSetCallback(ole, c'KILLFOCUS_CB', func)
-	return ole
+pub fn (ole_control &OLE) on_unfocused(func IFn) &OLE {
+	C.IupSetCallback(ole_control, c'KILLFOCUS_CB', func)
+	return ole_control
 }
 
 // on_entered action generated when the mouse enters the native element
-pub fn (ole &OLE) on_entered(func IFn) &OLE {
-	C.IupSetCallback(ole, c'ENTERWINDOW_CB', func)
-	return ole
+pub fn (ole_control &OLE) on_entered(func IFn) &OLE {
+	C.IupSetCallback(ole_control, c'ENTERWINDOW_CB', func)
+	return ole_control
 }
 
 // on_exited action generated when the mouse leaves the native element
-pub fn (ole &OLE) on_exited(func IFn) &OLE {
-	C.IupSetCallback(ole, c'LEAVEWINDOW_CB', func)
-	return ole
+pub fn (ole_control &OLE) on_exited(func IFn) &OLE {
+	C.IupSetCallback(ole_control, c'LEAVEWINDOW_CB', func)
+	return ole_control
 }

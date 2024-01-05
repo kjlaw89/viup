@@ -11,7 +11,7 @@ import viup { Ihandle, cleanup_iup, init_iup }
 #include "iuptuio.h"
 
 // `TUIO` inherits from `Ihandle`
-[heap]
+@[heap]
 pub struct TUIO {
 	Ihandle
 }

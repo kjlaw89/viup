@@ -10,7 +10,7 @@ import os
 #include "iup.h"
 
 // `Ihandle` is a dummy struct here, because we never use its member, only a pointer
-[heap]
+@[heap]
 pub struct Ihandle {
 	sig           [4]u8   // IUP Signature, initialized with "IUP", cleared on destroy
 	iclass        voidptr // Ihandle Class
@@ -162,9 +162,9 @@ pub fn get_all_handle_names(max_n int) []string {
 
 // thread creates a thread element in IUP, which is not associated to any interface element. It is a very simple support to create and manage threads in a multithread environment
 pub fn thread(attrs ...string) &Ihandle {
-	thread := C.IupThread()
-	thread.set_attrs(...attrs)
-	return thread
+	th := C.IupThread()
+	th.set_attrs(...attrs)
+	return th
 }
 
 // timer creates a timer which periodically invokes a callback `func` when the time is up

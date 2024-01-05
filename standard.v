@@ -7,7 +7,7 @@ module viup
 #include "iup.h"
 
 // `Control` inherits from `Ihandle`
-[heap]
+@[heap]
 pub struct Control {
 	Ihandle
 }

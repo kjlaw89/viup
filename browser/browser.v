@@ -12,7 +12,7 @@ import viup { Ihandle, cleanup_iup, init_iup }
 #include "iupweb.h"
 
 // `WebBrowser` inherits from `Ihandle`
-[heap]
+@[heap]
 pub struct WebBrowser {
 	Ihandle
 }

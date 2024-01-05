@@ -122,135 +122,135 @@ pub type IFniiddddi = fn (&Canvas, int, int, f64, f64, f64, f64, int) FuncResult
 
 pub type IFnv = fn (&Canvas, voidptr) FuncResult
 
-pub fn (cavas &Canvas) set_callback(name string, func voidptr) &Canvas {
-	C.IupSetCallback(cavas, name.str, func)
-	return cavas
+pub fn (canvas_control &Canvas) set_callback(name string, func voidptr) &Canvas {
+	C.IupSetCallback(canvas_control, name.str, func)
+	return canvas_control
 }
 
 // on_redraw generated when the canvas needs to be redrawn
-pub fn (cavas &Canvas) on_redraw(func IFnff) &Canvas {
-	C.IupSetCallback(cavas, c'ACTION', func)
-	return cavas
+pub fn (canvas_control &Canvas) on_redraw(func IFnff) &Canvas {
+	C.IupSetCallback(canvas_control, c'ACTION', func)
+	return canvas_control
 }
 
 // on_button generated when any mouse button is pressed or released
-pub fn (cavas &Canvas) on_button(func IFniiiis) &Canvas {
-	C.IupSetCallback(cavas, c'BUTTON_CB', func)
-	return cavas
+pub fn (canvas_control &Canvas) on_button(func IFniiiis) &Canvas {
+	C.IupSetCallback(canvas_control, c'BUTTON_CB', func)
+	return canvas_control
 }
 
 // on_drop_files [Windows and GTK Only]: generated when one or more files are dropped in the element
-pub fn (cavas &Canvas) on_drop_files(func IFnsiii) &Canvas {
-	C.IupSetCallback(cavas, c'DROPFILES_CB', func)
-	return cavas
+pub fn (canvas_control &Canvas) on_drop_files(func IFnsiii) &Canvas {
+	C.IupSetCallback(canvas_control, c'DROPFILES_CB', func)
+	return canvas_control
 }
 
 // on_focus when the canvas gets or looses the focus. It is called after the common callbacks GETFOCUS_CB and KILL_FOCUS_CB
-pub fn (cavas &Canvas) on_focus(func IFni) &Canvas {
-	C.IupSetCallback(cavas, c'FOCUS_CB', func)
-	return cavas
+pub fn (canvas_control &Canvas) on_focus(func IFni) &Canvas {
+	C.IupSetCallback(canvas_control, c'FOCUS_CB', func)
+	return canvas_control
 }
 
 // on_motion generated when the mouse is moved
-pub fn (cavas &Canvas) on_motion(func IFniis) &Canvas {
-	C.IupSetCallback(cavas, c'MOTION_CB', func)
-	return cavas
+pub fn (canvas_control &Canvas) on_motion(func IFniis) &Canvas {
+	C.IupSetCallback(canvas_control, c'MOTION_CB', func)
+	return canvas_control
 }
 
 // on_key_press generated when a key is pressed or released. It is called after the common callback K_ANY
 // When the canvas has the focus, pressing the arrow keys may change the focus to another cavas in some systems. If your callback process the arrow keys, we recommend you to return IUP_IGNORE so it will not lose its focus
-pub fn (cavas &Canvas) on_key_press(func IFnii) &Canvas {
-	C.IupSetCallback(cavas, c'KEYPRESS_CB', func)
-	return cavas
+pub fn (canvas_control &Canvas) on_key_press(func IFnii) &Canvas {
+	C.IupSetCallback(canvas_control, c'KEYPRESS_CB', func)
+	return canvas_control
 }
 
 // on_resize generated when the canvas size is changed
-pub fn (cavas &Canvas) on_resize(func IFnii) &Canvas {
-	C.IupSetCallback(cavas, c'RESIZE_CB', func)
-	return cavas
+pub fn (canvas_control &Canvas) on_resize(func IFnii) &Canvas {
+	C.IupSetCallback(canvas_control, c'RESIZE_CB', func)
+	return canvas_control
 }
 
 // on_scroll when the scrollbar is manipulated. (GTK 2.8) Also the POSX and POSY values will not be correctly updated for older GTK versions
-pub fn (cavas &Canvas) on_scroll(func IFniff) &Canvas {
-	C.IupSetCallback(cavas, c'SCROLL_CB', func)
-	return cavas
+pub fn (canvas_control &Canvas) on_scroll(func IFniff) &Canvas {
+	C.IupSetCallback(canvas_control, c'SCROLL_CB', func)
+	return canvas_control
 }
 
 // on_touch [Windows 7 Only]: Action generated when a touch event occurred. Multiple touch events will trigger several calls. Must set TOUCH=Yes to receive this event
-pub fn (cavas &Canvas) on_touch(func IFniiis) &Canvas {
-	C.IupSetCallback(cavas, c'TOUCH_CB', func)
-	return cavas
+pub fn (canvas_control &Canvas) on_touch(func IFniiis) &Canvas {
+	C.IupSetCallback(canvas_control, c'TOUCH_CB', func)
+	return canvas_control
 }
 
 // on_multi_touch [Windows 7 Only]: Action generated when multiple touch events occurred. Must set TOUCH=Yes to receive this event
-pub fn (cavas &Canvas) on_multi_touch(func IFniIIII) &Canvas {
-	C.IupSetCallback(cavas, c'MULTITOUCH_CB', func)
-	return cavas
+pub fn (canvas_control &Canvas) on_multi_touch(func IFniIIII) &Canvas {
+	C.IupSetCallback(canvas_control, c'MULTITOUCH_CB', func)
+	return canvas_control
 }
 
 // on_wheel generated when the mouse wheel is rotated
-pub fn (cavas &Canvas) on_wheel(func IFnfiis) &Canvas {
-	C.IupSetCallback(cavas, c'WHEEL_CB', func)
-	return cavas
+pub fn (canvas_control &Canvas) on_wheel(func IFnfiis) &Canvas {
+	C.IupSetCallback(canvas_control, c'WHEEL_CB', func)
+	return canvas_control
 }
 
 // on_wom [Windows Only]: Action generated when an audio device receives an event
-pub fn (cavas &Canvas) on_wom(func IFni) &Canvas {
-	C.IupSetCallback(cavas, c'WOM_CB', func)
-	return cavas
+pub fn (canvas_control &Canvas) on_wom(func IFni) &Canvas {
+	C.IupSetCallback(canvas_control, c'WOM_CB', func)
+	return canvas_control
 }
 
 // on_map called right after an element is mapped and its attributes updated in IupMap.
 // When the element is a dialog, it is called after the layout is updated. For all other elements is called before the layout is updated, so the element current size will still be 0x0 during MAP_CB
-pub fn (cavas &Canvas) on_map(func IFn) &Canvas {
-	C.IupSetCallback(cavas, c'MAP_CB', func)
-	return cavas
+pub fn (canvas_control &Canvas) on_map(func IFn) &Canvas {
+	C.IupSetCallback(canvas_control, c'MAP_CB', func)
+	return canvas_control
 }
 
 // on_unmap called right before an element is unmapped
-pub fn (cavas &Canvas) on_unmap(func IFn) &Canvas {
-	C.IupSetCallback(cavas, c'UNMAP_CB', func)
-	return cavas
+pub fn (canvas_control &Canvas) on_unmap(func IFn) &Canvas {
+	C.IupSetCallback(canvas_control, c'UNMAP_CB', func)
+	return canvas_control
 }
 
 // on_destroy called right before an element is destroyed
-pub fn (cavas &Canvas) on_destroy(func IFn) &Canvas {
-	C.IupSetCallback(cavas, c'DESTROY_CB', func)
-	return cavas
+pub fn (canvas_control &Canvas) on_destroy(func IFn) &Canvas {
+	C.IupSetCallback(canvas_control, c'DESTROY_CB', func)
+	return canvas_control
 }
 
 // on_focused action generated when an element is given keyboard focus. This callback is called after the KILLFOCUS_CB of the element that loosed the focus. The IupGetFocus function during the callback returns the element that loosed the focus
-pub fn (cavas &Canvas) on_focused(func IFn) &Canvas {
-	C.IupSetCallback(cavas, c'GETFOCUS_CB', func)
-	return cavas
+pub fn (canvas_control &Canvas) on_focused(func IFn) &Canvas {
+	C.IupSetCallback(canvas_control, c'GETFOCUS_CB', func)
+	return canvas_control
 }
 
 // on_unfocused action generated when an element loses keyboard focus. This callback is called before the GETFOCUS_CB of the element that gets the focus
-pub fn (cavas &Canvas) on_unfocused(func IFn) &Canvas {
-	C.IupSetCallback(cavas, c'KILLFOCUS_CB', func)
-	return cavas
+pub fn (canvas_control &Canvas) on_unfocused(func IFn) &Canvas {
+	C.IupSetCallback(canvas_control, c'KILLFOCUS_CB', func)
+	return canvas_control
 }
 
 // on_entered action generated when the mouse enters the native element
-pub fn (cavas &Canvas) on_entered(func IFn) &Canvas {
-	C.IupSetCallback(cavas, c'ENTERWINDOW_CB', func)
-	return cavas
+pub fn (canvas_control &Canvas) on_entered(func IFn) &Canvas {
+	C.IupSetCallback(canvas_control, c'ENTERWINDOW_CB', func)
+	return canvas_control
 }
 
 // on_exited action generated when the mouse leaves the native element
-pub fn (cavas &Canvas) on_exited(func IFn) &Canvas {
-	C.IupSetCallback(cavas, c'LEAVEWINDOW_CB', func)
-	return cavas
+pub fn (canvas_control &Canvas) on_exited(func IFn) &Canvas {
+	C.IupSetCallback(canvas_control, c'LEAVEWINDOW_CB', func)
+	return canvas_control
 }
 
 // on_key action generated when a keyboard event occurs
-pub fn (cavas &Canvas) on_key(func IFni) &Canvas {
-	C.IupSetCallback(cavas, c'K_ANY', func)
-	return cavas
+pub fn (canvas_control &Canvas) on_key(func IFni) &Canvas {
+	C.IupSetCallback(canvas_control, c'K_ANY', func)
+	return canvas_control
 }
 
-// on_help action generated when the user press F1 at a cavas. In Motif is also activated by the Help button in some workstations keyboard
-pub fn (cavas &Canvas) on_help(func IFn) &Canvas {
-	C.IupSetCallback(cavas, c'HELP_CB', func)
-	return cavas
+// on_help action generated when the user press F1 at a canvas. In Motif is also activated by the Help button in some workstations keyboard
+pub fn (canvas_control &Canvas) on_help(func IFn) &Canvas {
+	C.IupSetCallback(canvas_control, c'HELP_CB', func)
+	return canvas_control
 }

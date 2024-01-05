@@ -3,11 +3,9 @@ module main
 import viup
 import viup.plot as plot_module
 
-const (
-	max_plot = 6
-)
+const max_plot = 6
 
-[heap]
+@[heap]
 struct Plot {
 pub mut:
 	plot  []&viup.Control

@@ -11,7 +11,7 @@ import viup { Ihandle, cleanup_iup, init_iup }
 #include "iupcontrols.h"
 
 // `Control` inherits from `Ihandle`
-[heap]
+@[heap]
 pub struct Control {
 	Ihandle
 }

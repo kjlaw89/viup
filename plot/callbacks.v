@@ -122,197 +122,197 @@ pub type IFniiddddi = fn (&Plot, int, int, f64, f64, f64, f64, int) FuncResult
 
 pub type IFnv = fn (&Plot, voidptr) FuncResult
 
-pub fn (plot &Plot) set_callback(name string, func voidptr) &Plot {
-	C.IupSetCallback(plot, name.str, func)
-	return plot
+pub fn (plot_control &Plot) set_callback(name string, func voidptr) &Plot {
+	C.IupSetCallback(plot_control, name.str, func)
+	return plot_control
 }
 
 // https://iup.sourceforge.net/en/ctrl/iup_plot.html
 // ==============Plot==============
 
 // on_click_sample action generated when a sample is clicked. Called when the mouse button is released, with no Ctrl key and IUP_BUTTON3 only when Shift is pressed, to avoid conflict with zoom and context menu situations. The sample is searched using IupPlotFindSample
-pub fn (plot &Plot) on_click_sample(func IFniiddi) &Plot {
-	C.IupSetCallback(plot, c'CLICKSAMPLE_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_click_sample(func IFniiddi) &Plot {
+	C.IupSetCallback(plot_control, c'CLICKSAMPLE_CB', func)
+	return plot_control
 }
 
 // on_click_segment action generated when a segment is clicked. The segment is identified by the two samples that connects the segment. Called when the mouse button is released, with no Ctrl key and IUP_BUTTON3 only when Shift is pressed, to avoid conflict with zoom and context menu situations. If a sample is clicked this callback is ignored. The segment is searched using IupPlotFindSegment
-pub fn (plot &Plot) on_click_segment(func IFniiddddi) &Plot {
-	C.IupSetCallback(plot, c'CLICKSEGMENT_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_click_segment(func IFniiddddi) &Plot {
+	C.IupSetCallback(plot_control, c'CLICKSEGMENT_CB', func)
+	return plot_control
 }
 
 // on_edit_sample action generated when a sample coordinates are changed in the "Data Set Values..." dialog if EDITABLEVALUES=Yes
-pub fn (plot &Plot) on_edit_sample(func IFniidd) &Plot {
-	C.IupSetCallback(plot, c'EDITSAMPLE_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_edit_sample(func IFniidd) &Plot {
+	C.IupSetCallback(plot_control, c'EDITSAMPLE_CB', func)
+	return plot_control
 }
 
 // on_delete action generated when the Del key is pressed to removed a sample from a dataset. If multiple samples are selected it is called once for each selected sample
-pub fn (plot &Plot) on_delete(func IFniidd) &Plot {
-	C.IupSetCallback(plot, c'DELETE_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_delete(func IFniidd) &Plot {
+	C.IupSetCallback(plot_control, c'DELETE_CB', func)
+	return plot_control
 }
 
 // on_delete_begin actions generated when a delete operation will begin
-pub fn (plot &Plot) on_delete_begin(func IFn) &Plot {
-	C.IupSetCallback(plot, c'DELETEBEGIN_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_delete_begin(func IFn) &Plot {
+	C.IupSetCallback(plot_control, c'DELETEBEGIN_CB', func)
+	return plot_control
 }
 
 // on_delete_end actions generated when a delete operation will end
-pub fn (plot &Plot) on_delete_end(func IFn) &Plot {
-	C.IupSetCallback(plot, c'DELETEEND_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_delete_end(func IFn) &Plot {
+	C.IupSetCallback(plot_control, c'DELETEEND_CB', func)
+	return plot_control
 }
 
 // on_draw_sample action generated when a sample is drawn. When the plot is redraw, it is called for each sample, then it is called again for all selected samples, and this repeats for each data set, and this repeats for each data set
-pub fn (plot &Plot) on_draw_sample(func IFniiddi) &Plot {
-	C.IupSetCallback(plot, c'DRAWSAMPLE_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_draw_sample(func IFniiddi) &Plot {
+	C.IupSetCallback(plot_control, c'DRAWSAMPLE_CB', func)
+	return plot_control
 }
 
 // on_menu_context action generated after the context menu (right click) is created but before it is displayed, so the application can add or removed items from the menu. Called when the mouse button is pressed, with no Ctrl nor Shift keys. Only shown if MENUCONTEXT=Yes
-pub fn (plot &Plot) on_menu_context(func IFnnii) &Plot {
-	C.IupSetCallback(plot, c'MENUCONTEXT_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_menu_context(func IFnnii) &Plot {
+	C.IupSetCallback(plot_control, c'MENUCONTEXT_CB', func)
+	return plot_control
 }
 
 // on_menu_context_close same as `MENUCONTEXT_CB`, but called after the context menu is closed. Only shown if MENUCONTEXT=Yes
-pub fn (plot &Plot) on_menu_context_close(func IFnnii) &Plot {
-	C.IupSetCallback(plot, c'MENUCONTEXTCLOSE_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_menu_context_close(func IFnnii) &Plot {
+	C.IupSetCallback(plot_control, c'MENUCONTEXTCLOSE_CB', func)
+	return plot_control
 }
 
 // on_ds_properties_changed called after the user changed dataset attributes using the "Data Set Properties..." dialog
-pub fn (plot &Plot) on_ds_properties_changed(func IFni) &Plot {
-	C.IupSetCallback(plot, c'DSPROPERTIESCHANGED_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_ds_properties_changed(func IFni) &Plot {
+	C.IupSetCallback(plot_control, c'DSPROPERTIESCHANGED_CB', func)
+	return plot_control
 }
 
 // on_ds_properties_validate called when the user pressed OK to change dataset attributes using the "Data Set Properties..." dialog. Called only once
-pub fn (plot &Plot) on_ds_properties_validate(func IFnni) &Plot {
-	C.IupSetCallback(plot, c'DSPROPERTIESVALIDATE_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_ds_properties_validate(func IFnni) &Plot {
+	C.IupSetCallback(plot_control, c'DSPROPERTIESVALIDATE_CB', func)
+	return plot_control
 }
 
 // on_properties_changed called when the user changed plot attributes using the "Properties..." dialog
-pub fn (plot &Plot) on_properties_changed(func IFn) &Plot {
-	C.IupSetCallback(plot, c'PROPERTIESCHANGED_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_properties_changed(func IFn) &Plot {
+	C.IupSetCallback(plot_control, c'PROPERTIESCHANGED_CB', func)
+	return plot_control
 }
 
 // on_properties_validate called for each attribute in the page, when the user pressed Apply to change plot attributes using the "Properties..." dialog
-pub fn (plot &Plot) on_properties_validate(func IFnss) &Plot {
-	C.IupSetCallback(plot, c'PROPERTIESVALIDATE_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_properties_validate(func IFnss) &Plot {
+	C.IupSetCallback(plot_control, c'PROPERTIESVALIDATE_CB', func)
+	return plot_control
 }
 
 // on_select action generated when a sample is selected. If multiple samples are selected it is called once for each new selected sample. It is called only if the selection state of the sample is about to be changed
-pub fn (plot &Plot) on_select(func IFniiddi) &Plot {
-	C.IupSetCallback(plot, c'SELECT_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_select(func IFniiddi) &Plot {
+	C.IupSetCallback(plot_control, c'SELECT_CB', func)
+	return plot_control
 }
 
 // on_select_begin actions generated when a selection operation will begin
-pub fn (plot &Plot) on_select_begin(func IFn) &Plot {
-	C.IupSetCallback(plot, c'SELECTBEGIN_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_select_begin(func IFn) &Plot {
+	C.IupSetCallback(plot_control, c'SELECTBEGIN_CB', func)
+	return plot_control
 }
 
 // on_select_end actions generated when a selection operation will end
-pub fn (plot &Plot) on_select_end(func IFn) &Plot {
-	C.IupSetCallback(plot, c'SELECTEND_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_select_end(func IFn) &Plot {
+	C.IupSetCallback(plot_control, c'SELECTEND_CB', func)
+	return plot_control
 }
 
 // on_plot_button similar to BUTTON_CB but coordinates are in plot scale with double precision. It is called before the internal processing, if returns IUP_IGNORE internal processing will not be done
-pub fn (plot &Plot) on_plot_button(func IFniidds) &Plot {
-	C.IupSetCallback(plot, c'PLOTBUTTON_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_plot_button(func IFniidds) &Plot {
+	C.IupSetCallback(plot_control, c'PLOTBUTTON_CB', func)
+	return plot_control
 }
 
 // on_plot_motion similar to MOTION_CB but coordinates are in plot scale with double precision. It is called before the internal processing, if returns IUP_IGNORE internal processing will not be done
-pub fn (plot &Plot) on_plot_motion(func IFndds) &Plot {
-	C.IupSetCallback(plot, c'PLOTMOTION_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_plot_motion(func IFndds) &Plot {
+	C.IupSetCallback(plot_control, c'PLOTMOTION_CB', func)
+	return plot_control
 }
 
 // on_xtick_format_number allows to modify the displayed string of a tick number in the X axis. If the callback is not defined the internal function is used
-pub fn (plot &Plot) on_xtick_format_number(func IFnssds) &Plot {
-	C.IupSetCallback(plot, c'XTICKFORMATNUMBER_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_xtick_format_number(func IFnssds) &Plot {
+	C.IupSetCallback(plot_control, c'XTICKFORMATNUMBER_CB', func)
+	return plot_control
 }
 
 // on_ytick_format_number allows to modify the displayed string of a tick number in the Y axis. If the callback is not defined the internal function is used
-pub fn (plot &Plot) on_ytick_format_number(func IFnssds) &Plot {
-	C.IupSetCallback(plot, c'YTICKFORMATNUMBER_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_ytick_format_number(func IFnssds) &Plot {
+	C.IupSetCallback(plot_control, c'YTICKFORMATNUMBER_CB', func)
+	return plot_control
 }
 
 // on_pre_draw actions generated before the draw operation. Predraw can be used to draw a different background. Predraw is called after the background is drawn. To position primitives in plot units, use the IupPlotTransform function
-pub fn (plot &Plot) on_pre_draw(func IFnv) &Plot {
-	C.IupSetCallback(plot, c'PREDRAW_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_pre_draw(func IFnv) &Plot {
+	C.IupSetCallback(plot_control, c'PREDRAW_CB', func)
+	return plot_control
 }
 
 // on_post_draw actions generated after the draw operation. Postdraw can be used to draw additional information in the plot. Postdraw is clipped to the dataset area. Postdraw is called before the legend and title are drawn (the last drawn elements). To position primitives in plot units, use the IupPlotTransform function
-pub fn (plot &Plot) on_post_draw(func IFnv) &Plot {
-	C.IupSetCallback(plot, c'POSTDRAW_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_post_draw(func IFnv) &Plot {
+	C.IupSetCallback(plot_control, c'POSTDRAW_CB', func)
+	return plot_control
 }
 
 // on_map called right after an element is mapped and its attributes updated in IupMap.
 // When the element is a dialog, it is called after the layout is updated. For all other elements is called before the layout is updated, so the element current size will still be 0x0 during MAP_CB
-pub fn (plot &Plot) on_map(func IFn) &Plot {
-	C.IupSetCallback(plot, c'MAP_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_map(func IFn) &Plot {
+	C.IupSetCallback(plot_control, c'MAP_CB', func)
+	return plot_control
 }
 
 // on_unmap called right before an element is unmapped
-pub fn (plot &Plot) on_unmap(func IFn) &Plot {
-	C.IupSetCallback(plot, c'UNMAP_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_unmap(func IFn) &Plot {
+	C.IupSetCallback(plot_control, c'UNMAP_CB', func)
+	return plot_control
 }
 
 // on_destroy called right before an element is destroyed
-pub fn (plot &Plot) on_destroy(func IFn) &Plot {
-	C.IupSetCallback(plot, c'DESTROY_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_destroy(func IFn) &Plot {
+	C.IupSetCallback(plot_control, c'DESTROY_CB', func)
+	return plot_control
 }
 
 // on_focused action generated when an element is given keyboard focus. This callback is called after the KILLFOCUS_CB of the element that loosed the focus. The IupGetFocus function during the callback returns the element that loosed the focus
-pub fn (plot &Plot) on_focused(func IFn) &Plot {
-	C.IupSetCallback(plot, c'GETFOCUS_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_focused(func IFn) &Plot {
+	C.IupSetCallback(plot_control, c'GETFOCUS_CB', func)
+	return plot_control
 }
 
 // on_unfocused action generated when an element loses keyboard focus. This callback is called before the GETFOCUS_CB of the element that gets the focus
-pub fn (plot &Plot) on_unfocused(func IFn) &Plot {
-	C.IupSetCallback(plot, c'KILLFOCUS_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_unfocused(func IFn) &Plot {
+	C.IupSetCallback(plot_control, c'KILLFOCUS_CB', func)
+	return plot_control
 }
 
 // on_entered action generated when the mouse enters the native element
-pub fn (plot &Plot) on_entered(func IFn) &Plot {
-	C.IupSetCallback(plot, c'ENTERWINDOW_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_entered(func IFn) &Plot {
+	C.IupSetCallback(plot_control, c'ENTERWINDOW_CB', func)
+	return plot_control
 }
 
 // on_exited action generated when the mouse leaves the native element
-pub fn (plot &Plot) on_exited(func IFn) &Plot {
-	C.IupSetCallback(plot, c'LEAVEWINDOW_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_exited(func IFn) &Plot {
+	C.IupSetCallback(plot_control, c'LEAVEWINDOW_CB', func)
+	return plot_control
 }
 
 // on_key action generated when a keyboard event occurs
-pub fn (plot &Plot) on_key(func IFni) &Plot {
-	C.IupSetCallback(plot, c'K_ANY', func)
-	return plot
+pub fn (plot_control &Plot) on_key(func IFni) &Plot {
+	C.IupSetCallback(plot_control, c'K_ANY', func)
+	return plot_control
 }
 
 // on_help action generated when the user press F1 at a plot. In Motif is also activated by the Help button in some workstations keyboard
-pub fn (plot &Plot) on_help(func IFn) &Plot {
-	C.IupSetCallback(plot, c'HELP_CB', func)
-	return plot
+pub fn (plot_control &Plot) on_help(func IFn) &Plot {
+	C.IupSetCallback(plot_control, c'HELP_CB', func)
+	return plot_control
 }

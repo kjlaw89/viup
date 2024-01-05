@@ -2,10 +2,10 @@ module viup
 
 pub struct Color {
 pub mut:
-	r byte
-	g byte
-	b byte
-	a byte = 255
+	r u8
+	g u8
+	b u8
+	a u8 = 255
 }
 
 // parse_color parses the provided color string

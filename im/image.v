@@ -11,7 +11,7 @@ import viup { Ihandle, cleanup_iup, init_iup }
 #include "iupim.h"
 
 // `Image` inherits from `Ihandle`
-[heap]
+@[heap]
 pub struct Image {
 	Ihandle
 }

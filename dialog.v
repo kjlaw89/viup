@@ -1,7 +1,7 @@
 module viup
 
 // `Dialog` inherits from `Control`
-[heap]
+@[heap]
 pub struct Dialog {
 	Control
 }

@@ -13,14 +13,12 @@ $if arm64 {
 	#flag -lgcc
 }
 
-const (
-	version = '1.0.0'
-	about   = '
+const version = '1.0.0'
+const about = '
 This is version ${version} of VIUP Control Gallery demo.
 
 It gives a simple overview of all of the available controls and some sample use cases.
 	'
-)
 
 fn main() {
 	vlogo := im.load_image(os.resource_abs_path('./v-logo.png'), 'resize=64x64')!

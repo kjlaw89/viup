@@ -11,7 +11,7 @@ import viup { Ihandle, cleanup_iup, init_iup }
 #include "iupole.h"
 
 // OLE inherits from `Ihandle`
-[heap]
+@[heap]
 pub struct OLE {
 	Ihandle
 }

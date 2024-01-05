@@ -9,7 +9,7 @@ import viup { Ihandle, cleanup_iup, init_iup }
 #include "iup.h"
 
 // `Menu` inherits from `Ihandle`
-[heap]
+@[heap]
 pub struct Menu {
 	Ihandle
 }
@@ -42,9 +42,9 @@ pub fn menu(children []&Menu, attrs ...string) &Menu {
 		ptrs << child
 	}
 	ptrs << unsafe { &Menu(nil) } // Add null value
-	menu := C.IupMenuv(ptrs.data)
-	menu.set_attrs(...attrs)
-	return menu
+	m := C.IupMenuv(ptrs.data)
+	m.set_attrs(...attrs)
+	return m
 }
 
 // separator creates a simple horizontal line in a `menu`
@@ -63,9 +63,9 @@ pub fn sub_menu(title string, child &Menu, attrs ...string) &Menu {
 
 // set_handle is a helper function for `Menu` that calls the global
 // `set_handle` function. Returns back an instance of `Menu` for chaining
-pub fn (menu &Menu) set_handle(name string) &Menu {
-	C.IupSetHandle(name.str, &Ihandle(menu))
-	return menu
+pub fn (m &Menu) set_handle(name string) &Menu {
+	C.IupSetHandle(name.str, &Ihandle(m))
+	return m
 }
 
 // get_menu_handle returns a component with the provided handle name
@@ -76,36 +76,36 @@ pub fn get_menu_handle(handle string) &Menu {
 
 // set_attr sets an attribute on `Menu` and
 // returns `Menu` back for chaining
-pub fn (menu &Menu) set_attr(name string, value string) &Menu {
-	C.IupSetStrAttribute(&Ihandle(menu), name.to_upper().trim_space().str, value.trim_space().str)
+pub fn (m &Menu) set_attr(name string, value string) &Menu {
+	C.IupSetStrAttribute(&Ihandle(m), name.to_upper().trim_space().str, value.trim_space().str)
 
-	return menu
+	return m
 }
 
 // set_attrs takes all x=x values and applies them to `Menu` and
 // returns `Menu` back for chaining
-pub fn (menu &Menu) set_attrs(attrs ...string) &Menu {
+pub fn (m &Menu) set_attrs(attrs ...string) &Menu {
 	for attr in attrs {
 		split := attr.split_nth('=', 2)
 		if split.len == 1 {
 			continue
 		}
-		menu.set_attr(split[0], split[1])
+		m.set_attr(split[0], split[1])
 	}
 
-	return menu
+	return m
 }
 
 // set_data associates the provided `data` with `Menu` and
 // returns `Menu` back for chaining
-pub fn (menu &Menu) set_data(name string, data voidptr) &Menu {
-	C.IupSetAttribute(&Ihandle(menu), '${name}_data'.to_upper().trim_space().str, charptr(data))
+pub fn (m &Menu) set_data(name string, data voidptr) &Menu {
+	C.IupSetAttribute(&Ihandle(m), '${name}_data'.to_upper().trim_space().str, charptr(data))
 
-	return menu
+	return m
 }
 
 // unset_attr clears the provided attribute
-pub fn (menu &Menu) unset_attr(name string) &Menu {
-	C.IupSetAttribute(&Ihandle(menu), name.to_upper().trim_space().str, C.NULL)
-	return menu
+pub fn (m &Menu) unset_attr(name string) &Menu {
+	C.IupSetAttribute(&Ihandle(m), name.to_upper().trim_space().str, C.NULL)
+	return m
 }

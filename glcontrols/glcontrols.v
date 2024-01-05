@@ -12,7 +12,7 @@ import viup.gl { GL_Canvas }
 #include "iupglcontrols.h"
 
 // `GL_Controls` inherits from `GL_Canvas`
-[heap]
+@[heap]
 pub struct GL_Controls {
 	GL_Canvas
 }

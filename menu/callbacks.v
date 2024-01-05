@@ -122,59 +122,59 @@ pub type IFniiddddi = fn (&Menu, int, int, f64, f64, f64, f64, int) FuncResult
 
 pub type IFnv = fn (&Menu, voidptr) FuncResult
 
-pub fn (menu &Menu) set_callback(name string, func voidptr) &Menu {
-	C.IupSetCallback(menu, name.str, func)
-	return menu
+pub fn (m &Menu) set_callback(name string, func voidptr) &Menu {
+	C.IupSetCallback(m, name.str, func)
+	return m
 }
 
 // =====================Item=====================
 // on_selected generated when the item is selected. IUP_CLOSE will be processed. Even if inside a popup menu when IUP_CLOSE is returned, the current popup dialog or the main loop will be closed
-pub fn (menu &Menu) on_selected(func IFn) &Menu {
-	C.IupSetCallback(menu, c'ACTION', func)
-	return menu
+pub fn (m &Menu) on_selected(func IFn) &Menu {
+	C.IupSetCallback(m, c'ACTION', func)
+	return m
 }
 
 // on_highlight generated when the item is highlighted
-pub fn (menu &Menu) on_highlight(func IFn) &Menu {
-	C.IupSetCallback(menu, c'HIGHLIGHT_CB', func)
-	return menu
+pub fn (m &Menu) on_highlight(func IFn) &Menu {
+	C.IupSetCallback(m, c'HIGHLIGHT_CB', func)
+	return m
 }
 
 // =====================Menu=====================
 // on_menu_open called just before the menu is opened
-pub fn (menu &Menu) on_menu_open(func IFn) &Menu {
-	C.IupSetCallback(menu, c'OPEN_CB', func)
-	return menu
+pub fn (m &Menu) on_menu_open(func IFn) &Menu {
+	C.IupSetCallback(m, c'OPEN_CB', func)
+	return m
 }
 
 // on_menu_close called just after the menu is closed
-pub fn (menu &Menu) on_menu_close(func IFn) &Menu {
-	C.IupSetCallback(menu, c'MENUCLOSE_CB', func)
-	return menu
+pub fn (m &Menu) on_menu_close(func IFn) &Menu {
+	C.IupSetCallback(m, c'MENUCLOSE_CB', func)
+	return m
 }
 
 // =====================Submenu=====================
 // HIGHLIGHT_CB: Action generated when the submenu is highlighted
-pub fn (menu &Menu) on_action(func IFnff) &Menu {
-	C.IupSetCallback(menu, c'ACTION', func)
-	return menu
+pub fn (m &Menu) on_action(func IFnff) &Menu {
+	C.IupSetCallback(m, c'ACTION', func)
+	return m
 }
 
 // on_map called right after an element is mapped and its attributes updated in IupMap.
 // When the element is a dialog, it is called after the layout is updated. For all other elements is called before the layout is updated, so the element current size will still be 0x0 during MAP_CB
-pub fn (menu &Menu) on_map(func IFn) &Menu {
-	C.IupSetCallback(menu, c'MAP_CB', func)
-	return menu
+pub fn (m &Menu) on_map(func IFn) &Menu {
+	C.IupSetCallback(m, c'MAP_CB', func)
+	return m
 }
 
 // on_unmap called right before an element is unmapped
-pub fn (menu &Menu) on_unmap(func IFn) &Menu {
-	C.IupSetCallback(menu, c'UNMAP_CB', func)
-	return menu
+pub fn (m &Menu) on_unmap(func IFn) &Menu {
+	C.IupSetCallback(m, c'UNMAP_CB', func)
+	return m
 }
 
 // on_destroy called right before an element is destroyed
-pub fn (menu &Menu) on_destroy(func IFn) &Menu {
-	C.IupSetCallback(menu, c'DESTROY_CB', func)
-	return menu
+pub fn (m &Menu) on_destroy(func IFn) &Menu {
+	C.IupSetCallback(m, c'DESTROY_CB', func)
+	return m
 }

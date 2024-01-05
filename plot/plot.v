@@ -12,7 +12,7 @@ import viup.canvas { Canvas }
 #include "iup_plot.h"
 
 // `Plot` inherits from `Canvas`
-[heap]
+@[heap]
 pub struct Plot {
 	Canvas
 }
@@ -60,188 +60,189 @@ fn cleanup() {
 
 // plot create a plot control
 pub fn plot(attrs ...string) &Plot {
-	plot := C.IupPlot()
-	plot.set_attrs(...attrs)
-	return plot
+	plot_control := C.IupPlot()
+	plot_control.set_attrs(...attrs)
+	return plot_control
 }
 
 // plot_begin prepares a dataset to receive samples. If `str_xdata` is true then the X axis value is a string
-pub fn (plot &Plot) plot_begin(str_xdata bool) &Plot {
+pub fn (plot_control &Plot) plot_begin(str_xdata bool) &Plot {
 	str_xdata_int := if str_xdata { 1 } else { 0 }
-	C.IupPlotBegin(plot, str_xdata_int)
-	return plot
+	C.IupPlotBegin(plot_control, str_xdata_int)
+	return plot_control
 }
 
 // plot_add adds a sample(`x`,`y`) to the dataset. Can only be called if `plot_begin` was called with `str_xdata`=false
-pub fn (plot &Plot) plot_add(x f64, y f64) &Plot {
-	C.IupPlotAdd(plot, x, y)
-	return plot
+pub fn (plot_control &Plot) plot_add(x f64, y f64) &Plot {
+	C.IupPlotAdd(plot_control, x, y)
+	return plot_control
 }
 
 // plot_add_segment same as `plot_add`, but the sample starts a new segment. In drawing mode where samples are connected by lines this will create an empty space
-pub fn (plot &Plot) plot_add_segment(x f64, y f64) &Plot {
-	C.IupPlotAddSegment(plot, x, y)
-	return plot
+pub fn (plot_control &Plot) plot_add_segment(x f64, y f64) &Plot {
+	C.IupPlotAddSegment(plot_control, x, y)
+	return plot_control
 }
 
 // plot_add_str same as `plot_add`, but allows to use a string as the X axis value. Can only be called if `plot_begin` was called with `str_xdata`=true. Strings will be shown only in linear scale, they will not be shown in Logarithm scale
-pub fn (plot &Plot) plot_add_str(x string, y f64) &Plot {
-	C.IupPlotAddStr(plot, x.str, y)
-	return plot
+pub fn (plot_control &Plot) plot_add_str(x string, y f64) &Plot {
+	C.IupPlotAddStr(plot_control, x.str, y)
+	return plot_control
 }
 
 // plot_end adds a 2D dataset to the plot and returns the dataset index. The data set can be empty. Redraw is NOT done until the REDRAW attribute is set. Also it will change the current dataset index to the return value. You can only set attributes of a dataset AFTER you added the dataset.  Can only be called if `plot_begin` was called. Whenever you create a dataset all its "DS_*" attributes will be set to the default values
-pub fn (plot &Plot) plot_end(attrs ...string) int {
-	plot.set_attrs(...attrs)
-	return C.IupPlotEnd(plot)
+pub fn (plot_control &Plot) plot_end(attrs ...string) int {
+	plot_control.set_attrs(...attrs)
+	return C.IupPlotEnd(plot_control)
 }
 
 // plot_load_data creates new datasets from data stored in a file `filename`. The file must contains space (' '), tab ('\t') or semicolon (';') separated numeric data in text format. The text can contains line comments starting with '#'. The file can have more than one dataset but the first column will always be the X coordinate of all datasets. If `str_xdata`=true then the first column is treated as a string. The first line will define the number of datasets. The file must have at least two columns of data. Returns a non zero value is successful, or a zero value if failed. Notice that if it fails during data read, but after the fist line, the datasets were already created and they will not be destroyed when the function returns
-pub fn (plot &Plot) plot_load_data(filename string, str_xdata bool) int {
+pub fn (plot_control &Plot) plot_load_data(filename string, str_xdata bool) int {
 	str_xdata_int := if str_xdata { 1 } else { 0 }
-	return C.IupPlotLoadData(plot, filename.str, str_xdata_int)
+	return C.IupPlotLoadData(plot_control, filename.str, str_xdata_int)
 }
 
 // plot_insert inserts a sample in a dataset at the given `sample_index`. Can be used only after the dataset is added to the plot
-pub fn (plot &Plot) plot_insert(ds_index int, sample_index int, x f64, y f64) &Plot {
-	C.IupPlotInsert(plot, ds_index, sample_index, x, y)
-	return plot
+pub fn (plot_control &Plot) plot_insert(ds_index int, sample_index int, x f64, y f64) &Plot {
+	C.IupPlotInsert(plot_control, ds_index, sample_index, x, y)
+	return plot_control
 }
 
 // plot_insert_segment inserts a sample in a dataset at the given `sample_index`. Can be used only after the dataset is added to the plot
-pub fn (plot &Plot) plot_insert_segment(ds_index int, sample_index int, x f64, y f64) &Plot {
-	C.IupPlotInsertSegment(plot, ds_index, sample_index, x, y)
-	return plot
+pub fn (plot_control &Plot) plot_insert_segment(ds_index int, sample_index int, x f64, y f64) &Plot {
+	C.IupPlotInsertSegment(plot_control, ds_index, sample_index, x, y)
+	return plot_control
 }
 
 // plot_insert_str inserts a sample in a dataset at the given `sample_index`. Can be used only after the dataset is added to the plot
-pub fn (plot &Plot) plot_insert_str(ds_index int, sample_index int, x string, y f64) &Plot {
-	C.IupPlotInsertStr(plot, ds_index, sample_index, x.str, y)
-	return plot
+pub fn (plot_control &Plot) plot_insert_str(ds_index int, sample_index int, x string, y f64) &Plot {
+	C.IupPlotInsertStr(plot_control, ds_index, sample_index, x.str, y)
+	return plot_control
 }
 
 // plot_insert_samples inserts an array of samples in a dataset at the given `sample_index`. Can be used only after the dataset is added to the plot
-pub fn (plot &Plot) plot_insert_samples(ds_index int, sample_index int, x []f64, y []f64) &Plot {
+pub fn (plot_control &Plot) plot_insert_samples(ds_index int, sample_index int, x []f64, y []f64) &Plot {
 	assert x.len == y.len
-	C.IupPlotInsertSamples(plot, ds_index, sample_index, x.data, y.data, x.len)
-	return plot
+	C.IupPlotInsertSamples(plot_control, ds_index, sample_index, x.data, y.data, x.len)
+	return plot_control
 }
 
 // plot_insert_str_samples inserts an array of samples in a dataset at the given `sample_index`. Can be used only after the dataset is added to the plot
-pub fn (plot &Plot) plot_insert_str_samples(ds_index int, sample_index int, x []string, y []f64) &Plot {
+pub fn (plot_control &Plot) plot_insert_str_samples(ds_index int, sample_index int, x []string, y []f64) &Plot {
 	assert x.len == y.len
-	C.IupPlotInsertStrSamples(plot, ds_index, sample_index, x.data, y.data, x.len)
-	return plot
+	C.IupPlotInsertStrSamples(plot_control, ds_index, sample_index, x.data, y.data, x.len)
+	return plot_control
 }
 
 // plot_add_samples adds an array of samples in a dataset at the end. Can be used only after the dataset is added to the plot
-pub fn (plot &Plot) plot_add_samples(ds_index int, x []f64, y []f64) &Plot {
+pub fn (plot_control &Plot) plot_add_samples(ds_index int, x []f64, y []f64) &Plot {
 	assert x.len == y.len
-	C.IupPlotAddSamples(plot, ds_index, x.data, y.data, x.len)
-	return plot
+	C.IupPlotAddSamples(plot_control, ds_index, x.data, y.data, x.len)
+	return plot_control
 }
 
 // plot_add_str_samples adds an array of samples in a dataset at the end. Can be used only after the dataset is added to the plot
-pub fn (plot &Plot) plot_add_str_samples(ds_index int, x []string, y []f64) &Plot {
+pub fn (plot_control &Plot) plot_add_str_samples(ds_index int, x []string, y []f64) &Plot {
 	assert x.len == y.len
-	C.IupPlotAddStrSamples(plot, ds_index, x.data, y.data, x.len)
-	return plot
+	C.IupPlotAddStrSamples(plot_control, ds_index, x.data, y.data, x.len)
+	return plot_control
 }
 
 // plot_get_sample returns the sample value in a dataset at the given `sample_index`. Can be used only after the dataset is added to the plot
-pub fn (plot &Plot) plot_get_sample(ds_index int, sample_index int) (f64, f64) {
+pub fn (plot_control &Plot) plot_get_sample(ds_index int, sample_index int) (f64, f64) {
 	mut x := f64(0)
 	mut y := f64(0)
-	C.IupPlotGetSample(plot, ds_index, sample_index, &x, &y)
+	C.IupPlotGetSample(plot_control, ds_index, sample_index, &x, &y)
 	return x, y
 }
 
 // plot_get_sample_str returns the sample value in a dataset at the given `sample_index`. Can be used only after the dataset is added to the plot
-pub fn (plot &Plot) plot_get_sample_str(ds_index int, sample_index int) (string, f64) {
+pub fn (plot_control &Plot) plot_get_sample_str(ds_index int, sample_index int) (string, f64) {
 	mut ptr := charptr(0)
 	mut y := f64(0)
-	C.IupPlotGetSampleStr(plot, ds_index, sample_index, ptr, &y)
+	C.IupPlotGetSampleStr(plot_control, ds_index, sample_index, ptr, &y)
 	x := unsafe { cstring_to_vstring(ptr) }
 	return x, y
 }
 
 // plot_get_sample_selection returns the sample selected state in a dataset at the given `sample_index`. Can be used only after the dataset is added to the plot. By default all samples are not selected. Returns -1 if an error occurred
-pub fn (plot &Plot) plot_get_sample_selection(ds_index int, sample_index int) int {
-	return C.IupPlotGetSampleSelection(plot, ds_index, sample_index)
+pub fn (plot_control &Plot) plot_get_sample_selection(ds_index int, sample_index int) int {
+	return C.IupPlotGetSampleSelection(plot_control, ds_index, sample_index)
 }
 
 // plot_get_sample_extra returns the sample extra value in a dataset at the given `sample_index`. Can be used only after the dataset is added to the plot. By default all samples have an extra of 0. Returns -1 if an error occurred
-pub fn (plot &Plot) plot_get_sample_extra(ds_index int, sample_index int) f64 {
-	return C.IupPlotGetSampleExtra(plot, ds_index, sample_index)
+pub fn (plot_control &Plot) plot_get_sample_extra(ds_index int, sample_index int) f64 {
+	return C.IupPlotGetSampleExtra(plot_control, ds_index, sample_index)
 }
 
 // plot_set_sample changes the sample value in a dataset at the given `sample_index`. Can be used only after the dataset is added to the plot
-pub fn (plot &Plot) plot_set_sample(ds_index int, sample_index int, x f64, y f64) &Plot {
-	C.IupPlotSetSample(plot, ds_index, sample_index, x, y)
-	return plot
+pub fn (plot_control &Plot) plot_set_sample(ds_index int, sample_index int, x f64, y f64) &Plot {
+	C.IupPlotSetSample(plot_control, ds_index, sample_index, x, y)
+	return plot_control
 }
 
 // plot_set_sample_str changes the sample value in a dataset at the given `sample_index`. Can be used only after the dataset is added to the plot
-pub fn (plot &Plot) plot_set_sample_str(ds_index int, sample_index int, x string, y f64) &Plot {
-	C.IupPlotSetSampleStr(plot, ds_index, sample_index, x.str, y)
-	return plot
+pub fn (plot_control &Plot) plot_set_sample_str(ds_index int, sample_index int, x string, y f64) &Plot {
+	C.IupPlotSetSampleStr(plot_control, ds_index, sample_index, x.str, y)
+	return plot_control
 }
 
 // plot_set_sample_selection changes the sample selected state in a dataset at the given `sample_index`. Can be used only after the dataset is added to the plot
-pub fn (plot &Plot) plot_set_sample_selection(ds_index int, sample_index int, selected bool) &Plot {
+pub fn (plot_control &Plot) plot_set_sample_selection(ds_index int, sample_index int, selected bool) &Plot {
 	selected_int := if selected { 1 } else { 0 }
-	C.IupPlotSetSampleSelection(plot, ds_index, sample_index, selected_int)
-	return plot
+	C.IupPlotSetSampleSelection(plot_control, ds_index, sample_index, selected_int)
+	return plot_control
 }
 
 // plot_set_sample_extra changes the sample extra value in a dataset at the given `sample_index`. Can be used only after the dataset is added to the plot
-pub fn (plot &Plot) plot_set_sample_extra(ds_index int, sample_index int, extra f64) &Plot {
-	C.IupPlotSetSampleExtra(plot, ds_index, sample_index, extra)
-	return plot
+pub fn (plot_control &Plot) plot_set_sample_extra(ds_index int, sample_index int, extra f64) &Plot {
+	C.IupPlotSetSampleExtra(plot_control, ds_index, sample_index, extra)
+	return plot_control
 }
 
 // plot_transform converts coordinates in plot units to pixels. It should be used inside callbacks only. Output variables can be NULL if not used. Y canvas coordinates is in CD bottom to top orientation
-pub fn (plot &Plot) plot_transform(x f64, y f64) (f64, f64) {
+pub fn (plot_control &Plot) plot_transform(x f64, y f64) (f64, f64) {
 	mut cnv_x := f64(0)
 	mut cnv_y := f64(0)
-	C.IupPlotTransform(plot, x, y, &cnv_x, &cnv_y)
+	C.IupPlotTransform(plot_control, x, y, &cnv_x, &cnv_y)
 	return cnv_x, cnv_y
 }
 
 // plot_transform_to converts coordinates from pixels to plot coordinates. It should be used inside callbacks only. Output variables can be NULL if not used. Y canvas coordinates is in CD bottom to top orientation
-pub fn (plot &Plot) plot_transform_to(cnv_x f64, cnv_y f64) (f64, f64) {
+pub fn (plot_control &Plot) plot_transform_to(cnv_x f64, cnv_y f64) (f64, f64) {
 	mut x := f64(0)
 	mut y := f64(0)
-	C.IupPlotTransformTo(plot, cnv_x, cnv_y, &x, &y)
+	C.IupPlotTransformTo(plot_control, cnv_x, cnv_y, &x, &y)
 	return x, y
 }
 
 // plot_find_sample returns the nearest sample of the nearest dataset within a tolerance neighborhood. Tolerance can be set in SCREENTPlotRANCE attribute. Returns a non zero value is successful, or a zero value if failed. It should be used inside callbacks only. Output variables can be NULL if not used. The datasets are searched in reverse order they are drawn. Y canvas coordinates is in CD bottom to top orientation
-pub fn (plot &Plot) plot_find_sample(cnv_x f64, cnv_y f64) (int, int, int) {
+pub fn (plot_control &Plot) plot_find_sample(cnv_x f64, cnv_y f64) (int, int, int) {
 	mut ds_index := int(0)
 	mut sample_index := int(0)
-	return C.IupPlotFindSample(plot, cnv_x, cnv_y, &ds_index, &sample_index), ds_index, sample_index
+	return C.IupPlotFindSample(plot_control, cnv_x, cnv_y, &ds_index, &sample_index), ds_index, sample_index
 }
 
 // plot_find_segment returns the nearest segment of the nearest dataset within a tolerance neighborhood. Tolerance can be set in SCREENTPlotRANCE attribute. Returns a non zero value is successful, or a zero value if failed. It should be used inside callbacks only. Output variables can be NULL if not used. The datasets are searched in reverse order they are drawn. Y canvas coordinates is in CD bottom to top orientation. Only works when DS_MODE is LINE, MARKLINE, AREA, STEP or ERRORBAR
-pub fn (plot &Plot) plot_find_segment(cnv_x f64, cnv_y f64) (int, int, int, int) {
+pub fn (plot_control &Plot) plot_find_segment(cnv_x f64, cnv_y f64) (int, int, int, int) {
 	mut ds_index := int(0)
 	mut sample_index1 := int(0)
 	mut sample_index2 := int(0)
-	return C.IupPlotFindSegment(plot, cnv_x, cnv_y, &ds_index, &sample_index1, &sample_index2), ds_index, sample_index1, sample_index2
+	return C.IupPlotFindSegment(plot_control, cnv_x, cnv_y, &ds_index, &sample_index1,
+		&sample_index2), ds_index, sample_index1, sample_index2
 }
 
 // plot_paint_to plots to the given CD `canvas` instead of the display canvas. The element does not need to be mapped neither to be inside a dialog for this function to work
-pub fn (plot &Plot) plot_paint_to(the_canvas voidptr) &Plot {
-	C.IupPlotPaintTo(plot, the_canvas)
-	return plot
+pub fn (plot_control &Plot) plot_paint_to(the_canvas voidptr) &Plot {
+	C.IupPlotPaintTo(plot_control, the_canvas)
+	return plot_control
 }
 
 // set_handle is a helper function for `Plot` that calls the global
 // `set_handle` function. Returns back an instance of `Plot` for chaining
-pub fn (plot &Plot) set_handle(name string) &Plot {
-	C.IupSetHandle(name.str, &Ihandle(plot))
-	return plot
+pub fn (plot_control &Plot) set_handle(name string) &Plot {
+	C.IupSetHandle(name.str, &Ihandle(plot_control))
+	return plot_control
 }
 
 // get_plot_handle returns a component with the provided handle name
@@ -252,38 +253,39 @@ pub fn get_plot_handle(handle string) &Plot {
 
 // set_attr sets an attribute on `Plot` and
 // returns `Plot` back for chaining
-pub fn (plot &Plot) set_attr(name string, value string) &Plot {
-	C.IupSetStrAttribute(&Ihandle(plot), name.to_upper().trim_space().str, value.trim_space().str)
+pub fn (plot_control &Plot) set_attr(name string, value string) &Plot {
+	C.IupSetStrAttribute(&Ihandle(plot_control), name.to_upper().trim_space().str, value.trim_space().str)
 
-	return plot
+	return plot_control
 }
 
 // set_attrs takes all x=x values and applies them to `Plot` and
 // returns `Plot` back for chaining
-pub fn (plot &Plot) set_attrs(attrs ...string) &Plot {
+pub fn (plot_control &Plot) set_attrs(attrs ...string) &Plot {
 	for attr in attrs {
 		split := attr.split_nth('=', 2)
 		if split.len == 1 {
 			continue
 		}
-		plot.set_attr(split[0], split[1])
+		plot_control.set_attr(split[0], split[1])
 	}
 
-	return plot
+	return plot_control
 }
 
 // set_data associates the provided `data` with `Plot` and
 // returns `Plot` back for chaining
-pub fn (plot &Plot) set_data(name string, data voidptr) &Plot {
-	C.IupSetAttribute(&Ihandle(plot), '${name}_data'.to_upper().trim_space().str, charptr(data))
+pub fn (plot_control &Plot) set_data(name string, data voidptr) &Plot {
+	C.IupSetAttribute(&Ihandle(plot_control), '${name}_data'.to_upper().trim_space().str,
+		charptr(data))
 
-	return plot
+	return plot_control
 }
 
 // unset_attr clears the provided attribute
-pub fn (plot &Plot) unset_attr(name string) &Plot {
-	C.IupSetAttribute(&Ihandle(plot), name.to_upper().trim_space().str, C.NULL)
-	return plot
+pub fn (plot_control &Plot) unset_attr(name string) &Plot {
+	C.IupSetAttribute(&Ihandle(plot_control), name.to_upper().trim_space().str, C.NULL)
+	return plot_control
 }
 
 // plot_set_formula creates a new dataset and generate samples using the `formula` (since 3.13). The `formula` is executed for each sample within the dataset. Internally uses Lua to parse the formula. `init` is an optional Lua initialization code that is called only once (can be NULL). The callback "int FORMULAINIT_CB(Ihandle* ih, lua_State *L);" can also be used to initialize the Lua state. All Lua standard libraries are pre-loaded.
@@ -317,8 +319,8 @@ pub fn (plot &Plot) unset_attr(name string) &Plot {
 // "x^2"
 // "cos(t), sin(t)"
 /*
-pub fn (plot &Plot)plot_set_formula(sample_count int, formula string, init charptr) &Plot{
-	C.IupPlotSetFormula(plot,sample_count,formula.str,init)
-	return plot
+pub fn (plot_control &Plot)plot_set_formula(sample_count int, formula string, init charptr) &Plot{
+	C.IupPlotSetFormula(plot_control,sample_count,formula.str,init)
+	return plot_control
 }
 */

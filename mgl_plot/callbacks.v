@@ -122,74 +122,74 @@ pub type IFniiddddi = fn (&Mgl_Plot, int, int, f64, f64, f64, f64, int) FuncResu
 
 pub type IFnv = fn (&Mgl_Plot, voidptr) FuncResult
 
-pub fn (mgl_plot &Mgl_Plot) set_callback(name string, func voidptr) &Mgl_Plot {
-	C.IupSetCallback(mgl_plot, name.str, func)
-	return mgl_plot
+pub fn (mgl_plot_control &Mgl_Plot) set_callback(name string, func voidptr) &Mgl_Plot {
+	C.IupSetCallback(mgl_plot_control, name.str, func)
+	return mgl_plot_control
 }
 
 // on_pre_draw generated before the redraw operation. It can be used to draw additional information in the plot. Use only the IupMglPlotDraw* functions. For display output OpenGL primitives can also be used
-pub fn (mgl_plot &Mgl_Plot) on_pre_draw(func IFn) &Mgl_Plot {
-	C.IupSetCallback(mgl_plot, c'PREDRAW_CB', func)
-	return mgl_plot
+pub fn (mgl_plot_control &Mgl_Plot) on_pre_draw(func IFn) &Mgl_Plot {
+	C.IupSetCallback(mgl_plot_control, c'PREDRAW_CB', func)
+	return mgl_plot_control
 }
 
 // on_post_draw generated after the redraw operation. It can be used to draw additional information in the plot. Use only the IupMglPlotDraw* functions. For display output OpenGL primitives can also be used
-pub fn (mgl_plot &Mgl_Plot) on_post_draw(func IFn) &Mgl_Plot {
-	C.IupSetCallback(mgl_plot, c'POSTDRAW_CB', func)
-	return mgl_plot
+pub fn (mgl_plot_control &Mgl_Plot) on_post_draw(func IFn) &Mgl_Plot {
+	C.IupSetCallback(mgl_plot_control, c'POSTDRAW_CB', func)
+	return mgl_plot_control
 }
 
 // on_map called right after an element is mapped and its attributes updated in IupMap.
 // When the element is a dialog, it is called after the layout is updated. For all other elements is called before the layout is updated, so the element current size will still be 0x0 during MAP_CB
-pub fn (mgl_plot &Mgl_Plot) on_map(func IFn) &Mgl_Plot {
-	C.IupSetCallback(mgl_plot, c'MAP_CB', func)
-	return mgl_plot
+pub fn (mgl_plot_control &Mgl_Plot) on_map(func IFn) &Mgl_Plot {
+	C.IupSetCallback(mgl_plot_control, c'MAP_CB', func)
+	return mgl_plot_control
 }
 
 // on_unmap called right before an element is unmapped
-pub fn (mgl_plot &Mgl_Plot) on_unmap(func IFn) &Mgl_Plot {
-	C.IupSetCallback(mgl_plot, c'UNMAP_CB', func)
-	return mgl_plot
+pub fn (mgl_plot_control &Mgl_Plot) on_unmap(func IFn) &Mgl_Plot {
+	C.IupSetCallback(mgl_plot_control, c'UNMAP_CB', func)
+	return mgl_plot_control
 }
 
 // on_destroy called right before an element is destroyed
-pub fn (mgl_plot &Mgl_Plot) on_destroy(func IFn) &Mgl_Plot {
-	C.IupSetCallback(mgl_plot, c'DESTROY_CB', func)
-	return mgl_plot
+pub fn (mgl_plot_control &Mgl_Plot) on_destroy(func IFn) &Mgl_Plot {
+	C.IupSetCallback(mgl_plot_control, c'DESTROY_CB', func)
+	return mgl_plot_control
 }
 
 // on_focused action generated when an element is given keyboard focus. This callback is called after the KILLFOCUS_CB of the element that loosed the focus. The IupGetFocus function during the callback returns the element that loosed the focus
-pub fn (mgl_plot &Mgl_Plot) on_focused(func IFn) &Mgl_Plot {
-	C.IupSetCallback(mgl_plot, c'GETFOCUS_CB', func)
-	return mgl_plot
+pub fn (mgl_plot_control &Mgl_Plot) on_focused(func IFn) &Mgl_Plot {
+	C.IupSetCallback(mgl_plot_control, c'GETFOCUS_CB', func)
+	return mgl_plot_control
 }
 
 // on_unfocused action generated when an element loses keyboard focus. This callback is called before the GETFOCUS_CB of the element that gets the focus
-pub fn (mgl_plot &Mgl_Plot) on_unfocused(func IFn) &Mgl_Plot {
-	C.IupSetCallback(mgl_plot, c'KILLFOCUS_CB', func)
-	return mgl_plot
+pub fn (mgl_plot_control &Mgl_Plot) on_unfocused(func IFn) &Mgl_Plot {
+	C.IupSetCallback(mgl_plot_control, c'KILLFOCUS_CB', func)
+	return mgl_plot_control
 }
 
 // on_entered action generated when the mouse enters the native element
-pub fn (mgl_plot &Mgl_Plot) on_entered(func IFn) &Mgl_Plot {
-	C.IupSetCallback(mgl_plot, c'ENTERWINDOW_CB', func)
-	return mgl_plot
+pub fn (mgl_plot_control &Mgl_Plot) on_entered(func IFn) &Mgl_Plot {
+	C.IupSetCallback(mgl_plot_control, c'ENTERWINDOW_CB', func)
+	return mgl_plot_control
 }
 
 // on_exited action generated when the mouse leaves the native element
-pub fn (mgl_plot &Mgl_Plot) on_exited(func IFn) &Mgl_Plot {
-	C.IupSetCallback(mgl_plot, c'LEAVEWINDOW_CB', func)
-	return mgl_plot
+pub fn (mgl_plot_control &Mgl_Plot) on_exited(func IFn) &Mgl_Plot {
+	C.IupSetCallback(mgl_plot_control, c'LEAVEWINDOW_CB', func)
+	return mgl_plot_control
 }
 
 // on_key action generated when a keyboard event occurs
-pub fn (mgl_plot &Mgl_Plot) on_key(func IFni) &Mgl_Plot {
-	C.IupSetCallback(mgl_plot, c'K_ANY', func)
-	return mgl_plot
+pub fn (mgl_plot_control &Mgl_Plot) on_key(func IFni) &Mgl_Plot {
+	C.IupSetCallback(mgl_plot_control, c'K_ANY', func)
+	return mgl_plot_control
 }
 
 // on_help action generated when the user press F1 at a mgl_plot. In Motif is also activated by the Help button in some workstations keyboard
-pub fn (mgl_plot &Mgl_Plot) on_help(func IFn) &Mgl_Plot {
-	C.IupSetCallback(mgl_plot, c'HELP_CB', func)
-	return mgl_plot
+pub fn (mgl_plot_control &Mgl_Plot) on_help(func IFn) &Mgl_Plot {
+	C.IupSetCallback(mgl_plot_control, c'HELP_CB', func)
+	return mgl_plot_control
 }
